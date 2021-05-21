@@ -1,14 +1,23 @@
-from django.db import models
-
 # Create your models here.
 
 from django.db import models
+from django.db import models
 from django.contrib.auth.models import User  # 导入内建的User模型。
 from django.utils import timezone  # timezone 用于处理时间相关事务。
+from article_category.models import Category
 
 
 # 博客文章数据模型
 class Article(models.Model):
+    # 文章分类 外键
+    category = models.ForeignKey(
+        Category,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='articles'
+    )
+
     # 文章作者 ForeignKey 外键
     author = models.ForeignKey(
         User,

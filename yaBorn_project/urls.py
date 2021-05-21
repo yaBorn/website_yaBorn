@@ -25,4 +25,5 @@ urlpatterns = [
 
     # 配置自定app的url
     path('article/', include('article.urls', namespace='article')),
+    path('category/', include('article_category.urls', namespace='category')),
 ]

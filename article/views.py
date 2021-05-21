@@ -6,12 +6,12 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, Http404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.views import APIView
 from rest_framework import mixins
 from rest_framework import generics
-from article.models import Article
-from article.serializers import ArticleListSerializer, ArticleDetailSerializer
+from article.models import Article, Category
+from article.serializers import ArticleListSerializer, ArticleDetailSerializer, CategorySerializer
 from rest_framework.permissions import IsAdminUser
 from article.permissions import IsAdminUserOrReadOnly
 from rest_framework import filters
@@ -19,7 +19,8 @@ from rest_framework import filters
 
 # 文章列表
 # 类视图+APIView_文章列表
-class ArticleList(generics.ListCreateAPIView):
+class ArticleListView(generics.ListCreateAPIView):
+    """文章列表视图"""
     queryset = Article.objects.all()
     serializer_class = ArticleListSerializer
     # 只允许管理员发布文章
@@ -36,8 +37,10 @@ class ArticleList(generics.ListCreateAPIView):
 
 # 文章详情
 # 类视图+简化_文章详情_增删改查的函数简化掉
-class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
+class ArticleDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """文章详情视图"""
     queryset = Article.objects.all()
     serializer_class = ArticleDetailSerializer
     permission_classes = [IsAdminUserOrReadOnly]
+
 
