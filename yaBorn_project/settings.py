@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,7 +40,12 @@ INSTALLED_APPS = [
     'article',
     'article_category',
     'user_info',
+    'media',
 ]
+
+# 媒体资源文件储存位置
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 分页功能
 REST_FRAMEWORK = {

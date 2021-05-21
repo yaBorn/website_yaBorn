@@ -15,6 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from django.conf import settings
+from django.conf.urls.static import static
+from media import views
+
+# media_views_photo使用视图集,使用router自动处理视图的url
+router = routers.DefaultRouter()
+router.register(r'photo', views.PhotoViewSet)
 
 # 存放映射关系的列表
 urlpatterns = [
@@ -26,4 +34,23 @@ urlpatterns = [
     # 配置自定app的url
     path('article/', include('article.urls', namespace='article')),
     path('category/', include('article_category.urls', namespace='category')),
+
+    # drf 自动注册路由_视图集
+    # media资源储存在 media/...
+    # api/... 管理视图集行为 list Instance 等
+    path('api/', include(router.urls)),
 ]
+
+# 媒体文件路由注册
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+"""
+    后台管理：http://127.0.0.1:8000/admin/ 
+    文章列表：http://127.0.0.1:8000/article/article-list/
+    种类列表：http://127.0.0.1:8000/category/category-list/
+    标签列表：http://127.0.0.1:8000/category/tag-list/
+    视图集根目录：http://127.0.0.1:8000/api/
+        视图集使用：photo
+    图片资源：http://127.0.0.1:8000/media/photo
+"""

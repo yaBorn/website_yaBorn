@@ -45,8 +45,28 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
         ]
 
 
+# 标签接口
+# 子类： 标签_列表/详情
+class TagBaseSerializer(serializers.ModelSerializer):
+    # 检查是否有重复text
+    def check_tag_obj_exists(self, validated_data):
+        text = validated_data.get('text')
+        if Tag.objects.filter(text=text).exists():
+            raise serializers.ValidationError('Tag with text {} exists.'.format(text))
+
+    # 覆写create，检查text重复
+    def create(self, validated_data):
+        self.check_tag_obj_exists(validated_data)
+        return super().create(validated_data)
+
+    # 覆写update，检查text重复
+    def update(self, instance, validated_data):
+        self.check_tag_obj_exists(validated_data)
+        return super().update(instance, validated_data)
+
+
 # 标签列表接口
-class TagListSerializer(serializers.ModelSerializer):
+class TagListSerializer(TagBaseSerializer):
     """标签列表"""
     url = serializers.HyperlinkedIdentityField(view_name="article_category:tag_detail")
 
@@ -59,7 +79,7 @@ class TagListSerializer(serializers.ModelSerializer):
 
 
 # 标签详情接口
-class TagDetailSerializer(serializers.ModelSerializer ):
+class TagDetailSerializer(TagBaseSerializer):
     """标签详情"""
     articles = ArticleUrlSerializer(many=True, read_only=True)
 
