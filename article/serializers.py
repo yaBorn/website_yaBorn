@@ -4,6 +4,8 @@ from rest_framework import serializers
 from article.models import Article
 
 
+# 简化序列化器_使用ModelSerializer
+# 文章列表接口
 class ArticleListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
@@ -14,6 +16,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
         ]
 
 
+# 文章详情接口
 class ArticleDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
