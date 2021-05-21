@@ -3,6 +3,7 @@
 from rest_framework import serializers
 from article.models import Article
 from article_category.models import Category, Tag
+from comment.serializers import CommentSerializer
 from media.models import Photo
 from media.serializer import PhotoSerializer
 from user_info.serializers import UserDescSerializer
@@ -93,13 +94,16 @@ class ArticleListSerializer(ArticleBaseSerializer):
 # 文章详情接口
 class ArticleDetailSerializer(ArticleBaseSerializer):
     """文章详情序列化器"""
-    # 后端存储body，前端需要md化后的字符，后端直接将md化的字符给前端读取
-    # SMF为只读字段，调用附加方法获取值
-    # 即body_html会自动调用getBH方法，返回结果作为序列化数据
     # markdown渲染后的正文
     body_html = serializers.SerializerMethodField()
     # markdown渲染后的目录
     toc_html = serializers.SerializerMethodField()
+    #   后端存储body，前端需要md化后的字符，后端直接将md化的字符给前端读取
+    #   SMF为只读字段，调用附加方法获取值
+    #   即body_html会自动调用getBH方法，返回结果作为序列化数据
+    # 文章详情_评论 嵌套序列化器
+    id = serializers.IntegerField(read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     def get_body_html(self, obj):
         # obj为序列化器获取的model实例，即文章对象了

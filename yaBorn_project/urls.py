@@ -18,11 +18,19 @@ from django.urls import path, include
 from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
-from media import views
+# 不同模块同名Views，直接导入则冲突
+from media.views import PhotoViewSet
+from comment.views import CommentViewSet
 
-# media_views_photo使用视图集,使用router自动处理视图的url
+
+# 使用视图集的 views视图 ,使用 router 自动处理视图的url
+# 因为视图集自带了list instance等行为
+#   直接在根url注册即可
+# 文章列表/详情 种类列表/详情 使用generics.API视图
+#   自己写了列表/详情，在对应模块urls下写分级url
 router = routers.DefaultRouter()
-router.register(r'photo', views.PhotoViewSet)
+router.register(r'photo', PhotoViewSet)
+router.register(r'comment', CommentViewSet)
 
 # 存放映射关系的列表
 urlpatterns = [
@@ -41,7 +49,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
 ]
 
-# 媒体文件路由注册
+# 资源文件路由注册
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -51,6 +59,8 @@ if settings.DEBUG:
     种类列表：http://127.0.0.1:8000/category/category-list/
     标签列表：http://127.0.0.1:8000/category/tag-list/
     视图集根目录：http://127.0.0.1:8000/api/
-        视图集使用：photo
+        视图集使用：
+            图片 photo
+            评论 comment
     图片资源：http://127.0.0.1:8000/media/photo
 """

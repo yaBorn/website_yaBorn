@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'article_category',
     'user_info',
     'media',
+    'comment',
 ]
 
 # 媒体资源文件储存位置
