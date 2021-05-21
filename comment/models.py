@@ -27,6 +27,16 @@ class Comment(models.Model):
     content = models.TextField()  # 评论内容
     created = models.DateTimeField(default=timezone.now)  # 评论时间
 
+    # 评论的评论 即所属于一个父评论
+    # 父评论/评论->1/n
+    parent = models.ForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='children'
+    )
+
     class Meta:
         ordering = ['-created']
 
