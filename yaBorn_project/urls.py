@@ -24,5 +24,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 
     # 配置自定app的url
-    path('article/', include('article.urls', namespace='article')),
+    path('api/article/', include('article.urls', namespace='article')),
 ]
