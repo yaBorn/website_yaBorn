@@ -43,16 +43,15 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 
     # 配置自定app的url
-    path('article/', include('article.urls', namespace='article')),
-    path('category/', include('article_category.urls', namespace='category')),
+    path('bg/article/', include('article.urls', namespace='article')),
+    path('bg/category/', include('article_category.urls', namespace='category')),
 
     # # JWT验证的 Token 获取与刷新地址
-    # path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # path('bg/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('bg/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     # drf 自动注册路由_视图集
-    #   api/... 管理视图集行为 list Instance 等
-    path('api/', include(router.urls)),
+    path('bg/', include(router.urls)),
 ]
 
 # 资源文件路由注册
@@ -61,16 +60,18 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 """
+# bg/根目录为解决前后端端口不统一，设立跨域代理而设立bg/根目录
+# 详见 frontend/vue.config.js
     后台管理：http://127.0.0.1:8000/admin/ 
-    文章列表：http://127.0.0.1:8000/article/article-list/
-    种类列表：http://127.0.0.1:8000/category/category-list/
-    标签列表：http://127.0.0.1:8000/category/tag-list/
-    视图集根目录：http://127.0.0.1:8000/api/
+    文章列表：http://127.0.0.1:8000/bg/article/article-list/
+    种类列表：http://127.0.0.1:8000/bg/category/category-list/
+    标签列表：http://127.0.0.1:8000/bg/category/tag-list/
+    视图集根目录：http://127.0.0.1:8000/bg/
         图片 photo 
         评论 comment
         用户 user
     JWT令牌验证：
-        http://127.0.0.1:8000/token/
-        http://127.0.0.1:8000/token/refresh/
+        http://127.0.0.1:8000/bg/token/
+        http://127.0.0.1:8000/bg/token/refresh/
     图片资源：http://127.0.0.1:8000/media/photo
 """
