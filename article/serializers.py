@@ -1,14 +1,13 @@
 # 前后端分离_序列化器_把 Python 对象转换为 JSON
-
+# 简化序列化器_使用ModelSerializer
 from rest_framework import serializers
 from article.models import Article
-from article_category.models import Category
+from article_category.models import Category, Tag
 from user_info.serializers import UserDescSerializer
-# 简化序列化器_使用ModelSerializer
 
 
-# 文章类别接口
-# 嵌套于文章列表/详情序列化器中
+# 类别接口
+# 嵌套于序列化器: 文章_列表/详情
 class CategorySerializer(serializers.ModelSerializer):
     """分类序列化器"""
     url = serializers.HyperlinkedIdentityField(view_name="article_category:detail")
@@ -19,9 +18,32 @@ class CategorySerializer(serializers.ModelSerializer):
             'id',
             'title',
             'url',
-            'created',
         ]
-        read_only_fields = ['created']
+
+
+# 标签接口
+# 嵌套于序列器： 文章_列表/详情
+class TagSerializer(serializers.ModelSerializer):
+    """标签序列化器"""
+    class Meta:
+        model = Tag
+        fields = '__all__'
+
+    # 检查是否有重复text
+    def check_tag_obj_exists(self, validated_data):
+        text = validated_data.get('text')
+        if Tag.objects.filter(text=text).exists():
+            raise serializers.ValidationError('Tag with text {} exists.'.format(text))
+
+    # 覆写create，检查text重复
+    def create(self, validated_data):
+        self.check_tag_obj_exists(validated_data)
+        return super().create(validated_data)
+
+    # 覆写update，检查text重复
+    def update(self, instance, validated_data):
+        self.check_tag_obj_exists(validated_data)
+        return super().update(instance, validated_data)
 
 
 # 文章列表接口
@@ -43,6 +65,25 @@ class ArticleListSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Category with id {} not exists.".format(value))
         return value
 
+    # 标签 字段
+    tags = serializers.SlugRelatedField(
+        queryset=Tag.objects.all(),
+        many=True,
+        required=False,
+        slug_field='text'
+    )
+
+    # 覆写方法，如果输入的标签不存在则创建它
+    def to_internal_value(self, data):
+        tags_data = data.get('tags')
+
+        if isinstance(tags_data, list):
+            for text in tags_data:
+                if not Tag.objects.filter(text=text).exists():
+                    Tag.objects.create(text=text)
+
+        return super().to_internal_value(data)
+
     class Meta:
         model = Article
         fields = [
@@ -52,6 +93,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
             'created',
             'category',
             'category_id',
+            'tags',
         ]
 
 
@@ -71,9 +113,27 @@ class ArticleDetailSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Category with id {} not exists.".format(value))
         return value
 
+    # 标签 字段
+    tags = serializers.SlugRelatedField(
+        queryset=Tag.objects.all(),
+        many=True,
+        required=False,
+        slug_field='text'
+    )
+
+    # 覆写方法，如果输入的标签不存在则创建它
+    def to_internal_value(self, data):
+        tags_data = data.get('tags')
+
+        if isinstance(tags_data, list):
+            for text in tags_data:
+                if not Tag.objects.filter(text=text).exists():
+                    Tag.objects.create(text=text)
+
+        return super().to_internal_value(data)
+
     class Meta:
         model = Article
         fields = '__all__'  # 使用所有字段
-
 
 

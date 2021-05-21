@@ -1,19 +1,10 @@
-from django.shortcuts import render
-
 # Create your views here.
 
 # 导入 HttpResponse 模块
-from django.http import HttpResponse, JsonResponse, Http404
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status, viewsets
-from rest_framework.views import APIView
-from rest_framework import mixins
 from rest_framework import generics
-from article.models import Article, Category
-from article.serializers import ArticleListSerializer, ArticleDetailSerializer, CategorySerializer
-from rest_framework.permissions import IsAdminUser
-from article.permissions import IsAdminUserOrReadOnly
+from article.models import Article
+from article.serializers import ArticleListSerializer, ArticleDetailSerializer
+from yaBorn_project.permissions import IsAdminUserOrReadOnly
 from rest_framework import filters
 
 

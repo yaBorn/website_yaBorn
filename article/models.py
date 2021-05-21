@@ -4,7 +4,7 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import User  # 导入内建的User模型。
 from django.utils import timezone  # timezone 用于处理时间相关事务。
-from article_category.models import Category
+from article_category.models import Category, Tag
 
 
 # 博客文章数据模型
@@ -15,6 +15,13 @@ class Article(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
+        related_name='articles'
+    )
+
+    # 文章标签 多对多
+    tags = models.ManyToManyField(
+        Tag,
+        blank=True,
         related_name='articles'
     )
 

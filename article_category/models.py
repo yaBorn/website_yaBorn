@@ -18,3 +18,14 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# 文章标签
+class Tag(models.Model):
+    text = models.CharField(max_length=50)
+
+    class Meta:
+        ordering = ['-id']
+
+    def __str__(self):
+        return self.text
