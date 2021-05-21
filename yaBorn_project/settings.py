@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     # 注册app列表
     'rest_framework',
     'article',
+    'user_info',
 ]
 
 MIDDLEWARE = [
