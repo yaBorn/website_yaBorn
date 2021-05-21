@@ -19,6 +19,7 @@ from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
 # 不同模块同名Views，直接导入则冲突
+from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 from media.views import PhotoViewSet
 from comment.views import CommentViewSet
 
@@ -44,12 +45,15 @@ urlpatterns = [
     path('category/', include('article_category.urls', namespace='category')),
 
     # drf 自动注册路由_视图集
-    # media资源储存在 media/...
-    # api/... 管理视图集行为 list Instance 等
+    #   api/... 管理视图集行为 list Instance 等
     path('api/', include(router.urls)),
+    # JWT验证的 Token 获取与刷新地址
+    path('/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 # 资源文件路由注册
+#   media资源储存在 media/...
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -59,8 +63,10 @@ if settings.DEBUG:
     种类列表：http://127.0.0.1:8000/category/category-list/
     标签列表：http://127.0.0.1:8000/category/tag-list/
     视图集根目录：http://127.0.0.1:8000/api/
-        视图集使用：
-            图片 photo
-            评论 comment
+        图片 photo 
+        评论 comment
+    JWT令牌验证：
+        http://127.0.0.1:8000/token/
+        http://127.0.0.1:8000/token/refresh/
     图片资源：http://127.0.0.1:8000/media/photo
 """
