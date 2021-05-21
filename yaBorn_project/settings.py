@@ -55,11 +55,11 @@ REST_FRAMEWORK = {
     # 分页功能
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 4,  # 设置每页文章数量
-    # JWT为默认认证机制
-    # 安装库djangorestframework-simplejwt
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    # # JWT为默认认证机制
+    # # 安装库djangorestframework-simplejwt
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # )
 }
 
 # JWT验证时间

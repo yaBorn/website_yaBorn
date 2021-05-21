@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 from media.views import PhotoViewSet
 from comment.views import CommentViewSet
+from user_info.views import UserViewSet
 
 
 # 使用视图集的 views视图 ,使用 router 自动处理视图的url
@@ -30,8 +31,9 @@ from comment.views import CommentViewSet
 # 文章列表/详情 种类列表/详情 使用generics.API视图
 #   自己写了列表/详情，在对应模块urls下写分级url
 router = routers.DefaultRouter()
-router.register(r'photo', PhotoViewSet)
-router.register(r'comment', CommentViewSet)
+router.register(r'photo', PhotoViewSet)  # media_photo 图像视图集
+router.register(r'comment', CommentViewSet)  # comment_comment 评论视图集
+router.register(r'user', UserViewSet)  # userInfo_uer 用户视图集
 
 # 存放映射关系的列表
 urlpatterns = [
@@ -44,12 +46,13 @@ urlpatterns = [
     path('article/', include('article.urls', namespace='article')),
     path('category/', include('article_category.urls', namespace='category')),
 
+    # # JWT验证的 Token 获取与刷新地址
+    # path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
     # drf 自动注册路由_视图集
     #   api/... 管理视图集行为 list Instance 等
     path('api/', include(router.urls)),
-    # JWT验证的 Token 获取与刷新地址
-    path('/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 # 资源文件路由注册
@@ -65,6 +68,7 @@ if settings.DEBUG:
     视图集根目录：http://127.0.0.1:8000/api/
         图片 photo 
         评论 comment
+        用户 user
     JWT令牌验证：
         http://127.0.0.1:8000/token/
         http://127.0.0.1:8000/token/refresh/

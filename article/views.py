@@ -35,3 +35,4 @@ class ArticleDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAdminUserOrReadOnly]
 
 
+
