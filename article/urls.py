@@ -10,7 +10,7 @@ urlpatterns = [
     # 文章列表
     # 之前是函数视图，现在是类视图
     # path('article-list/', views.article_list, name='article_list'),
-    path('article-list/', views.ArticleList.as_view(), name='article_list'),
+    path('article-list/', views.ArticleList.as_view(), name='list'),
 
     # 文章详情
     # path('article-detail/<int:id>/', views.article_detail, name='article_detail'),
