@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from rest_framework.routers import DefaultRouter
+from article import views
+
+router = DefaultRouter()
+router.register(r'article', views.ArticleViewSet)
+
 # 存放映射关系的列表
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +30,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 
     # 配置自定app的url
-    path('article/', include('article.urls', namespace='article')),
+    # path('article/', include('article.urls', namespace='article')),
+    # 视图集自动排序
+    path('api/', include(router.urls)),
 ]

@@ -31,7 +31,7 @@ class Article(models.Model):
     # 内部类 class Meta 用于给 model 定义元数据
     class Meta:
         # ordering 模型返回的数据排列顺序 '-created' 表明数据倒序排列
-        ordering = ('-created',)
+        ordering = ['-created']
 
     # 函数 __str__ 调用对象的 str() 方法时返回值内容
     def __str__(self):
