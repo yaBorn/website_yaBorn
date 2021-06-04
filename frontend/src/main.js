@@ -9,4 +9,5 @@ import App from './App.vue'
 // 前端路由 vue-router 加载到vue
 // 加载router后，页面显示空白 -> app重复创建
 import router from './router'
+
 createApp(App).use(router).mount('#app');

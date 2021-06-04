@@ -59,7 +59,6 @@
                 info: ''        // data info 属性初始化时赋值空字符串
             }
         },
-
         mounted() {        // Vue 加载完成后,调用生命周期钩子 mounted() 方法
             // 通过 axios 向 Django 后端获取到文章列表数据并赋值给 info 后
             // 页面中关联的部分也会立即随之更新，而不用手动去操作页面元素
@@ -67,7 +66,7 @@
                 .get('/bg/article/article-list/')
                 .then(response => (this.info = response.data))
         },
-
+        // methods方法 可在脚本中直接调用 也可在模板中通过标签属性或花括号调用
         methods: {  // 标签和创建时间
             formatted_time: function (iso_date_string) {
                 const date = new Date(iso_date_string);
