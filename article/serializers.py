@@ -27,6 +27,9 @@ class CategorySerializer(serializers.ModelSerializer):
 # 文章父类
 # 被继承子类: 文章_列表/详情
 class ArticleBaseSerializer(serializers.ModelSerializer):
+    # vue-router 前端路由将文章id作为动态地址 后端序列化器将添加id值给前端使用
+    id = serializers.IntegerField(read_only=True)
+
     # 用户信息，嵌套序列化器
     author = UserDescSerializer(read_only=True)
     # 这里的name为urls的name母urls中app对应的namespace
