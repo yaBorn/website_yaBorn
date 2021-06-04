@@ -3,7 +3,7 @@
     * 前端初始化设置可写在此处
 */
 import { createApp } from 'vue'
-import App from './views/Home.vue'
+import App from './App.vue'
 
 createApp(App).mount('#app')
 

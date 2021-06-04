@@ -2,10 +2,10 @@
 
 <!-- html -->
 <template>
-    <div id="name">     <!--  此处添加id  -->
-    <BlogHeader/>
-    <!--  此处添加内容  -->
-    <BlogFooter/>
+    <div id="id">     <!--  此处添加id  -->
+        <BlogHeader/>
+        <!--  此处添加内容  -->
+        <BlogFooter/>
     </div>
 </template>
 
@@ -22,11 +22,4 @@
 
 <!-- css -->
 <style>
-/*  
-    #app {
-        font-family: Georgia, Arial, sans-serif;
-        margin-left: 40px;
-        margin-right: 40px;
-    }
-*/
 </style>

@@ -3,9 +3,9 @@
 <!-- html -->
 <template>
     <div id="ArticleDetail">
-    <BlogHeader/>
-    <!--  此处添加内容  -->
-    <BlogFooter/>
+        <BlogHeader/>
+        <!--  此处添加内容  -->
+        <BlogFooter/>
     </div>
 </template>
 
@@ -22,11 +22,4 @@
 
 <!-- css -->
 <style>
-/*  
-    #app {
-        font-family: Georgia, Arial, sans-serif;
-        margin-left: 40px;
-        margin-right: 40px;
-    }
-*/
 </style>

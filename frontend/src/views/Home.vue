@@ -3,9 +3,9 @@
 <!-- html -->
 <template>
     <div id="home">
-    <BlogHeader/>
-    <ArticleList/>
-    <BlogFooter/>
+        <BlogHeader/>
+        <ArticleList/>
+        <BlogFooter/>
     </div>
 </template>
 
@@ -20,16 +20,11 @@
     import ArticleList from '../components/my/ArticleList.vue'
 
     export default {
-        name: 'App',
+        name: 'Home',
         components: { BlogHeader, BlogFooter, ArticleList }
     }
 </script>
 
 <!-- css -->
 <style>
-    #app {
-        font-family: Georgia, Arial, sans-serif;
-        margin-left: 40px;
-        margin-right: 40px;
-    }
 </style>
