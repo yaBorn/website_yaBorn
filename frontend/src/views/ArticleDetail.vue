@@ -46,7 +46,7 @@
             axios
                 // $route.params.id 获取路由中的动态参数 见router/index.js
                 // 拼接为 后端对应的文章详情地址 见article/urls.py
-                .get('/bg/article/article-detail' + this.$route.params.id)
+                .get('/bg/article/article-detail/' + this.$route.params.id)
                 .then(response => (this.article = response.data))
         },
         // methods方法 可在脚本中直接调用 也可在模板中通过标签属性或花括号调用
