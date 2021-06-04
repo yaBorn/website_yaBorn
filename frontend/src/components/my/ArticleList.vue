@@ -28,7 +28,7 @@
                 <!-- {{ article.title }} -->
             <!-- </div> -->
             <router-link
-                :to="{ name: 'ArticleDetail', params: { id: article.aid }}"
+                :to="{ name: 'ArticleDetail', params: { id: article.id }}"
                 class="article-title"
             >
                 {{ article.title }}
@@ -36,7 +36,7 @@
             <!-- 调用vue-router
                 :to指定跳转位置，动态参数id为后端对应序列化器 aid接口 
                 vue中，属性前的 :表啊是属性绑定，为v-bind:缩写
-                TODO: 跳转失败 id为undefined 后端序列化器接口id没有暴露出来
+                TODO: 跳转失败 id为undefined 后端序列化器接口id字段没有暴露
             -->
 
             <!-- 创建时间 -->
