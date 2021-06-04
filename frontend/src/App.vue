@@ -8,7 +8,7 @@
         <BlogHeader/>
         <BlogFooter/>
         <!-- vue-router 路由的各路径页面实际渲染位置 -->
-        <!-- <router-view/> -->
+        <router-view/>
     </div>
 </template>
 
