@@ -6,7 +6,6 @@
     <div id="footer">
         <p>yaborn.com</p>
     </div>
-
 </template>
 
 <!-- js -->

@@ -1,10 +1,13 @@
+<!--
+    Home 页面 文章列表 
+-->
 
 <!-- html -->
 <template>
     <div id="home">
-    <BlogHeader/>
-    <ArticleList/>
-    <BlogFooter/>
+        <BlogHeader/>
+        <ArticleList/>
+        <BlogFooter/>
     </div>
 </template>
 

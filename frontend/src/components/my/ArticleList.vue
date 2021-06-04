@@ -9,31 +9,31 @@
 
 <!-- html -->
 <template>
-<div id="ArticleList">
-    <!-- 文章列表 -->
-    <div v-for="article in info.results" v-bind:key="article.url" id="articles">
-        <!-- 标签 -->
-        <div>
-            <span
-                    v-for="tag in article.tags"
-                    v-bind:key="tag"
-                    class="tag"
-            >
-                {{ tag }}
-            </span>
-        </div>
+    <div id="articlelist">
+        <!-- 文章列表 -->
+        <div v-for="article in info.results" v-bind:key="article.url" id="articles">
+            <!-- 标签 -->
+            <div>
+                <span
+                        v-for="tag in article.tags"
+                        v-bind:key="tag"
+                        class="tag"
+                >
+                    {{ tag }}
+                </span>
+            </div>
 
-        <!-- 文章标题 -->
-        <div class="article-title">
-            {{ article.title }}
-        </div>
+            <!-- 文章标题 -->
+            <div class="article-title">
+                {{ article.title }}
+            </div>
 
-        <!-- 创建时间 -->
-        <div>
-            {{ formatted_time(article.created) }}
+            <!-- 创建时间 -->
+            <div>
+                {{ formatted_time(article.created) }}
+            </div>
         </div>
     </div>
-</div>
 </template>
 
 <!-- js -->
