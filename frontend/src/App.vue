@@ -8,9 +8,7 @@
 <!-- html -->
 <template>
     <div id="vue">
-    <BlogHeader/>
-    <ArticleList/>
-    <BlogFooter/>
+        <router-view/>
     </div>
 </template>
 
@@ -20,13 +18,8 @@
     Vue组件化思想
     分解成模块，增加解耦和复用
 */
-    import BlogHeader from './components/my/BlogHeader.vue'
-    import BlogFooter from './components/my/BlogFooter.vue'
-    import ArticleList from './components/my/ArticleList.vue'
-
     export default {
         name: 'App',
-        components: { BlogHeader, BlogFooter, ArticleList }
     }
 </script>
 
