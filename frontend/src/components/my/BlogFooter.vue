@@ -6,9 +6,11 @@
 <!-- html -->
 <template>
     <!-- 页脚 -->
-    <div id="footer">
-        <p>yaborn.com</p>
-    </div>
+    <router-link :to="{name:'Home'}"> <!-- 点击跳转回home -->
+        <div id="footer">
+            <p>yaborn.com</p>
+        </div>
+    </router-link>
 </template>
 
 <!-- js -->
@@ -30,5 +32,6 @@
         background: whitesmoke;
         text-align: center;
         font-weight: bold;
+        color: black;
     }
 </style>

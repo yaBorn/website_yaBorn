@@ -6,10 +6,12 @@
 <!-- html -->
 <template>
     <!-- 页眉 -->
-    <div id="header">
-        <h1>yaBorn Blog</h1>
-        <hr>
-    </div>
+    <router-link :to="{name:'Home'}"> <!-- 点击跳转回home -->
+        <div id="header">
+            <h1>yaBorn Blog</h1>
+            <hr>
+        </div>
+    </router-link>
 </template>
 
 <!-- js -->
@@ -23,7 +25,9 @@
 <!-- "scoped" 使样式仅在当前组件生效 -->
 <style scoped>
     #header {
+        text-decoration: none;
         text-align: center;
         margin-top: 20px;
+        color: black;
     }
 </style>

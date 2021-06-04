@@ -49,6 +49,7 @@
         </div>
         
         <!-- 翻页 -->
+        <!-- 每页项目数量 由后端传输json内容决定  setting-->
         <div id='pageinator'>
             <!-- 前页 -->
             <span v-if="is_page_exists('previous')">
