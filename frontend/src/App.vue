@@ -5,8 +5,6 @@
 <!-- html -->
 <template>
     <div id="vue">
-        <BlogHeader/>
-        <BlogFooter/>
         <!-- vue-router 路由的各路径页面实际渲染位置 -->
         <router-view/>
     </div>
@@ -14,12 +12,8 @@
 
 <!-- js -->
 <script>
-    import BlogHeader from '@/components/my/BlogHeader.vue'
-    import BlogFooter from '@/components/my/BlogFooter.vue'
-
     export default {
-        name: 'App',
-        components: { BlogHeader, BlogFooter}
+        name: 'App'
     }
 </script>
 

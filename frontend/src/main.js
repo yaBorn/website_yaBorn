@@ -4,10 +4,9 @@
 */
 import { createApp } from 'vue'
 import App from './App.vue'
-
-createApp(App).mount('#app')
+// createApp(App).mount('#app')
 
 // 前端路由 vue-router 加载到vue
-// TODO: 加载router后，页面显示空白
+// 加载router后，页面显示空白 -> app重复创建
 import router from './router'
 createApp(App).use(router).mount('#app');
