@@ -83,6 +83,7 @@ class ArticleListSerializer(ArticleBaseSerializer):
     class Meta:
         model = Article
         fields = [
+            'id',
             'title',
             'url',
             'author',
@@ -105,7 +106,6 @@ class ArticleDetailSerializer(ArticleBaseSerializer):
     #   SMF为只读字段，调用附加方法获取值
     #   即body_html会自动调用getBH方法，返回结果作为序列化数据
     # 文章详情_评论 嵌套序列化器
-    id = serializers.IntegerField(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
 
     def get_body_html(self, obj):

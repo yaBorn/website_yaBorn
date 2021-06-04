@@ -17,7 +17,8 @@ const routes = [
         component: Home,
     },
     {
-        path: "/article/:id",
+        path: "/article/:id", // 动态路由 冒号:id 来定义
+        // 文章列表组件 对应 id修改
         name: "ArticleDetail",
         component: ArticleDetail
     }
