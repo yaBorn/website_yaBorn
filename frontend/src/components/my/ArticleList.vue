@@ -47,6 +47,26 @@
                 {{ formatted_time(article.created) }}
             </div>
         </div>
+        
+        <!-- 翻页 -->
+        <div id='pageinator'>
+            <!-- 前页 -->
+            <span v-if="is_page_exists('previous')">
+                <router-link :to="{ name:'Home', query:{page:get_page_param('previous')} }">
+                    Prew
+                </router-link>
+            </span>
+            <!-- 当前页 -->
+            <span class="current-page">
+                {{ get_page_param('current') }}
+            </span>
+            <!-- 后页 -->
+            <span v-if="is_page_exists('next')">
+                <router-link :to="{ name:'Home', query:{page:get_page_param('next')} }">
+                    Next
+                </router-link>    
+            </span>           
+        </div>
     </div>
 </template>
 
@@ -60,21 +80,68 @@
         name: 'ArticleList',
         data: function () {
             return {
-                info: ''        // data info 属性初始化时赋值空字符串
+                info: '' // data info 属性初始化时赋值空字符串
             }
         },
-        mounted() {        // Vue 加载完成后,调用生命周期钩子 mounted() 方法
-            // 通过 axios 向 Django 后端获取到文章列表数据并赋值给 info 后
-            // 页面中关联的部分也会立即随之更新，而不用手动去操作页面元素
-            axios
-                .get('/bg/article/article-list/')
-                .then(response => (this.info = response.data))
+        // Vue 加载完成 调用生命周期钩子 mounted() 方法
+        mounted() {
+            this.get_article_data() // 见方法
         },
         // methods方法 可在脚本中直接调用 也可在模板中通过标签属性或花括号调用
-        methods: {  // 标签和创建时间
+        methods: {
+            // 获取文章列表数据
+            get_article_data:function () {
+                let url = '/bg/article/article-list/'
+                const page = Number(this.$route.query.page)
+                if (!isNaN(page) && (page !== 0)) { // 默认首页，当页码不存在返回home
+                    url = url + '/?page=' + page
+                }
+                // 通过 axios 向 Django 后端获取到文章列表数据并赋值给 info
+                axios
+                    .get(url)
+                    .then(response => (this.info = response.data))
+            },
+            // 标签和创建时间
             formatted_time: function (iso_date_string) {
                 const date = new Date(iso_date_string);
                 return date.toLocaleDateString()
+            },
+            // 判断页面是否存在
+            is_page_exists(direction) {
+                if(direction === 'next') {
+                    return this.info.next !== null
+                }
+                return this.info.previous !== null
+            },
+            // 获取页码
+            get_page_param:function(direction) {
+                try { // 规避意外 TODO:网速缓慢，info还未获取到数据
+                    let url_string
+                    switch (direction) { // 根据翻页方向返回URL对象页码参数
+                        case 'next':
+                            url_string = this.info.next
+                            break
+                        case 'previous':
+                            url_string = this.info.previous
+                            break
+                        default:
+                            return this.$route.query.page
+                    }
+                    const url = new URL(url_string)
+                    return url.searchParams.get('page')
+                }
+                catch (err) {
+                    // TODO:添加报错信息提示
+                    return
+                }
+            }
+        },
+        // watch监听路由变化 用于翻页
+        watch:{
+            // 监听Vue数据，改变时执行相应方法
+            $route() { // vue路由对象
+                this.get_article_data() // 路由改变，即页数改变，更新
+                // 参数page变化对于 vue-router而言不算路径变化，因此不会触发mouted()，而是通过监听执行
             }
         }
     }
@@ -105,5 +172,18 @@
         background-color: #4e4e4e;
         color: whitesmoke;
         border-radius: 5px;
+    }
+    #pageinator {
+        text-align: center;
+        padding-top: 50px;
+    }
+    a {
+        color: black;
+    }
+    .current-page {
+        font-size: x-large;
+        font-weight: bold;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 </style>
