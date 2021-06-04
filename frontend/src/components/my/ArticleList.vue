@@ -24,9 +24,19 @@
             </div>
 
             <!-- 文章标题 -->
-            <div class="article-title">
+            <!-- <div class="article-title"> -->
+                <!-- {{ article.title }} -->
+            <!-- </div> -->
+            <router-link
+                :to="{ name: 'ArticleDetail', params: { id: article.id }}"
+                class="article-title"
+            >
                 {{ article.title }}
-            </div>
+            </router-link>
+            <!-- 调用vue-router
+                :to指定跳转位置，动态参数id为序列化器id接口 
+                vue中，属性前的 :表啊是属性绑定，为v-bind:缩写
+            -->
 
             <!-- 创建时间 -->
             <div>
