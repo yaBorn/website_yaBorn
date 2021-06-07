@@ -12,6 +12,8 @@
                 <h3>注册账号</h3>
                 <form>
                     <div class="form-elem">
+                        <!-- TODO:输入格式限制 -->
+                        <!-- 后端密码限制：小于150字符，只包括字母、数字和@/./+/-/_ 详见:8000/bg/user/ -->
                         <span>账号名称：</span> 
                         <input v-model="signupName" type="text" placeholder="输入用户名">
                     </div>
@@ -23,8 +25,14 @@
                         <span>再次输入：</span> 
                         <input v-model="signupPwdtest" type="password" placeholder="输入密码">
                     </div>
-                    <div class="form-elem">
-                        <button v-on:click.prevent="signup">提交</button>
+                    <!-- 错误提示框 -->
+                    <div id="putgrid">
+                        <div class="form-elem">
+                            <button v-on:click.prevent="signup">提交</button>
+                        </div>
+                        <div class="message">
+                            <p v-text="errorMessageUp"></p>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -52,14 +60,21 @@
                 signupPwd: '',
                 signupPwdtest: '',
                 signupResponse: null,
+                errorMessageUp:'',
             }
         },
         methods: {
             signup() {
                 const that = this;
+                // 判断空值
+                if(this.signupName=='' || this.signupPwd=='' || this.signupPwdtest=='') {
+                    this.errorMessageUp = '输入为空'
+                    return
+                }
                 // 验证密码
                 if(this.signupPwd !== this.signupPwdtest) {
-                    alert('密码不一致，请重新输入');
+                    // alert('密码不一致，请重新输入');
+                    this.errorMessageUp = '密码不一致，请重新输入'
                     return
                 }
                 // axios将注册数据 post到 bg/user完成注册
@@ -80,13 +95,27 @@
                             this在函数调用时修改，在函数没有调用的时候，this的值无法确定。
                             即 then()中直接使用 this 但 this未定义 导致报错 https://juejin.cn/post/6844903573428371464
                         */
-                        that.signupResponse = response.data;
-                        alert('用户注册成功，快去登录吧！');
+                        that.signupResponse = response.data
+                        // alert('用户注册成功！')
+                        that.errorMessageUp = '用户注册成功！'
                     })
                     .catch(function (error) {
-                        // TODO: 优化报错内容
+                        // TODO: 优化报错内容 error.message
                         // 400 重复名称
-                        alert(error.message);
+                        // 403 后端页码登录
+                        // alert(error.message)
+                        switch(error.message) {
+                            case 'Request failed with status code 400':
+                                that.errorMessageUp = '该名称已注册'
+                                break
+                            case 'Request failed with status code 403':
+                                that.errorMessageUp = '后端异常：请联系管理员'
+                                break
+                            default:
+                                that.errorMessageUp = '意料外异常：请联系管理员'
+                                alert(error.message)
+                                return
+                        }
                         // 报错信息见：https://github.com/axios/axios#handling-errors
                     });
             },
@@ -105,6 +134,15 @@
     }
     .form-elem {
         padding: 10px;
+    }
+    #putgrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .message {
+        text-align: left;
+        font-size: 10px;
+        color: rgba(251, 14, 14, 0.931);
     }
     input {
         height: 25px;
