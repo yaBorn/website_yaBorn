@@ -50,15 +50,18 @@
             return {
                 signupName: '',
                 signupPwd: '',
-                // signupPwdtest: '',
+                signupPwdtest: '',
                 signupResponse: null,
             }
         },
         methods: {
             signup() {
                 const that = this;
-                // 检验一致性
-                
+                // 验证密码
+                if(this.signupPwd !== this.signupPwdtest) {
+                    alert('密码不一致，请重新输入');
+                    return
+                }
                 // axios将注册数据 post到 bg/user完成注册
                 axios
                     // TODO:VUE_axios_post报错 request failed with status code 403
