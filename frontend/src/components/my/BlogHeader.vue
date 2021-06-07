@@ -31,6 +31,12 @@
         </div>
         <!-- 底部下划线 -->
         <hr>
+        <!-- 用户注册 -->
+        <div class="login">
+            <router-link to="/login" class="login-link">
+                登录/注册
+            </router-link>
+        </div>
     </div>
 </template>
 
@@ -76,6 +82,13 @@
         text-align: center;
         margin-top: 20px;
         color: black;
+    }
+    .login {
+        text-align: right;
+        padding-right: 5px;
+    }
+    .login-link {
+        color:black;
     }
 </style>
 <!-- 搜索框 css 样式 -->

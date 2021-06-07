@@ -12,12 +12,12 @@
                 <h3>注册账号</h3>
                 <form>
                     <div class="form-elem">
-                        <span>账号：</span> 
+                        <span>账号名称：</span> 
                         <input v-model="signupName" type="text" placeholder="输入用户名">
                     </div>
                     <div class="form-elem">
-                        <span>密码：</span> 
-                        <input v-model="signupPwd" type="password" placeholder="输入密码">
+                        <span>再次输入：</span> 
+                        <input v-model="signupPwdtest" type="password" placeholder="输入密码">
                     </div>
                     <div class="form-elem">
                         <button v-on:click.prevent="signup">提交</button>
@@ -46,6 +46,7 @@
             return {
                 signupName: '',
                 signupPwd: '',
+                signupPwdtest: '',
                 signupResponse: null,
             }
         },
@@ -61,7 +62,7 @@
                         /* TODO:js中 
                             this为call()方法调用函数时传递的第一个参数
                             this在函数调用时修改，在函数没有调用的时候，this的值无法确定。
-                            即直接使用 this 但 this未定义 导致报错 https://juejin.cn/post/6844903573428371464
+                            即 then()中直接使用 this 但 this未定义 导致报错 https://juejin.cn/post/6844903573428371464
                         */
                         that.signupResponse = response.data;
                         alert('用户注册成功，快去登录吧！');
