@@ -16,6 +16,10 @@
                         <input v-model="signupName" type="text" placeholder="输入用户名">
                     </div>
                     <div class="form-elem">
+                        <span>输入密码：</span> 
+                        <input v-model="signupPwd" type="text" placeholder="输入密码">
+                    </div>
+                    <div class="form-elem">
                         <span>再次输入：</span> 
                         <input v-model="signupPwdtest" type="password" placeholder="输入密码">
                     </div>
@@ -53,6 +57,7 @@
         methods: {
             signup() {
                 const that = this;
+                // 检验一致性
                 axios
                     .post('/api/user/', {
                         username: this.signupName,
