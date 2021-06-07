@@ -93,9 +93,16 @@
             // 获取文章列表数据
             get_article_data:function () {
                 let url = '/bg/article/article-list/'
-                const page = Number(this.$route.query.page)
-                if (!isNaN(page) && (page !== 0)) { // 默认首页，当页码不存在返回home
-                    url = url + '/?page=' + page
+                // 翻页迭代搜索功能 获取搜索返回的URL对象
+                // 原生append()不判断值存在 会出现/?page=undefined 错误
+                // myAppendIfExists 排除错误路径 为扩展的对象功能 见main.js
+                let params = new URLSearchParams();
+                params.myAppendIfExists('page', this.$route.query.page);
+                params.myAppendIfExists('search', this.$route.query.search);
+                
+                const paramsString = params.toString()
+                if (paramsString.charAt(0) !== '') { // 默认首页，当页码不存在返回home
+                    url = url + '/?' + paramsString
                 }
                 // 通过 axios 向 Django 后端获取到文章列表数据并赋值给 info
                 axios
@@ -135,6 +142,30 @@
                     // TODO:添加报错信息提示
                     return
                 }
+            },
+            // 搜索功能迭代
+            get_path:function(direction) {
+                // <router-link>翻页时读取 page值，但对于搜索search则获取不到正确路径
+                // 以此迭代 get_article_data()
+                let url = '';
+                try {
+                    switch (direction) {
+                        case 'next':
+                            if (this.info.next !== undefined) {
+                                url += (new URL(this.info.next)).search
+                            }
+                            break;
+                        case 'previous':
+                            if (this.info.previous !== undefined) {
+                                url += (new URL(this.info.previous)).search
+                            }
+                            break;
+                    }
+                }
+                catch { 
+                    return url 
+                }
+                return url
             }
         },
         // watch监听路由变化 用于翻页

@@ -10,4 +10,13 @@ import App from './App.vue'
 // TODO: 加载router后，页面显示空白 -> app重复创建
 import router from './router'
 
+// 扩展 URLSearchParams方法
+// 用于ArticleList.vue_script_get_article_data()
+URLSearchParams.prototype.myAppendIfExists = function (key, value) {
+    if (value !== null && value !== undefined) {
+        // 比 append()多了判断值存在的情况
+        this.append(key, value)
+    }
+};
+
 createApp(App).use(router).mount('#app');
