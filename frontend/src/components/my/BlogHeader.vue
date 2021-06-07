@@ -12,8 +12,12 @@
             <!-- 搜索框 -->
             <div class="search">
                 <form>
-                    <input type="text" placeholder="输入内容...">
-                    <button></button>
+                    <!-- v-model为数据绑定 input数据和 js的searchText绑定在 共享数据内容 -->
+                    <input v-model="searchText" type="text" placeholder="输入内容...">
+                    <!-- v-on:clic为按键点击事件，触发searchArticles() -->
+                    <!-- prevent阻止按钮初始表单提交 -->
+                    <button v-on:click.prevent="searchArticles">
+                    </button>
                 </form>
             </div>
             <!-- 标题 -->
@@ -34,6 +38,22 @@
 <script>
     export default {
         name: 'BlogHeader',
+        data: function () {
+            return {
+                searchText: ''
+            }
+        },
+        methods: {
+            searchArticles() {
+                // 点击button触发回调，将searchText作为参数进行路径跳转
+                const text = this.searchText.trim();
+                if(text.charAt(0) !== '') {
+                    // 和 <router-link>类似，为脚本中的动态跳转
+                    // $route路径对象 $router路由器对象
+                    this.$router.push({name:'Home', query:{ search:text}})
+                }
+            }
+        }
     }
 </script>
 
