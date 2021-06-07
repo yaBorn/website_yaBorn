@@ -53,7 +53,8 @@
         <div id='pageinator'>
             <!-- 前页 -->
             <span v-if="is_page_exists('previous')">
-                <router-link :to="{ name:'Home', query:{page:get_page_param('previous')} }">
+                <!-- <router-link :to="{ name:'Home', query:{page:get_page_param('previous')} }"> -->
+                <router-link :to="get_path('previous')">
                     Prew
                 </router-link>
             </span>
@@ -63,7 +64,8 @@
             </span>
             <!-- 后页 -->
             <span v-if="is_page_exists('next')">
-                <router-link :to="{ name:'Home', query:{page:get_page_param('next')} }">
+                <!-- <router-link :to="{ name:'Home', query:{page:get_page_param('next')} }"> -->
+                <router-link :to="get_path('next')">
                     Next
                 </router-link>    
             </span>           
@@ -143,7 +145,7 @@
                     return
                 }
             },
-            // 搜索功能迭代
+            // 搜索功能迭代 获取页码
             get_path:function(direction) {
                 // <router-link>翻页时读取 page值，但对于搜索search则获取不到正确路径
                 // 以此迭代 get_article_data()
