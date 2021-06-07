@@ -19,10 +19,10 @@
                         <span>输入密码：</span> 
                         <input v-model="signupPwd" type="text" placeholder="输入密码">
                     </div>
-                    <div class="form-elem">
+                    <!-- <div class="form-elem">
                         <span>再次输入：</span> 
                         <input v-model="signupPwdtest" type="password" placeholder="输入密码">
-                    </div>
+                    </div> -->
                     <div class="form-elem">
                         <button v-on:click.prevent="signup">提交</button>
                     </div>
@@ -50,7 +50,7 @@
             return {
                 signupName: '',
                 signupPwd: '',
-                signupPwdtest: '',
+                // signupPwdtest: '',
                 signupResponse: null,
             }
         },
@@ -59,7 +59,11 @@
                 const that = this;
                 // 检验一致性
                 axios
-                    .post('/api/user/', {
+                    // TODO:VUE_axios_post报错
+                    // request failed with status code 403
+                    // dijango后台报错 post 403 58
+                    // 但从dijango后台 bg/user/可以 post
+                    .post('/bg/user/', {
                         username: this.signupName,
                         password: this.signupPwd,
                     })
