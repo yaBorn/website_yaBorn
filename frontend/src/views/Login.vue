@@ -28,7 +28,9 @@
                     <!-- 错误提示框 -->
                     <div id="putgrid">
                         <div class="form-elem">
-                            <button v-on:click.prevent="signup">提交</button>
+                            <button v-on:click.prevent="signup">
+                                注册
+                            </button>
                         </div>
                         <div class="message">
                             <p v-text="errorMessageUp"></p>
@@ -38,7 +40,29 @@
             </div>
 
             <!-- 用户登录 -->
-            <div>
+            <div id="signin">
+                <h3>登录账号</h3>
+                <form>
+                    <div class="form-elem">
+                        <span>账号：</span> 
+                        <input v-model="signinName" type="text" placeholder="输入用户名">
+                    </div>
+                    <div class="form-elem">
+                        <span>密码：</span> 
+                        <input v-model="signinPwd" type="text" placeholder="输入密码">
+                    </div>
+                    <!-- 错误提示框 -->
+                    <div id="putgrid">
+                        <div class="form-elem">
+                            <button v-on:click.prevent="signin">
+                                登录
+                            </button>
+                        </div>
+                        <div class="message">
+                            <p v-text="errorMessageIn"></p>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <BlogFooter/>
@@ -59,12 +83,17 @@
                 signupName: '',
                 signupPwd: '',
                 signupPwdtest: '',
-                signupResponse: null,
                 errorMessageUp:'',
+                signupResponse: null,
+
+                signinName: '',
+                signinPwd: '',
+                errorMessageIn: '',
             }
         },
         methods: {
-            signup() {
+            // 注册按钮回调
+            signup () {
                 const that = this;
                 // 判断空值
                 if(this.signupName=='' || this.signupPwd=='' || this.signupPwdtest=='') {
@@ -83,12 +112,10 @@
                     // dijango后台报错 post 403 58
                     // 但从dijango后台 bg/user/可以 post
                     // dijango后台登录了管理员账户，此时前端注册则报错403 58
-                    .post('/bg/user/', 
-                        {
-                            username: this.signupName,
-                            password: this.signupPwd,
-                        }
-                    )
+                    .post('/bg/user/', {
+                        username: this.signupName,
+                        password: this.signupPwd,
+                    })
                     .then(function (response) {
                         /* TODO:js中 
                             this为call()方法调用函数时传递的第一个参数
@@ -119,6 +146,52 @@
                         // 报错信息见：https://github.com/axios/axios#handling-errors
                     });
             },
+            // 登录按钮回调
+            signin () {
+                const that = this;
+                // 判断空值
+                if(this.signinName=='' || this.signinPwd=='') {
+                    this.errorMessageIn = '输入为空'
+                    return
+                }
+                // axios将注册数据 post到 bg/user完成注册
+                axios
+                    .post('/bg/token/', {
+                        // 发送请求申请token
+                        username: this.signinName,
+                        password: this.signinPwd,
+                    })
+                    .then(function (response) {
+                            // 将token令牌，过期时间，用户数据存放到 LS
+                            const storage = localStorage;
+                            // Date.parse(...) 返回1970年1月1日UTC以来的毫秒数
+                            // TODO:修改JWT验证时间
+                            // Token 在后端 setting-SIMPLE_JWT被设置为1分钟 此处加上60000毫秒
+                            const expiredTime = Date.parse(response.headers.date) + 60000;
+                            // 设置 localStorage
+                            storage.setItem('access.myblog', response.data.access);
+                            storage.setItem('refresh.myblog', response.data.refresh);
+                            storage.setItem('expiredTime.myblog', expiredTime);
+                            storage.setItem('username.myblog', that.signinName);
+                            // 路由跳转 登录成功后回到博客首页
+                            that.$router.push({name: 'Home'});
+                    })
+                    .catch(function (error) {
+                        switch(error.message) {
+                            case 'Request failed with status code 401':
+                                // TODO: 优化报错内容 error.message
+                                that.errorMessageIn = '账号不存在 / 密码错误'
+                                break
+                            case 'Request failed with status code 403':
+                                that.errorMessageIn = '后端异常：请联系管理员'
+                                break
+                            default:
+                                that.errorMessageIn = '意料外异常：请联系管理员'
+                                alert(error.message)
+                                return
+                        }
+                    });
+            }
         }
     }
 </script>
@@ -128,6 +201,9 @@
     #grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
+    }
+    #signin {
+        text-align: center;
     }
     #signup {
         text-align: center;

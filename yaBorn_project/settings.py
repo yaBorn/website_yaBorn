@@ -65,7 +65,9 @@ REST_FRAMEWORK = {
 # JWT验证时间
 SIMPLE_JWT = {
     # Token 有效期设置
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    # TODO: 修改 ACCESS_TOKEN_LIFETIME
+    #  则前端 Login.vie-script-methods-signin-then 处需要加上对应时长的毫秒
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
 }
 
