@@ -47,8 +47,8 @@ urlpatterns = [
     path('bg/category/', include('article_category.urls', namespace='category')),
 
     # # JWT验证的 Token 获取与刷新地址
-    # path('bg/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('bg/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('bg/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('bg/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     # drf 自动注册路由_视图集
     path('bg/', include(router.urls)),

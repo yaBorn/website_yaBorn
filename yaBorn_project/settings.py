@@ -57,9 +57,9 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 4,  # 设置每页文章数量
     # # JWT为默认认证机制
     # # 安装库djangorestframework-simplejwt
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # )
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 # JWT验证时间
