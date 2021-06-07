@@ -19,10 +19,10 @@
                         <span>输入密码：</span> 
                         <input v-model="signupPwd" type="text" placeholder="输入密码">
                     </div>
-                    <!-- <div class="form-elem">
+                    <div class="form-elem">
                         <span>再次输入：</span> 
                         <input v-model="signupPwdtest" type="password" placeholder="输入密码">
-                    </div> -->
+                    </div>
                     <div class="form-elem">
                         <button v-on:click.prevent="signup">提交</button>
                     </div>
@@ -58,15 +58,19 @@
             signup() {
                 const that = this;
                 // 检验一致性
+                
+                // axios将注册数据 post到 bg/user完成注册
                 axios
-                    // TODO:VUE_axios_post报错
-                    // request failed with status code 403
+                    // TODO:VUE_axios_post报错 request failed with status code 403
                     // dijango后台报错 post 403 58
                     // 但从dijango后台 bg/user/可以 post
-                    .post('/bg/user/', {
-                        username: this.signupName,
-                        password: this.signupPwd,
-                    })
+                    // dijango后台登录了管理员账户，此时前端注册则报错403 58
+                    .post('/bg/user/', 
+                        {
+                            username: this.signupName,
+                            password: this.signupPwd,
+                        }
+                    )
                     .then(function (response) {
                         /* TODO:js中 
                             this为call()方法调用函数时传递的第一个参数
@@ -77,9 +81,10 @@
                         alert('用户注册成功，快去登录吧！');
                     })
                     .catch(function (error) {
+                        // TODO: 优化报错内容
+                        // 400 重复名称
                         alert(error.message);
-                        // Handling Error here...
-                        // https://github.com/axios/axios#handling-errors
+                        // 报错信息见：https://github.com/axios/axios#handling-errors
                     });
             },
         }
