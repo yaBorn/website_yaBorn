@@ -78,7 +78,7 @@
 </style>
 <style>
     /* <style> 标签可以有多个 */
-    /* 文章内容、目录都是从原始 HTML 渲染的，不在 scoped 的管理范围内 */
+    /*52 文章内容、目录都是从原始 HTML 渲染的，不在 scoped 的管理范围内 */
     .article-body p img {
         max-width: 100%;
         border-radius: 50px;
