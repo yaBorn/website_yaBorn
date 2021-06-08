@@ -167,14 +167,17 @@
                             // Date.parse(...) 返回1970年1月1日UTC以来的毫秒数
                             // TODO:修改JWT验证时间
                             // Token 在后端 setting-SIMPLE_JWT被设置为1分钟 此处加上60000毫秒
-                            const expiredTime = Date.parse(response.headers.date) + 60000;
+                            // 此外 Header-mounted-axios 刷新token相同设置
+                            const expiredTime = Date.parse(response.headers.date) + 60000
                             // 设置 localStorage
-                            storage.setItem('access.myblog', response.data.access);
-                            storage.setItem('refresh.myblog', response.data.refresh);
-                            storage.setItem('expiredTime.myblog', expiredTime);
-                            storage.setItem('username.myblog', that.signinName);
+                            // header mounted中被使用 同步修改该名称
+                            storage.setItem('access.myblog', response.data.access)
+                            storage.setItem('refresh.myblog', response.data.refresh)
+                            storage.setItem('expiredTime.myblog', expiredTime)
+                            storage.setItem('username.myblog', that.signinName)
                             // 路由跳转 登录成功后回到博客首页
-                            that.$router.push({name: 'Home'});
+                            // console.log('登录成功')
+                            that.$router.push({name: 'Home'})
                     })
                     .catch(function (error) {
                         switch(error.message) {
