@@ -28,6 +28,8 @@
         },
         methods: {
             searchArticles() {
+                // TODO:搜索范围迭代 搜索标题/标签关键词
+                // 并且在更新列表 list高亮该关键词
                 // 点击button触发回调，将searchText作为参数进行路径跳转
                 const text = this.searchText.trim();
                 if(text.charAt(0) !== '') {
