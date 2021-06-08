@@ -176,7 +176,8 @@
                             storage.setItem('expiredTime.myblog', expiredTime)
                             storage.setItem('username.myblog', that.signinName)
                             // 路由跳转 登录成功后回到博客首页
-                            // console.log('登录成功')
+                            console.log('-----login.vue')
+                            console.log('登录成功 账户：', that.signinName)
                             that.$router.push({name: 'Home'})
                     })
                     .catch(function (error) {

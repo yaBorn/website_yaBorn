@@ -33,6 +33,8 @@
         <hr>
         <!-- 用户注册 -->
         <div class="login">
+            <p v-text="hasLogin"></p>
+            <!-- TODO:这里 hasLogin为 true但 v-if仍跳过了 -->
             <div v-if="haslogin"> <!-- 判断是否登录 -->
                 <!-- 已登录界面 -->
                 欢迎，{{username}}
@@ -50,6 +52,7 @@
 <!-- js -->
 <script>
 import axios from 'axios';
+
     export default {
         name: 'BlogHeader',
         data: function () {
@@ -79,14 +82,21 @@ import axios from 'axios';
             const current = (new Date()).getTime() // 当前时间
             const refreshToken = storage.getItem('refresh.myblog') // 刷新
             that.username = storage.getItem('username.myblog') // 账号名称
+            console.log('-----header.vue')
+            console.log('当前时间:',current)
+            console.log('过期时间:',expiredTime)
+            console.log('账户：', that.username)
+
 
             // token未过期
             if (expiredTime > current) {
                 that.hasLogin = true
+                console.log('令牌未过期，hasLogin：', that.hasLogin)
             }
             // token过期 但在可更新时间内
             else if(refreshToken !== null){
                 // 重新申请token
+                console.log('令牌过期，重新申请')
                 axios
                     .post('bg/token/refresh/', {
                         refresh: refreshToken
@@ -109,6 +119,7 @@ import axios from 'axios';
             else {
                 storage.clear();
                 that.hasLogin = false;
+                console.log('令牌过期，失效，清空token，hasLogin:', that.hasLogin)
             }
         }
     }
