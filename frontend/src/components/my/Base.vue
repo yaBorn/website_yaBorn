@@ -8,6 +8,15 @@
 
 <!-- js -->
 <script>
+    export default {
+        name: '',
+        data: function () {
+            return {
+            }
+        },
+        methods: {
+        },
+    }
 </script>
 
 <!-- css -->
