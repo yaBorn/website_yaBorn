@@ -1,6 +1,7 @@
 <!-- 
     组件 页眉 
         Home.vue
+    TODO:设置用户登出
 -->
 
 <!-- html -->
@@ -33,7 +34,7 @@
         </div>
         <!-- 底部下划线 -->
         <hr>
-        
+
         <!-- 用户注册 -->
         <div class="login">
             <!-- <p v-text="hasLogin"></p> -->
@@ -88,7 +89,6 @@ import axios from 'axios';
             console.log('当前时间:',current)
             console.log('过期时间:',expiredTime)
             console.log('账户：', that.username)
-
 
             // token未过期
             if (expiredTime > current) {
