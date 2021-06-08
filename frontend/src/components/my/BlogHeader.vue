@@ -9,6 +9,7 @@
     <div id="header">
         <!-- 布局 -->
         <div class="grid">
+
             <!-- 搜索框 -->
             <div class="search">
                 <form>
@@ -20,6 +21,7 @@
                     </button>
                 </form>
             </div>
+
             <!-- 标题 -->
             <router-link :to="{name:'Home'}"> <!-- 点击跳转回 home -->
                 <div class="headertex">
@@ -31,11 +33,11 @@
         </div>
         <!-- 底部下划线 -->
         <hr>
+        
         <!-- 用户注册 -->
         <div class="login">
-            <p v-text="hasLogin"></p>
-            <!-- TODO:这里 hasLogin为 true但 v-if仍跳过了 -->
-            <div v-if="haslogin"> <!-- 判断是否登录 -->
+            <!-- <p v-text="hasLogin"></p> -->
+            <div v-if="hasLogin">
                 <!-- 已登录界面 -->
                 欢迎，{{username}}
             </div>
