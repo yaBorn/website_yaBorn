@@ -33,9 +33,11 @@
         <hr>
         <!-- 用户注册 -->
         <div class="login">
+            <!-- 登录注册链接 -->
             <router-link to="/login" class="login-link">
                 登录/注册
             </router-link>
+            <!-- 已登录界面 -->
         </div>
     </div>
 </template>
