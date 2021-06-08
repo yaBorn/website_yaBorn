@@ -46,7 +46,7 @@
 <!-- js -->
 <script>
     import axios from 'axios'
-    import SearchBox from '@/components/my/SearchBox.vue'
+    import SearchBox from '@/components/SearchBox.vue'
 
     export default {
         name: 'BlogHeader',
@@ -96,14 +96,14 @@
                     })
                     .catch(function () {
                         // .clear() 清空当前域名下所有的值
-                        storage.clear();
-                        that.hasLogin = false;
+                        storage.clear()
+                        that.hasLogin = false
                     })
             }
             // token过期 失效
             else {
-                storage.clear();
-                that.hasLogin = false;
+                storage.clear()
+                that.hasLogin = false
                 console.log('令牌过期，失效，清空token，hasLogin:', that.hasLogin)
             }
         }

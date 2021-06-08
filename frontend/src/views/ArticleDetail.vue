@@ -30,8 +30,8 @@
 
 <!-- js -->
 <script>
-    import BlogHeader from '@/components/my/BlogHeader.vue'
-    import BlogFooter from '@/components/my/BlogFooter.vue'
+    import BlogHeader from '@/components/BlogHeader.vue'
+    import BlogFooter from '@/components/BlogFooter.vue'
     import axios from 'axios'
 
     export default {

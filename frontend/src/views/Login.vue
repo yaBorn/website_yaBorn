@@ -72,8 +72,8 @@
 <!-- js -->
 <script>
     import axios from 'axios';
-    import BlogHeader from '@/components/my/BlogHeader.vue'
-    import BlogFooter from '@/components/my/BlogFooter.vue'
+    import BlogHeader from '@/components/BlogHeader.vue'
+    import BlogFooter from '@/components/BlogFooter.vue'
 
     export default {
         name: 'Login',
