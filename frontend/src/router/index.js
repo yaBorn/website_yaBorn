@@ -31,6 +31,12 @@ const routes = [
         name: "Login",
         component: Login,
     },
+    // 用户中心页面
+    {
+        path: "/user/:username",
+        name: "UserCenter",
+        component: UserCenter,
+    },
 ];
 
 /* 创建vue-router
