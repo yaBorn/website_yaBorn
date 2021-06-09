@@ -9,7 +9,9 @@
         <div id="grid">
             <!-- 用户注册 -->
             <div id="signup">
-                <h3>注册账号</h3>
+                <h3>
+                    注册账号
+                </h3>
                 <form>
                     <div class="form-elem">
                         <!-- TODO:输入格式限制 -->
@@ -41,7 +43,9 @@
 
             <!-- 用户登录 -->
             <div id="signin">
-                <h3>登录账号</h3>
+                <h3>
+                    登录账号
+                </h3>
                 <form>
                     <div class="form-elem">
                         <span>账号：</span> 
