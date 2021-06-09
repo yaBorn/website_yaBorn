@@ -81,7 +81,10 @@
 
     export default {
         name: 'Login',
-        components: {BlogHeader, BlogFooter},
+        components: {
+            BlogHeader, 
+            BlogFooter,
+        },
         data: function () {
             return {
                 signupName: '',
@@ -98,6 +101,8 @@
         methods: {
             // 注册按钮回调
             signup () {
+                console.log('-----Login.vue.signup')
+
                 const that = this;
                 // 判断空值
                 if(this.signupName=='' || this.signupPwd=='' || this.signupPwdtest=='') {
@@ -152,6 +157,8 @@
             },
             // 登录按钮回调
             signin () {
+                console.log('-----Login.vue.signin')
+
                 const that = this;
                 // 判断空值
                 if(this.signinName=='' || this.signinPwd=='') {
@@ -166,6 +173,7 @@
                         password: this.signinPwd,
                     })
                     .then(function (response) {
+                            console.log()
                             // 将token令牌，过期时间，用户数据存放到 LS
                             const storage = localStorage;
                             // Date.parse(...) 返回1970年1月1日UTC以来的毫秒数
@@ -180,7 +188,6 @@
                             storage.setItem('expiredTime.myblog', expiredTime)
                             storage.setItem('username.myblog', that.signinName)
                             // 路由跳转 登录成功后回到博客首页
-                            console.log('-----login.vue')
                             console.log('登录成功 账户：', that.signinName)
                             that.$router.push({name: 'Home'})
                     })
@@ -195,7 +202,8 @@
                                 break
                             default:
                                 that.errorMessageIn = '意料外异常：请联系管理员'
-                                alert(error.message)
+                                // alert(error.message)
+                                console.log(error.message)
                                 return
                         }
                     });

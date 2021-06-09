@@ -2,10 +2,11 @@
     vue-router 前端路由 地址分配
 */
 
-import {createWebHistory, createRouter} from "vue-router";
-import Home from "@/views/Home.vue";
-import ArticleDetail from "@/views/ArticleDetail.vue";
-import Login from "@/views/Login.vue";
+import {createWebHistory, createRouter} from "vue-router"
+import Home from "@/views/Home.vue"
+import ArticleDetail from "@/views/ArticleDetail.vue"
+import Login from "@/views/Login.vue"
+import UserCenter from "@/views/UserCenter.vue"
 
 /* routes列表
     定义所有挂载到路由中的路径
@@ -25,7 +26,7 @@ const routes = [
         name: "ArticleDetail",
         component: ArticleDetail,
     },
-    // 用户注册页面
+    // 用户注册登录页面
     {
         path: "/login",
         name: "Login",
@@ -33,11 +34,11 @@ const routes = [
     },
     // 用户中心页面
     {
-        path: "/user/:username",
+        path: "/uuser/:username",
         name: "UserCenter",
         component: UserCenter,
     },
-];
+]
 
 /* 创建vue-router
     hostory：路由模式
@@ -47,6 +48,6 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
-});
+})
 
-export default router;
+export default router

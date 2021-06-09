@@ -1,6 +1,5 @@
 <!-- 
     组件 页眉 
-        Home.vue
     TODO:设置用户登出
 -->
 
@@ -27,22 +26,25 @@
 
         <!-- 用户注册 -->
         <div class="login">
-            <!-- 已登录下拉框 -->
+            <!-- 已登录下拉框 详见css -->
             <div v-if="hasLogin">
-                <!-- <p v-text="hasLogin"></p> -->
-                <button class="dropbtn">
-                    欢迎，{{username}}
-                </button>
-                <!-- 下拉框内容 -->
-                <div class="dropdown-content">
-                    <router-link :to="{name:'UserCenter',params:{username:username}}">
-                        用户中心
-                    </router-link>
-                </div>
+                <div class="dropdown">
+                    <!-- <p v-text="hasLogin"></p> -->
+                    <button class="dropbtn">
+                        欢迎，{{username}}
+                    </button>
+                    <!-- 下拉框内容 -->
+                    <div class="dropdown-content">
+                        <router-link :to="{name:'UserCenter',params:{username:username}}">
+                            用户中心
+                        </router-link>
+                    </div>
+                </div>  
             </div>
             <div v-else>
                 <!-- 登录注册链接 -->
-                <router-link to="/login" class="login-link">
+                <!-- <router-link to="/login" class="login-link"> -->
+                <router-link :to="{name:'Login'}" class="login-link">
                     登录/注册
                 </router-link>
             </div>
@@ -52,7 +54,6 @@
 
 <!-- js -->
 <script>
-    import axios from 'axios'
     import SearchBox from '@/components/SearchBox.vue'
     import authorization from '@/func/authorization'
 

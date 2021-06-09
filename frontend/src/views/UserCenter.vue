@@ -17,7 +17,7 @@
 
                 <div class="form-elem">
                     <span>新密码：</span>
-                    <input v-model="passWord" type="passWord" placeholder="输入密码">
+                    <input v-model="passWord" type="text" placeholder="输入密码">
                 </div>
 
                 <div class="form-elem">
@@ -27,8 +27,9 @@
 
                 <!-- 错误提示框 -->
                 <div id="grid">
+                    <div></div>
                     <div class="form-elem">
-                        <button v-on:click.prevent="changInfo">
+                        <button v-on:click.prevent="changeinfo">
                             更新
                         </button>
                     </div>
@@ -65,41 +66,67 @@
                 token: '',
             }
         },
-        mounted () {
-            this.userName = storage.getItem('userName.myblog')
-        },
-        menthods: {
+        methods: {
             // 更新按钮 回调函数
-            changeInfo () {
+            changeinfo () {
+                console.log('-----UserCenter.vue.changeinfo')
+
                 const that = this
+                // console.log('输入用户名：',that.userName)
+                // console.log('输入password:',that.passWord)
+                // console.log('输入passwordtst:',that.passWordTest)
+
                 // TODO:更多的格式化
+                // 均空 不更新
+                if(that.passWord.length == 0
+                    && that.passWordTest.length == 0
+                    && that.userName == null) {
+                    console.log('输入为空')
+                    that.errorMessage = '请输入内容'
+                    return
+                }
                 // 验证二次输入
                 if(that.passWord !== that.passWordTest) {
-                    // alert('密码不一致，请重新输入')
+                    console.log('密码不一致')
                     that.errorMessage = '密码不一致，请重新输入'
                     return
                 }
                 // 格式规定 密码长度
-                if( that.passWord.length > 0 && that.passWord.length < 6) {
-                    that.errorMessage = '密码需大于6位'
+                if(that.passWord.length > 0 && that.passWord.length < 3) {
+                    console.log('输入格式错误')
+                    that.errorMessage = '密码需大于3位'
                     return
                 }
+                axios
+                .patch( 
+                    // TODO:此处报错 转发到了 8080:user/bg/user 404
+                    // 第一个user为该页面地址 与路由 index同步
+                    // 改为 post也一样
+                    // 与正常运行的 Login.vue.sigin.axios.post比较
+                    // sigin的 post地址为 8080:bg/token 无路由前缀
+                    'bbg/user/' + this.userName + '/', {
+                        username: this.userName,
+                        password: this.passWord,
+                    }, 
+                    {headers:{Authorization:'Bearer'+that.token}} // token验证字段 头对象
+                )
+
                 /* 调用 func-authorization() 进行用户验证
                     旧方法见 git提交历史 2021.6.8 16：03 用户登录 Login.vue-methods
                 */
                 authorization()
                     .then(function (response) {
+                        console.log('--UserCenter.vue.then')
                         // 检查登录状态
                         if( !response[0]) {
                             that.errorMessage = '登录过期，请重新登录'
-                            console.log('-----UserCenter.vue')
                             console.log('登录过期，请重新登录')
                             return
                         }
-                        // 获取令牌
-                        that.token = storage.getItem('access.myblog')
-                        // 旧 username用于 axios发送数据
-                        const oldUserName = storage.getItem('username.myblog')
+
+                        // 用于 axios
+                        that.token = storage.getItem('access.myblog') // 获取令牌
+                        const oldUserName = storage.getItem('username.myblog') // 旧 username用于 axios发送数据
                         // 获取填写的数据
                         let data = {}
                         if(that.userName !=='') { // 判空 空则不更新
@@ -108,12 +135,25 @@
                         if(that.passWord !== '') {
                             data.password = that.passWord
                         }
+
+                        console.log('token:', that.token)
+                        console.log('oldname:', oldUserName)
+
                         // 将令牌和填写的数据发送到 axios 更新数据
                         axios
-                            .patch(
-                                'bg/user/'+oldUserName+'/',
-                                data, 
-                                {headers: {Authorization:'Bearer'+that.token}}
+                            .patch( 
+                                /* TODO:此处报错 转发到了 8080:user/bg/user 404
+                                    第一个user为该页面地址 与路由 index同步
+                                    与正常运行的 Login.vue.sigin.axios.post比较
+                                    sigin的 post地址为 8080:bg/token 无路由前缀
+                                        改为 post也一样，排除 patch/post差异
+                                        在authorization()之前也一样，排除 .then包围影响
+                                */
+                                'bg/user/' + oldUserName + '/', {
+                                    username: data.username,
+                                    password: data.password,
+                                }, 
+                                {headers:{Authorization:'Bearer'+that.token}} // token验证字段 头对象
                             )
                             .then(function (response) {
                                 const name = response.data.userName
@@ -123,8 +163,14 @@
                                     params:{username:name}
                                 })
                             })
+                            .catch(function (error) {
+                                console.log(error.message)
+                            })
                     })
             }
+        },
+        mounted () {
+            this.userName = storage.getItem('userName.myblog')
         }
     }
 </script>
@@ -136,6 +182,15 @@
     }
     .form-elem {
         padding: 10px;
+    }
+    #grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .message {
+        text-align: left;
+        font-size: 10px;
+        color: rgba(251, 14, 14, 0.931);
     }
     input {
         height: 25px;
@@ -149,6 +204,6 @@
         background: gray;
         color: whitesmoke;
         border-radius: 5px;
-        width: 200px;
+        width: 60px;
     }
 </style>

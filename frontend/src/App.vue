@@ -1,5 +1,10 @@
 <!-- 
     main.js 注册的前端入口
+        TODO:新建参数文件夹 
+            存放各类字段
+                vue路径字段 用于import变化
+                storage字段 tokenJWT验证信息
+                accessTimeJWT参数 令牌有效期 与Django后端对应
 -->
 
 <!-- html -->

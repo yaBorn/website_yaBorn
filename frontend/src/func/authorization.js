@@ -9,7 +9,7 @@ import axios from 'axios'
     axios请求是异步的 需要将异步同步
     不然 localStorage因网络速度导致存取顺序bug
 */
-async function aurhorization () {
+async function auhorization () {
     /*  localStorage与 cookie类似 为用户本地储存
         浏览器隐私模式 localStorage不可读
         为字符串存取，json格式需要 JSON.stringfy()转化
@@ -25,7 +25,7 @@ async function aurhorization () {
     const refreshToken = storage.getItem('refresh.myblog') // 刷新
     let hasLogin = false // 登录标记
 
-    console.log('-----aurhorization.js')
+    console.log('--auhorization.js')
     console.log('账户：', username)
     console.log('当前时间:', current)
     console.log('过期时间:', expiredTime)
@@ -33,7 +33,7 @@ async function aurhorization () {
     // token未过期
     if (expiredTime > current) {
         hasLogin = true
-        console.log('令牌未过期，hasLogin：', hasLogin)
+        console.log('令牌未过期')
     }
     // token过期 但在可更新时间内
     else if(refreshToken !== null){
@@ -45,7 +45,7 @@ async function aurhorization () {
             // 重置 loscalStorage
             const newExpiredTime = Date.parse(response.headers.date)
             storage.setItem('access.myblog', response.data.access)
-            storage.setItem('expiredTime.myblog', expiredTime)
+            storage.setItem('expiredTime.myblog', newExpiredTime)
             storage.removeItem('refresh.myblog')
             hasLogin = true
             console.log('令牌过期，重新申请')
@@ -61,11 +61,11 @@ async function aurhorization () {
     else {
         storage.clear()
         hasLogin = false
-        console.log('令牌过期，失效，清空token，hasLogin:', hasLogin)
+        console.log('令牌失效，清空token')
     }
 
-    console.log('---aurhorization.js over')
+    console.log('return:', hasLogin, username)
     return [hasLogin, username]
 }
 
-export default authorization // 导出函数 以便其他程序 import
+export default auhorization // 导出函数 以便其他程序 import
