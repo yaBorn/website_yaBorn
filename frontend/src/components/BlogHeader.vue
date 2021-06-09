@@ -10,7 +10,6 @@
     <div id="header">
         <!-- 布局 -->
         <div class="grid">
-
             <!-- 搜索框 -->
             <SearchBox/>
 
