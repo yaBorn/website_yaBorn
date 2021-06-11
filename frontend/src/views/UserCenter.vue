@@ -66,6 +66,27 @@
                 token: '',
             }
         },
+        // 加载用户中心时 检查登录状态
+        mounted() {
+            console.log('-----UserCenter.vue.mounted')
+            this.userName = storage.getItem('userName.myblog')
+            
+            // 进行用户验证
+            const that = this
+            authorization()
+                .then(function (response) {
+                    // 检查登录状态
+                    if( !response[0]) {
+                        that.errorMessage = '登录过期，请重新登录'
+                        console.log('登录过期，请重新登录')
+                        alert('登录过期，请重新登录') // 通知框通知用户                        
+                        // TODO 跳转主页面 
+                        // this.$router.push({name:'Home'});
+                        return
+                    }
+                })
+            console.log('令牌通过')
+        },
         methods: {
             // 更新按钮 回调函数
             changeinfo () {
@@ -169,9 +190,6 @@
                     })
             }
         },
-        mounted () {
-            this.userName = storage.getItem('userName.myblog')
-        }
     }
 </script>
 

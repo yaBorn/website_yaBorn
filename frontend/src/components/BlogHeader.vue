@@ -158,7 +158,7 @@
 <style scoped>
     /* 来源: https://www.runoob.com/css/css-dropdowns.html */
     .dropbtn {
-        background-color: mediumslateblue;
+        background-color: rgb(136, 136, 136);
         color: white;
         padding: 8px 8px 30px 8px ;
         font-size: 16px;
@@ -198,6 +198,6 @@
     }
     /* 当下拉内容显示后修改下拉按钮的背景颜色 */
     .dropdown:hover .dropbtn {
-        background-color: darkslateblue;
+        background-color: rgb(190, 190, 190);
     }
 </style>
