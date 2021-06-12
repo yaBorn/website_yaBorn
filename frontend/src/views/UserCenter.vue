@@ -81,7 +81,10 @@
                         console.log('登录过期，请重新登录')
                         alert('登录过期，请重新登录') // 通知框通知用户                        
                         // TODO 跳转主页面 
-                        // this.$router.push({name:'Home'});
+                        // this.$router.push({name:'Home'})
+                        that.$router.push({name:'Home'})
+                        // 若为this，报错Uncaught (in promise) TypeError: Cannot read property '$router' of undefined
+                        // 原因同login 129TODO this关键字的作用域问题
                         return
                     }
                 })
