@@ -31,7 +31,7 @@
                 <div class="dropdown">
                     <!-- <p v-text="hasLogin"></p> -->
                     <button class="dropbtn">
-                        欢迎，{{username}}
+                        欢迎，{{name}}
                     </button>
                     <!-- 下拉框内容 -->
                     <div class="dropdown-content">
@@ -73,6 +73,18 @@
         },
         components:{
             SearchBox,
+        },
+        props:['welcomeName'], // 更新页面传递过来的prop参数
+        // 计算属性
+        // 基于响应式依赖进行缓存，当相关响应式依赖发生改变时才会重新求值
+        // 即只要参数未改变 重复访问时直接返回之前的结果
+        // computed默认不接受参数 且不可改变Vue管理数据 否则报错
+        computed:{
+            name() {
+                // 判断用户中心页面是否传递来 name更新参数
+                // 根据判断 来显示Vue的 {{name}}内容
+                return (this.welcomeName !== undefined) ? this.welcomeName : this.username
+            }
         },
         // 模板渲染 html后调用 二次操作 html的 dom结点
         mounted() {

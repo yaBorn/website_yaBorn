@@ -5,7 +5,15 @@
 <!-- html -->
 <template>
     <div id="UC">
-        <BlogHeader/>
+        <BlogHeader :welcome-name='name2header'/>
+        <!-- :x即双向绑定Vue管理的数据 v-bind:缩写
+        目的在更新name后 header欢迎{{name}}同步改变
+        HTML大小写不敏感，Vue规定prop命名的 N大写用-n替换
+        welcome-name对应header的prop welcomeName -->
+        <!-- TODO 简单的方法 -->
+        <!-- Header写个refresh更新username为本地localstorage.getitem
+        <BlogHeader ref="header"/>
+        js使用 that.$refs.header.refresh()调用子组件函数 -->
         <div id="user-center">
             <!-- 用户中心 表单 -->
             <h3>更新信息</h3>
@@ -64,11 +72,14 @@
                 passWordTest: '',
                 errorMessage: '',
                 token: '',
+                // 更新name后传递给header以更新欢迎词
+                name2header: '',
             }
         },
         // 加载用户中心时 检查登录状态
         mounted() {
             console.log('-----UserCenter.vue.mounted')
+            this.name2header = storage.getItem('username.myblog')
             this.username = storage.getItem('username.myblog')
             
             // 进行用户验证
@@ -181,9 +192,15 @@
                                     name:'UserCenter', 
                                     params:{username:name}
                                 })
-                                // TODO跳转后发现问题，路径/表单等数据name已更新成新name
-                                // 但vue-header组件上 欢迎，{{username}} 未更新
-                                // 原因Vue$router
+                                // TODO：跳转后发现问题，路径/表单等数据 name已更新成 新name
+                                // 但 vue-header组件上 欢迎，{{username}} 未更新
+                                // 原因 Vue$router跳转同一个页面时，只渲染发生变化的组件
+                                // 页眉_默认参数 name=''，通过生命周期钩子 mounted()，验证用户后更新 name
+                                // 则此处 axios更新 name资料后 跳转 Vue认为 header组件未改变
+                                // Vue判定组件改变的依据在 Vue管理下的数据变化
+                                // 而不会判定本地 localStorage变化
+                                // 通过 props 组件间参数传递实现
+                                that.name2header = name
                             })
                             .catch(function (error) {
                                 console.log(error.message)
