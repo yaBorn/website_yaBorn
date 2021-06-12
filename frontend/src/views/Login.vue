@@ -104,6 +104,7 @@
                 console.log('-----Login.vue.signup')
 
                 const that = this;
+                this.errorMessageIn = '' // 重置信息框 二次修改
                 // 判断空值
                 if(this.signupName=='' || this.signupPwd=='' || this.signupPwdtest=='') {
                     this.errorMessageUp = '输入为空'
@@ -160,6 +161,7 @@
                 console.log('-----Login.vue.signin')
 
                 const that = this;
+                this.errorMessageIn = '' // 重置信息框 二次修改
                 // 判断空值
                 if(this.signinName=='' || this.signinPwd=='') {
                     this.errorMessageIn = '输入为空'

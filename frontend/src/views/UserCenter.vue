@@ -96,6 +96,7 @@
                 console.log('-----UserCenter.vue.changeinfo')
 
                 const that = this
+                that.errorMessage = '' // 重置信息框
                 // console.log('输入用户名：',that.username)
                 // console.log('输入password:',that.passWord)
                 // console.log('输入passwordtst:',that.passWordTest)
@@ -180,6 +181,9 @@
                                     name:'UserCenter', 
                                     params:{username:name}
                                 })
+                                // TODO跳转后发现问题，路径/表单等数据name已更新成新name
+                                // 但vue-header组件上 欢迎，{{username}} 未更新
+                                // 原因Vue$router
                             })
                             .catch(function (error) {
                                 console.log(error.message)
