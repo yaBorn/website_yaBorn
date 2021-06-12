@@ -1,5 +1,6 @@
 <!-- 
     用户中心 页面
+        TODO：组件 + 代码重构
 -->
 
 <!-- html -->
@@ -10,8 +11,8 @@
         目的在更新name后 header欢迎{{name}}同步改变
         HTML大小写不敏感，Vue规定prop命名的 N大写用-n替换
         welcome-name对应header的prop welcomeName -->
-        <!-- TODO 简单的方法 -->
-        <!-- Header写个refresh更新username为本地localstorage.getitem
+        <!-- TODO 简单的方法
+        Header写个refresh更新username为本地localstorage.getitem
         <BlogHeader ref="header"/>
         js使用 that.$refs.header.refresh()调用子组件函数 -->
         <div id="user-center">
@@ -101,6 +102,8 @@
             this.username = storage.getItem('username.myblog')
             
             // 进行用户验证
+            // 防止未登录用户通过输入url的方式到达其他用户的用户中心
+            // 用户令牌过期也不行
             const that = this
             authorization()
                 .then(function (response) {
@@ -116,6 +119,9 @@
                         // 原因同login 129TODO this关键字的作用域问题
                         return
                     }
+                    // 检验用户与路径
+                    // TODO:已登录用户登录其他用户的用户中心url
+                    // 虽然组件仍是本用户数据，但url是别人的，看着难受
                 })
             console.log('令牌通过')
         },
@@ -249,6 +255,18 @@
                             })
                             .catch(function (error) {
                                 console.log(error.message)
+                                switch(error.message) {
+                                case 'Request failed with status code 400':
+                                    that.errorMessage = '该名称已注册'
+                                    break
+                                case 'Request failed with status code 403':
+                                    that.errorMessage = '后端异常：请联系管理员'
+                                    break
+                                default:
+                                    that.errorMessage = '意料外异常：请联系管理员'
+                                    alert(error.message)
+                                    return
+                        }
                             })
                     })
             }
