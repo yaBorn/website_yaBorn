@@ -20,7 +20,7 @@
                 </div>
             </router-link>
             <!-- grid布局 搜多-标题-空 -->
-            <div></div>
+            <PointRun/>
         </div>
         <!-- 底部下划线 -->
         <hr>
@@ -63,6 +63,7 @@
 <script>
     import SearchBox from '@/components/SearchBox.vue'
     import authorization from '@/func/authorization'
+    import PointRun from '@/components//others/PointRun.vue'
 
     export default {
         name: 'BlogHeader',
@@ -74,6 +75,7 @@
         },
         components:{
             SearchBox,
+            PointRun,
         },
         props:['welcomeName'], // 更新页面传递过来的prop参数
         // 计算属性
@@ -166,7 +168,7 @@
     }
     .grid { 
         display: grid;
-        grid-template-columns: 1fr 8fr 1fr; /* grid布局 1:4:1 空白-标题-搜索框 */
+        grid-template-columns: 1fr 3fr 1fr; /* grid布局 1:4:1 空白-标题-搜索框 */
     }
     .search {
         padding-top: 22px;

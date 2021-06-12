@@ -8,7 +8,9 @@
     <div class="search">
         <form>
             <!-- v-model为数据绑定 input数据和 js的searchText绑定在 共享数据内容 -->
-            <input v-model="searchText" type="text" placeholder="输入内容...">
+            <input v-model="searchText" 
+                type="text" 
+                placeholder="输入内容...">
             <!-- v-on:clic为按键点击事件，触发searchArticles() -->
             <!-- prevent阻止按钮初始表单提交 -->
             <button v-on:click.prevent="searchArticles">

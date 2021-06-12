@@ -167,7 +167,7 @@
     width: 94%;
     height: 70%;
     left: 3%;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     bottom: 5%;
     border-top-left-radius: 40% 50%;
     border-top-right-radius: 40% 50%;

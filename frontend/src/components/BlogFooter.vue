@@ -20,7 +20,7 @@
 
 <!-- js -->
 <script>
-import Doge from '@/components//others/Doge.vue'
+    import Doge from '@/components//others/Doge.vue'
 
     export default {
         name: 'BlogFooter',
