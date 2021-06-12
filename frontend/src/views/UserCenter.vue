@@ -122,6 +122,13 @@
                     // 检验用户与路径
                     // TODO:已登录用户登录其他用户的用户中心url
                     // 虽然组件仍是本用户数据，但url是别人的，看着难受
+                    var urlname = that.$route.path.split("/").pop() // 路径最后一个元素(用户名称)
+                    if(that.username !== urlname) {
+                        // username与urlname不符合 跳转回Home
+                        alert('不可以看别人的用户中心哦')                  
+                        that.$router.push({name:'Home'})
+                        return
+                    }
                 })
             console.log('令牌通过')
         },
