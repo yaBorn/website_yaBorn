@@ -53,7 +53,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # REST_FRAMEWORK配置
 REST_FRAMEWORK = {
     # 分页功能
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 4,  # 设置每页文章数量
     # # JWT为默认认证机制
     # # 安装库djangorestframework-simplejwt

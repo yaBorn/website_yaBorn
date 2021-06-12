@@ -49,6 +49,7 @@ async function auhorization () {
             storage.removeItem('refresh.myblog')
             hasLogin = true
             console.log('令牌过期，重新申请')
+            console.log('token:', response.data.access)
         }
         catch (error) {
             // .clear() 清空当前域名下所有的值

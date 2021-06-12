@@ -34,7 +34,7 @@ const routes = [
     },
     // 用户中心页面
     {
-        path: "/uuser/:username",
+        path: "/user/:username",
         name: "UserCenter",
         component: UserCenter,
     },

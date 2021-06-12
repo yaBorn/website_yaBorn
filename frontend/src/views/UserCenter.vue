@@ -116,9 +116,9 @@
                     return
                 }
                 // 格式规定 密码长度
-                if(that.passWord.length > 0 && that.passWord.length < 3) {
+                if(that.passWord.length > 0 && that.passWord.length < 2) {
                     console.log('输入格式错误')
-                    that.errorMessage = '密码需大于3位'
+                    that.errorMessage = '密码需大于2位'
                     return
                 }
 
@@ -133,10 +133,6 @@
                             console.log('登录过期，请重新登录')
                             return
                         }
-
-                        // 用于 axios
-                        that.token = storage.getItem('access.myblog') // 获取令牌
-                        const oldUserName = storage.getItem('username.myblog') // 旧 username用于 axios发送数据
                         // 获取填写的数据
                         let data = {}
                         if(that.userName !=='') { // 判空 空则不更新
@@ -146,8 +142,12 @@
                             data.password = that.passWord
                         }
 
+                        // 用于 axios发送请求
+                        that.token = storage.getItem('access.myblog') // 获取令牌
+                        const oldUserName = storage.getItem('username.myblog') // 旧 username用于 axios发送数据
                         console.log('token:', that.token)
                         console.log('oldname:', oldUserName)
+                        console.log('changeData:', data)
 
                         // 将令牌和填写的数据发送到 axios 更新数据
                         axios
@@ -160,12 +160,16 @@
                                 // 解决 
                                 //      'bg/uer/'则会添加该页面的路径 变成 'user/bg/user'
                                 //      '/bg/user/'则为 '/bg/user'
-                                '/bg/user/' + oldUserName + '/', {
-                                    username: data.username,
-                                    password: data.password,
-                                }, 
-                                {headers:{Authorization:'Bearer'+that.token}} // token验证字段 头对象
+                                '/bg/user/' + oldUserName + '/', 
+                                data, 
+                                {
+                                    headers: {Authorization: 'Bearer '+ that.token}
+                                } // token验证字段 头对象
                                 // TODO:报错2 PATCH http://127.0.0.1:8080/bg/user/c1/ 401 (Unauthorized)
+                                // 输入原账号密码仍 Request failed with status code 401 
+                                // 猜测token身份验证错误
+                                // 登录时获取的response.data.access和此处headers相同
+                                // 解决 'Bearer' -> 'Bearer '....patch过去的命令 Bearer没带空格
                             )
                             .then(function (response) {
                                 const name = response.data.userName

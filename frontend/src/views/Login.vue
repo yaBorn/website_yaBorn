@@ -165,7 +165,7 @@
                     this.errorMessageIn = '输入为空'
                     return
                 }
-                // axios将注册数据 post到 bg/user完成注册
+                // axios将注册数据 post到 bg/user完成登录
                 axios
                     .post('/bg/token/', {
                         // 发送请求申请token
@@ -189,6 +189,7 @@
                             storage.setItem('username.myblog', that.signinName)
                             // 路由跳转 登录成功后回到博客首页
                             console.log('登录成功 账户：', that.signinName)
+                            console.log('token：', response.data.access)
                             that.$router.push({name: 'Home'})
                     })
                     .catch(function (error) {
