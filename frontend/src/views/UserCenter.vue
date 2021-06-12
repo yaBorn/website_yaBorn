@@ -12,7 +12,7 @@
             <form> 
                 <div class="form-elem">
                     <span>用户名：</span>
-                    <input v-model="userName" type="text" placeholder="输入用户名...">
+                    <input v-model="username" type="text" placeholder="输入用户名...">
                 </div>
 
                 <div class="form-elem">
@@ -59,7 +59,7 @@
         },
         data: function () {
             return {
-                userName: '',
+                username: '',
                 passWord: '',
                 passWordTest: '',
                 errorMessage: '',
@@ -69,7 +69,7 @@
         // 加载用户中心时 检查登录状态
         mounted() {
             console.log('-----UserCenter.vue.mounted')
-            this.userName = storage.getItem('userName.myblog')
+            this.username = storage.getItem('username.myblog')
             
             // 进行用户验证
             const that = this
@@ -96,7 +96,7 @@
                 console.log('-----UserCenter.vue.changeinfo')
 
                 const that = this
-                // console.log('输入用户名：',that.userName)
+                // console.log('输入用户名：',that.username)
                 // console.log('输入password:',that.passWord)
                 // console.log('输入passwordtst:',that.passWordTest)
 
@@ -104,7 +104,7 @@
                 // 均空 不更新
                 if(that.passWord.length == 0
                     && that.passWordTest.length == 0
-                    && that.userName == null) {
+                    && that.username == null) {
                     console.log('输入为空')
                     that.errorMessage = '请输入内容'
                     return
@@ -135,8 +135,8 @@
                         }
                         // 获取填写的数据
                         let data = {}
-                        if(that.userName !=='') { // 判空 空则不更新
-                            data.username = that.userName
+                        if(that.username !=='') { // 判空 空则不更新
+                            data.username = that.username
                         }
                         if(that.passWord !== '') {
                             data.password = that.passWord
@@ -144,9 +144,9 @@
 
                         // 用于 axios发送请求
                         that.token = storage.getItem('access.myblog') // 获取令牌
-                        const oldUserName = storage.getItem('username.myblog') // 旧 username用于 axios发送数据
+                        const oldUsername = storage.getItem('username.myblog') // 旧 username用于 axios发送数据
                         console.log('token:', that.token)
-                        console.log('oldname:', oldUserName)
+                        console.log('oldname:', oldUsername)
                         console.log('changeData:', data)
 
                         // 将令牌和填写的数据发送到 axios 更新数据
@@ -160,7 +160,7 @@
                                 // 解决 
                                 //      'bg/uer/'则会添加该页面的路径 变成 'user/bg/user'
                                 //      '/bg/user/'则为 '/bg/user'
-                                '/bg/user/' + oldUserName + '/', 
+                                '/bg/user/' + oldUsername + '/', 
                                 data, 
                                 {
                                     headers: {Authorization: 'Bearer '+ that.token}
@@ -172,8 +172,10 @@
                                 // 解决 'Bearer' -> 'Bearer '....patch过去的命令 Bearer没带空格
                             )
                             .then(function (response) {
-                                const name = response.data.userName
+                                // 更改本地存放的数据
+                                const name = response.data.username
                                 storage.setItem('username.myblog', name)
+                                // 跳转到更改用户名后对应的路由界面
                                 that.$router.push({
                                     name:'UserCenter', 
                                     params:{username:name}

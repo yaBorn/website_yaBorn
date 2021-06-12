@@ -38,6 +38,12 @@
                         <router-link :to="{name:'UserCenter',params:{username:username}}">
                             用户中心
                         </router-link>
+                        <!-- <router-link @click='logout()'>
+                            退出
+                        </router-link> -->
+                        <router-link v-on:click.prevent="logout()" :to="{name:'Home'}">
+                            退出
+                        </router-link>
                     </div>
                 </div>  
             </div>
@@ -70,6 +76,7 @@
         },
         // 模板渲染 html后调用 二次操作 html的 dom结点
         mounted() {
+            // 整合验证代码
             authorization()
                 .then(
                     (data) => [this.hasLogin, this.username] = data
@@ -121,6 +128,18 @@
                     console.log('令牌过期，失效，清空token，hasLogin:', that.hasLogin)
                 }
             */
+        },
+        methods: {
+        // 用户登出按钮回调
+            logout () {
+                console.log('-----Header.vue.logout')
+                const storage = localStorage
+                storage.clear()
+                this.hasLogin = false
+                console.log('用户登出，清空token')
+                // 刷新页面 不刷新也可 router-link有跳转
+                // window.location.reload() 
+            }
         }
     }
 </script>
