@@ -45,6 +45,25 @@
                         <p v-text="errorMessage"></p>
                     </div>
                 </div>
+
+                <!-- 删除用户 -->
+                <div id="grid">
+                <div></div>
+                    <button 
+                        v-on:click.prevent="showDeleteAlert = true" 
+                        class="delete-btn"
+                    >删除用户
+                    </button>
+                    <!-- 二次确认 -->
+                    <div :class="{ shake: showDeleteAlert }">
+                        <button v-if="showDeleteAlert"
+                            class="confirm-btn"
+                            @click.prevent="deleteUser"
+                        >确定要删除嘛？
+                        </button>
+                        <!-- @为v-on缩写 -->
+                    </div>
+                </div>
             </form>
         </div>
         <BlogFooter/>
@@ -72,8 +91,9 @@
                 passWordTest: '',
                 errorMessage: '',
                 token: '',
-                // 更新name后传递给header以更新欢迎词
-                name2header: '',
+
+                name2header: '', // 更新name后传递给header以更新欢迎词
+                showDeleteAlert: false, // 删除用户二次确认显示
             }
         },
         // 加载用户中心时 检查登录状态
@@ -102,6 +122,30 @@
             console.log('令牌通过')
         },
         methods: {
+            // 删除用户
+            deleteUser() {
+                console.log('-----UserCenter.vue.deleteUser')
+                const that = this
+                authorization() // 验证用户
+                    .then(function (response) {
+                        if (response[0]) {
+                            // 获取令牌
+                            that.token = storage.getItem('access.myblog')
+                            // axios发生删去请求
+                            axios
+                                .delete('/bg/user/' + that.username + '/', {
+                                    headers: {Authorization: 'Bearer ' + that.token} // 带token
+                                })
+                                // 请求后清空本地令牌数据
+                                .then(function () {
+                                    storage.clear()
+                                    console.log('删除用户, 清空token')
+                                    // 跳转回Home
+                                    that.$router.push({name: 'Home'})
+                                })
+                        }
+                    })
+            },
             // 更新按钮 回调函数
             changeinfo () {
                 console.log('-----UserCenter.vue.changeinfo')
@@ -240,6 +284,43 @@
         background: gray;
         color: whitesmoke;
         border-radius: 5px;
-        width: 60px;
+        width: 80px;
+    }
+    /* 删除用户 */
+    .confirm-btn {
+        width: 80px;
+        background-color: rgba(187, 0, 0, 0.815);
+        width: 120px;
+    }
+    .delete-btn {
+        background-color: rgb(255, 0, 0);
+        margin-bottom: 10px;
+        width: 80px;
+    }
+    .shake {
+        animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+    }
+    /* 抖动动画 */
+    @keyframes shake {
+        10%,
+        90% {
+            transform: translate3d(-1px, 0, 0);
+        }
+        20%,
+        80% {
+            transform: translate3d(2px, 0, 0);
+        }
+        30%,
+        50%,
+        70% {
+            transform: translate3d(-4px, 0, 0);
+        }
+        40%,
+        60% {
+            transform: translate3d(4px, 0, 0);
+        }
     }
 </style>
