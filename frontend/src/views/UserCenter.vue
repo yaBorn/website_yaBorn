@@ -121,24 +121,9 @@
                     that.errorMessage = '密码需大于3位'
                     return
                 }
-                axios
-                    .patch( 
-                        // TODO:此处报错 转发到了 8080:user/bg/user 404
-                        // 第一个user为该页面地址 与路由 index同步
-                        // 改为 post也一样
-                        // 与正常运行的 Login.vue.sigin.axios.post比较
-                        // sigin的 post地址为 8080:bg/token 无路由前缀
-                        'bg/user/' + this.userName + '/', 
-                        {
-                            username: this.userName,
-                            password: this.passWord,
-                        }, 
-                        {headers:{Authorization:'Bearer'+that.token}} // token验证字段 头对象
-                    )
 
-                /* 调用 func-authorization() 进行用户验证
-                    旧方法见 git提交历史 2021.6.8 16：03 用户登录 Login.vue-methods
-                */
+                // 调用 func-authorization() 进行用户验证
+                // 旧方法见 git提交历史 2021.6.8 16：03 用户登录 Login.vue-methods
                 authorization()
                     .then(function (response) {
                         console.log('--UserCenter.vue.then')
@@ -167,18 +152,20 @@
                         // 将令牌和填写的数据发送到 axios 更新数据
                         axios
                             .patch( 
-                                /* TODO:此处报错 转发到了 8080:user/bg/user 404
-                                    第一个user为该页面地址 与路由 index同步
-                                    与正常运行的 Login.vue.sigin.axios.post比较
-                                    sigin的 post地址为 8080:bg/token 无路由前缀
-                                        改为 post也一样，排除 patch/post差异
-                                        在authorization()之前也一样，排除 .then包围影响
-                                */
-                                'bg/user/' + oldUserName + '/', {
+                                // TODO:此处报错 转发到了 8080:user/bg/user 404
+                                // 第一个user为该页面地址 与路由 index同步
+                                // 改为 post也一样
+                                // 与正常运行的 Login.vue.sigin.axios.post比较
+                                // sigin的 post地址为 8080:bg/token 无路由前缀
+                                // 解决 
+                                //      'bg/uer/'则会添加该页面的路径 变成 'user/bg/user'
+                                //      '/bg/user/'则为 '/bg/user'
+                                '/bg/user/' + oldUserName + '/', {
                                     username: data.username,
                                     password: data.password,
                                 }, 
                                 {headers:{Authorization:'Bearer'+that.token}} // token验证字段 头对象
+                                // TODO:报错2 PATCH http://127.0.0.1:8080/bg/user/c1/ 401 (Unauthorized)
                             )
                             .then(function (response) {
                                 const name = response.data.userName
