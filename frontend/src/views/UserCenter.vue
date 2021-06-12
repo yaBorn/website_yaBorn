@@ -47,7 +47,6 @@
                 </div>
 
                 <!-- 删除用户 -->
-                <div id="grid">
                 <div></div>
                     <button 
                         v-on:click.prevent="showDeleteAlert = true" 
@@ -63,7 +62,6 @@
                         </button>
                         <!-- @为v-on缩写 -->
                     </div>
-                </div>
             </form>
         </div>
         <BlogFooter/>
@@ -155,12 +153,15 @@
                 // console.log('输入用户名：',that.username)
                 // console.log('输入password:',that.passWord)
                 // console.log('输入passwordtst:',that.passWordTest)
+                // console.log('用户名：',that.username.length)
+                // console.log('password:',that.passWord.length)
+                // console.log('passwordtst:',that.passWordTest.length)
 
                 // TODO:更多的格式化
                 // 均空 不更新
                 if(that.passWord.length == 0
                     && that.passWordTest.length == 0
-                    && that.username == null) {
+                    && that.username.length == 0) {
                     console.log('输入为空')
                     that.errorMessage = '请输入内容'
                     return
