@@ -33,6 +33,8 @@
                 <div v-html="article.toc_html" class="toc"></div>
             </div>
         </div>
+        <!-- 评论组件 -->
+        <Comments :article="article" />
         <BlogFooter/>
     </div>
 </template>
@@ -41,11 +43,16 @@
 <script>
     import BlogHeader from '@/components/BlogHeader.vue'
     import BlogFooter from '@/components/BlogFooter.vue'
+    import Comments from '@/components/Comments.vue'
     import axios from 'axios'
 
     export default {
         name: 'ArticleDetail',
-        components: { BlogHeader, BlogFooter},
+        components: { 
+            BlogHeader, 
+            BlogFooter,
+            Comments,
+        },
         data:function() {
             return{
                 article: null
