@@ -92,6 +92,9 @@ class ArticleListSerializer(ArticleBaseSerializer):
             'category_id',
             'tags',
             'photo',
+            # TODO:前端在该处进行post
+            # Django只会接收 fields包含的字段 否则post会漏掉body 虽然这样在APIview会很不清晰
+            'body',
         ]
 
 

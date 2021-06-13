@@ -123,14 +123,9 @@
                             .map(x => x.trim()) // 剔除标签首尾空格
                             .filter(x => x.charAt(0) !== '') // 剔除长度为零的无效标签
 
-                        console.log('submitData:', data)
-                        // console.log('title:', data.title)
-                        // console.log('body:', data.body)
-                        // console.log('category:', data.category_id)
-                        // console.log('tags:', data.title)                       
-
                         // 将发表文章请求发送至接口
                         // 成功后前往详情页面
+                        console.log('submitData:', data)                      
                         const token = localStorage.getItem('access.myblog');
                         axios
                             .post('/bg/article/article-list/',
