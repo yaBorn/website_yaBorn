@@ -15,13 +15,14 @@
     <div id="articlelist">
         <!-- 文章列表 -->
         <div v-for="article in info.results" v-bind:key="article.url" id="articles">
-            <!-- 标签 -->
             <div>
-                <span
-                        v-for="tag in article.tags"
-                        v-bind:key="tag"
-                        class="tag"
-                >
+                <!-- 分类 -->
+                <span v-if="article.category !== null" class="category">
+                    {{article.category.title}}
+                </span>
+            
+                <!-- 标签 -->
+                <span v-for="tag in article.tags" v-bind:key="tag" class="tag">
                     {{ tag }}
                 </span>
             </div>
@@ -197,6 +198,15 @@
         color: black;
         text-decoration: none;
         padding: 5px 0 5px 0;
+    }
+    .category {
+        padding: 5px 10px 5px 10px;
+        margin: 5px 5px 5px 0;
+        font-family: Georgia, Arial, sans-serif;
+        font-size: small;
+        background-color: rgb(43, 90, 151);
+        color: whitesmoke;
+        border-radius: 15px;
     }
     .tag {
         padding: 2px 5px 2px 5px;
