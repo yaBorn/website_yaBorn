@@ -175,7 +175,7 @@
                         password: this.signinPwd,
                     })
                     .then(function (response) {
-                            console.log()
+                            // console.log()
                             // 将token令牌，过期时间，用户数据存放到 LS
                             const storage = localStorage;
                             // Date.parse(...) 返回1970年1月1日UTC以来的毫秒数
@@ -189,6 +189,16 @@
                             storage.setItem('refresh.myblog', response.data.refresh)
                             storage.setItem('expiredTime.myblog', expiredTime)
                             storage.setItem('username.myblog', that.signinName)
+
+                            // 记录是否为管理员用户
+                            axios
+                                .get('/bg/user/' + that.signinName + '/')
+                                .then(function (response) {
+                                    // 存入缓存
+                                    storage.setItem('isSuperuser.myblog', response.data.is_superuser)
+                                    console.log('super权限：', response.data.is_superuser)
+                                })
+
                             // 路由跳转 登录成功后回到博客首页
                             console.log('登录成功 账户：', that.signinName)
                             console.log('token：', response.data.access)
