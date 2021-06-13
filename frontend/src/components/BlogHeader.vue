@@ -168,7 +168,7 @@
     }
     .grid { 
         display: grid;
-        grid-template-columns: 1fr 3fr 1fr; /* grid布局 1:4:1 空白-标题-搜索框 */
+        grid-template-columns: 1fr 5fr 1fr; /* grid布局 1:4:1 空白-标题-搜索框 */
     }
     .search {
         padding-top: 22px;
