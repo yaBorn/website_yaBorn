@@ -35,15 +35,21 @@
                         </button>
                         <!-- 下拉框内容 -->
                         <div class="dropdown-content">
+                            <!-- 用户中心 -->
                             <router-link :to="{name:'UserCenter',params:{username:username}}">
                                 用户中心
+                            </router-link>
+                            <!-- 对管理员用户显示文章发表 -->
+                            <router-link :to="{name: 'ArticleCreate'}" v-if="isSuperuser">
+                                发表文章
+                            </router-link>
+                            <!-- 退出 -->
+                            <router-link v-on:click.prevent="logout()" :to="{name:'Home'}">
+                                退出
                             </router-link>
                             <!-- <router-link @click='logout()'>
                                 退出
                             </router-link> -->
-                            <router-link v-on:click.prevent="logout()" :to="{name:'Home'}">
-                                退出
-                            </router-link>
                         </div>
                     </div>  
                 </div>
@@ -73,6 +79,8 @@
             return {
                 username: '',
                 hasLogin: false,
+                // 是否为管理员 直接从缓冲中解析json
+                isSuperuser: JSON.parse(localStorage.getItem('isSuperuser.myblog')),
             }
         },
         components:{
