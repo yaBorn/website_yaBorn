@@ -58,6 +58,7 @@ async function auhorization () {
             storage.clear()
             hasLogin = false
             console.log('刷新令牌，error:', error.message)
+            // TODO:刷新令牌失败
         }
     }
     // token过期 失效
