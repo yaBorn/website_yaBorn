@@ -7,6 +7,7 @@ import Home from "@/views/Home.vue"
 import ArticleDetail from "@/views/ArticleDetail.vue"
 import Login from "@/views/Login.vue"
 import UserCenter from "@/views/UserCenter.vue"
+import ArticleCreate from "@/views/ArticleCreate.vue";
 
 /* routes列表
     定义所有挂载到路由中的路径
@@ -37,6 +38,12 @@ const routes = [
         path: "/user/:username",
         name: "UserCenter",
         component: UserCenter,
+    },
+    // 发表文章页面
+    {
+        path: "/article/create",
+        name: "ArticleCreate",
+        component: ArticleCreate
     },
 ]
 
