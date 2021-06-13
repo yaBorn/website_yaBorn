@@ -8,6 +8,15 @@
         <BlogHeader/>
         <div id="article-create">
             <h3>发表文章</h3>
+            <!-- 标题图像 -->
+            <form id="image_form">
+                <div class="form-elem">
+                    <span>标题图像：</span>
+                    <input v-on:change="onFileChange" type="file" id="file">
+                </div>
+            </form>
+            
+            <!-- 文章内容 -->
             <form>
             <div class="form-elem">
                 <span>标题：</span>
@@ -70,6 +79,8 @@
                 categories: [],  // 数据库中所有的分类
                 selectedCategory: null,  // 选定的分类
                 tags: '',  // 标签
+
+                imageID: null, // 标题图像id
             }
         },
         mounted() {
@@ -89,6 +100,27 @@
                     backgroundColor: 'lightgrey',
                     color: 'black',
                 }
+            },
+            // 标题图像文件上传
+            // e为控件所触发的事件对象
+            onFileChange(e) {
+                // 二进制文件数据添加入上传数据中
+                // 图像二进制流不应该表示为字符串数据 应使用FormData表单对象
+                const file = e.target.files[0]
+                let formData = new FormData()
+                formData.append("content", file)
+
+                // TODO:增加错误排查 权限审查
+                
+                // 发送图像到后端
+                axios
+                    .post('/bg/photo/',
+                        formData, 
+                        {headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'Authorization': 'Bearer ' + localStorage.getItem('access.myblog')
+                        }})
+                    .then( response => this.imageID = response.data.id)
             },
             // 选取分类的方法
             chooseCategory(category) {
@@ -113,6 +145,7 @@
                             title: that.title,
                             body: that.body,
                         };
+
                         // 添加分类
                         if (that.selectedCategory) {
                             data.category_id = that.selectedCategory.id
@@ -122,6 +155,14 @@
                             .split(/[,，]/) // 用逗号分隔标签
                             .map(x => x.trim()) // 剔除标签首尾空格
                             .filter(x => x.charAt(0) !== '') // 剔除长度为零的无效标签
+
+                        // 添加标题图
+                        // onFileChange()上传了图像 返回了id 此处直接postid
+                        if (that.imageID) {
+                            // TODO:代码解耦 发送的data名称需与后端一致
+                            // 建立全局参数表
+                            data.photo_id = that.imageID
+                        }
 
                         // 将发表文章请求发送至接口
                         // 成功后前往详情页面

@@ -45,6 +45,7 @@
             db-1 1s  linear infinite alternate,
             db-2 0.5s cubic-bezier(0,200,.8,200) infinite;
     }
+    /* 圆点间断跳跃 */
     @keyframes db-0 {
         0%      {background-position: 0  100%,50% 0   ,100% 0}
         8%,42%  {background-position: 0  0   ,50% 0   ,100% 0}
@@ -52,9 +53,11 @@
         58%,92% {background-position: 0  0   ,50% 0   ,100% 0}
         100%    {background-position: 0  0   ,50% 0   ,100% 100%}
     }
+    /* 方块左右移动 */
     @keyframes db-1 {
         100% {left:calc(100% - 8px)}
     }
+    /* 方块上下移动 */
     @keyframes db-2 {
         100% {top:-0.1px}
     }
