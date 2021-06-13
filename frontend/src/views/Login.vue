@@ -197,6 +197,7 @@
                                     // 存入缓存
                                     storage.setItem('isSuperuser.myblog', response.data.is_superuser)
                                     console.log('super权限：', response.data.is_superuser)
+                                    // TODO 报错TypeError 获取不到该组件
                                     // 刷新header组件 (TODO原因见 UserCenter.vue和 Header.vue.refresh)
                                     console.log(that.$refs.header.ss)
                                 })
