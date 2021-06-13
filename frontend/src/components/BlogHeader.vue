@@ -8,54 +8,56 @@
 <template>
     <!-- 页眉 -->
     <div id="header">
-        <!-- 布局 -->
-        <div class="grid">
-            <!-- 搜索框 -->
-            <SearchBox/>
+        <div class='content'>
+            <!-- 布局 -->
+            <div class="grid">
+                <!-- 搜索框 -->
+                <SearchBox/>
 
-            <!-- 标题 -->
-            <router-link :to="{name:'Home'}"> <!-- 点击跳转回 home -->
-                <div class="headertex">
-                    <h1>yaBorn Blog</h1>
+                <!-- 标题 -->
+                <router-link :to="{name:'Home'}"> <!-- 点击跳转回 home -->
+                    <div class="headertex">
+                        <h1>yaBorn Blog</h1>
+                    </div>
+                </router-link>
+                <!-- grid布局 搜多-标题-空 -->
+                <PointRun/>
+            </div>
+
+            <!-- 用户注册 -->
+            <div class="login">
+                <!-- 已登录下拉框 详见css -->
+                <div v-if="hasLogin">
+                    <div class="dropdown">
+                        <!-- <p v-text="hasLogin"></p> -->
+                        <button class="dropbtn">
+                            欢迎，{{name}}
+                        </button>
+                        <!-- 下拉框内容 -->
+                        <div class="dropdown-content">
+                            <router-link :to="{name:'UserCenter',params:{username:username}}">
+                                用户中心
+                            </router-link>
+                            <!-- <router-link @click='logout()'>
+                                退出
+                            </router-link> -->
+                            <router-link v-on:click.prevent="logout()" :to="{name:'Home'}">
+                                退出
+                            </router-link>
+                        </div>
+                    </div>  
                 </div>
-            </router-link>
-            <!-- grid布局 搜多-标题-空 -->
-            <PointRun/>
+                <div v-else>
+                    <!-- 登录注册链接 -->
+                    <!-- <router-link to="/login" class="login-link"> -->
+                    <router-link :to="{name:'Login'}" class="login-link">
+                        登录/注册
+                    </router-link>
+                </div>
+            </div>
         </div>
         <!-- 底部下划线 -->
         <hr>
-
-        <!-- 用户注册 -->
-        <div class="login">
-            <!-- 已登录下拉框 详见css -->
-            <div v-if="hasLogin">
-                <div class="dropdown">
-                    <!-- <p v-text="hasLogin"></p> -->
-                    <button class="dropbtn">
-                        欢迎，{{name}}
-                    </button>
-                    <!-- 下拉框内容 -->
-                    <div class="dropdown-content">
-                        <router-link :to="{name:'UserCenter',params:{username:username}}">
-                            用户中心
-                        </router-link>
-                        <!-- <router-link @click='logout()'>
-                            退出
-                        </router-link> -->
-                        <router-link v-on:click.prevent="logout()" :to="{name:'Home'}">
-                            退出
-                        </router-link>
-                    </div>
-                </div>  
-            </div>
-            <div v-else>
-                <!-- 登录注册链接 -->
-                <!-- <router-link to="/login" class="login-link"> -->
-                <router-link :to="{name:'Login'}" class="login-link">
-                    登录/注册
-                </router-link>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -164,6 +166,15 @@
 <style scoped>
     #header {
         text-align: center;
+        margin-top: 0px;
+        /* background: whitesmoke; */
+        /* 固定顶端位置 并固定宽度100%
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%; */
+    }
+    .content {
         margin-top: 20px;
     }
     .grid { 

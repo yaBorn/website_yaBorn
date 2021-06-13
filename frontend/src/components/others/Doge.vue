@@ -34,22 +34,22 @@
                     animation: none;
     }
     }
-    .husky:before {
-        /* width: 90%;
+    /* .husky:before {
+        width: 90%;
         height: 0.5vmin;
         background: #00000000;
         border-radius: 0.5vmin;
         top: 100%;
         left: 5%;
-        z-index: 2; */
+        z-index: 2;
     }
     .husky:after {
-        /* width: 100%;
+        width: 100%;
         height: 10%;
         top: calc(100% + 0.5vmin);
         z-index: 3;
-        background: #00000000; */
-    }
+        background: #00000000;
+    } */
 </style>
 
 <!-- html -->
