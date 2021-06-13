@@ -15,7 +15,14 @@
                 <div class="form-elem">
                     <span>标题图像：</span>
                     <!-- 选定文件 触发ofc方法 -->
-                    <input v-on:change="onFileChange" type="file" id="file">
+                    <input v-on:change="onFileChange" 
+                        type="file" id="file"
+                        accept="image/gif,image/jpeg,image/png">
+                        <!-- TODO:迭代更多的im格式 -->
+                        <!-- TODO:前端未加密，存在安全问题，在后端也补上相应验证 -->
+                        <!-- TODO:覆写后端model.save()方法 执行图像压缩 -->
+                        <!-- TODO:存在自己服务器吃资源 对象储存云服务器部署？ -->
+                        <!-- TODO：标题图仅自己的图片资源，外部链接？想md外链那样 然后用gitee储存 -->
                 </div>
             </form>
             
