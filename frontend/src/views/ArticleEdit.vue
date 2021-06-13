@@ -41,11 +41,12 @@
                     <textarea v-model="body" placeholder="输入正文" rows="20" cols="80"></textarea>
                 </div>
 
+
                 <div class="form-elem">
-                    <button v-on:click.prevent="submit">提交</button>
+                    <button class='post-btn' v-on:click.prevent="submit">提交</button>
                 </div>
                 <div class="form-elem">
-                    <button v-on:click.prevent="deleteArticle" style="background-color: darkred">删除</button>
+                    <button class='post-btn' v-on:click.prevent="deleteArticle" style="background-color: darkred">删除</button>
                 </div>
             </form>
         </div>
@@ -88,7 +89,7 @@
             // 根据用户身份选用不同的序列化器
             const that = this;
             axios
-                .get('/bg/article/article-list/' + that.$route.params.id + '/')
+                .get('/bg/article/article-detail/' + that.$route.params.id + '/')
                 .then(function (response) {
                     const data = response.data
                     that.title = data.title
@@ -141,7 +142,7 @@
 
                             const token = localStorage.getItem('access.myblog')
                             axios
-                                .put('/bg/article/article-list/' + that.articleID + '/',
+                                .put('/bg/article/article-detail/' + that.articleID + '/',
                                     data, 
                                     {headers: {Authorization: 'Bearer ' + token}}
                                 )
@@ -162,7 +163,7 @@
                     .then(function (response) {
                         if (response[0]) {
                         axios
-                            .delete('/bg/article/article-list/' + that.articleID + '/',
+                            .delete('/bg/article/article-detail/' + that.articleID + '/',
                                 {headers: {Authorization: 'Bearer ' + token}}
                             )
                             .then(() => that.$router.push({name: 'Home'}))
@@ -207,5 +208,9 @@
         color: whitesmoke;
         border-radius: 5px;
         width: 60px;
+    }
+    .post-btn {
+        position: relative;
+        left: 600px;
     }
 </style>
