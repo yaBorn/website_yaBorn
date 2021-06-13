@@ -19,7 +19,7 @@
     /* JWT tocken令牌 */
     // Django.setting.py.SIMPLE_JWT.ACCESS_TOKEN_LIFETIME 一致
     const JWT_unit = 'minutes' // 未判断其他单位 TODO：想加再改
-    const JWT_num = 1
+    const JWT_num = 10
     const JWT_time = 60000*JWT_num // 毫秒
 
     export default

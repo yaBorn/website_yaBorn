@@ -31,6 +31,7 @@ async function auhorization () {
     console.log('账户：', username)
     console.log('当前时间:', current)
     console.log('过期时间:', expiredTime)
+    console.log('刷新标识:', refreshToken)
 
     // token未过期
     if (expiredTime > current) {
@@ -38,18 +39,23 @@ async function auhorization () {
         console.log('令牌未过期')
     }
     // token过期 但在可更新时间内
+    // 此处 可延长一次令牌时间
+    // TODO：改进为 判定 Django.setting.SIMPLE_JWT.REFRESH_TOKEN_LIFETIME 的时长内 连续更新
     else if(refreshToken !== null){
         try {
             // axios重新 post token
             // await用在 async函数内 表示等待异步结果
             // async不返回return 后数据 而是一个 Promise对象 其可能为 rejected 因此用 try包围
-            let response = await axios.post('bg/token/refresh/', {refresh: refreshToken})
-            // 重置 loscalStorage
+            let response = await axios.post('/bg/token/refresh/', {refresh: refreshToken})
+
+            // 更新值
             const newExpiredTime = Date.parse(response.headers.date) + set_.JWT_time
             storage.setItem('access.myblog', response.data.access)
             storage.setItem('expiredTime.myblog', newExpiredTime)
-            storage.removeItem('refresh.myblog')
+            console.log('刷新令牌返回freshToken: ', response.data.refresh) // refresh获取的新token 不返回refresh token
+            storage.removeItem('refresh.myblog') // 刷新后移去刷新token(再次过期则失效)
             hasLogin = true
+
             console.log('刷新令牌')
             console.log('token:', response.data.access)
         }

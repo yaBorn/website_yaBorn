@@ -68,8 +68,12 @@ SIMPLE_JWT = {
     # Token 有效期设置
     # TODO: 修改 ACCESS_TOKEN_LIFETIME
     #  则前端 Login.vie-script-methods-signin-then 处需要加上对应时长的毫秒
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    # 'ACCESS_TOKEN_LIFETIME': timedelta(seconds=6),
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=30),
+    # ACCESS token 有效期短 refresh长
+    # access过期后 用refresh刷新(判断为活跃用户)
+    # refresh过期 重新登录
 }
 
 MIDDLEWARE = [
