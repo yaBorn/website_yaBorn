@@ -191,6 +191,7 @@
                             storage.setItem('username.myblog', that.signinName)
 
                             // 记录是否为管理员用户
+                            console.log('判定权限')
                             axios
                                 .get('/bg/user/' + that.signinName + '/')
                                 .then(function (response) {
