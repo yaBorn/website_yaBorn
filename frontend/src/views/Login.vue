@@ -5,7 +5,7 @@
 <!-- html -->
 <template>
     <div id="login">
-        <BlogHeader ref="header"/>
+        <BlogHeader :is-super='super2header'/>
         <div id="grid">
             <!-- 用户注册 -->
             <div id="signup">
@@ -96,7 +96,12 @@
                 signinName: '',
                 signinPwd: '',
                 errorMessageIn: '',
+
+                super2header: '', // 登录管理员用户后 传递给header以更新下拉框
             }
+        },
+        mounted() {
+            this.super2header = JSON.parse(localStorage.getItem('isSuperuser.myblog'))
         },
         methods: {
             // 注册按钮回调
@@ -196,10 +201,12 @@
                                 .then(function (response) {
                                     // 存入缓存
                                     storage.setItem('isSuperuser.myblog', response.data.is_superuser)
-                                    console.log('super权限：', response.data.is_superuser)
                                     // TODO 报错TypeError 获取不到该组件
                                     // 刷新header组件 (TODO原因见 UserCenter.vue和 Header.vue.refresh)
-                                    console.log(that.$refs.header.ss)
+                                    // console.log(that.$refs.header.ss)
+                                    // 使用组件通信旧方法
+                                    that.super2header = response.data.is_superuser
+                                    console.log('super2header权限：', that.super2header)
                                 })
 
                             // 路由跳转 登录成功后回到博客首页
