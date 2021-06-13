@@ -15,37 +15,45 @@
     <div id="articlelist">
         <!-- 文章列表 -->
         <div v-for="article in info.results" v-bind:key="article.url" id="articles">
-            <div>
-                <!-- 分类 -->
-                <span v-if="article.category !== null" class="category">
-                    {{article.category.title}}
-                </span>
-            
-                <!-- 标签 -->
-                <span v-for="tag in article.tags" v-bind:key="tag" class="tag">
-                    {{ tag }}
-                </span>
-            </div>
+            <!-- 为标题图位置布局 设置的网格层 -->
+            <div class="grid" :style="gridStyle(article)">
+                <!-- 标题图 -->
+                <div class="image-container">
+                    <img :src="imageIfExists(article)" alt="" class="image">
+                </div>
 
-            <!-- 文章标题 -->
-            <!-- <div class="article-title"> -->
-                <!-- {{ article.title }} -->
-            <!-- </div> -->
-            <router-link
-                :to="{ name: 'ArticleDetail', params: { id: article.id }}"
-                class="article-title"
-            >
-                {{ article.title }}
-            </router-link>
-            <!-- 调用vue-router
-                :to指定跳转位置，动态参数id为后端对应序列化器 aid接口 
-                vue中，属性前的 :表啊是属性绑定，为v-bind:缩写
-                TODO: 跳转失败 id为undefined 后端序列化器接口id字段没有暴露
-            -->
+                <div>
+                    <!-- 分类 -->
+                    <span v-if="article.category !== null" class="category">
+                        {{article.category.title}}
+                    </span>
+                
+                    <!-- 标签 -->
+                    <span v-for="tag in article.tags" v-bind:key="tag" class="tag">
+                        {{ tag }}
+                    </span>
+                </div>
 
-            <!-- 创建时间 -->
-            <div>
-                {{ formatted_time(article.created) }}
+                <!-- 文章标题 -->
+                <!-- <div class="article-title"> -->
+                    <!-- {{ article.title }} -->
+                <!-- </div> -->
+                <router-link
+                    :to="{ name: 'ArticleDetail', params: { id: article.id }}"
+                    class="article-title"
+                >
+                    {{ article.title }}
+                </router-link>
+                <!-- 调用vue-router
+                    :to指定跳转位置，动态参数id为后端对应序列化器 aid接口 
+                    vue中，属性前的 :表啊是属性绑定，为v-bind:缩写
+                    TODO: 跳转失败 id为undefined 后端序列化器接口id字段没有暴露
+                -->
+
+                <!-- 创建时间 -->
+                <div>
+                    {{ formatted_time(article.created) }}
+                </div>
             </div>
         </div>
         
@@ -93,6 +101,21 @@
         },
         // methods方法 可在脚本中直接调用 也可在模板中通过标签属性或花括号调用
         methods: {
+            // 显示文章标题图
+            imageIfExists(article) {
+                if(article.photo) {
+                    return article.photo.content
+                }
+            },
+            // 若文章带标题图 改写布局
+            gridStyle(article) {
+                if(article.photo) {
+                    return {
+                        display: 'grid',
+                        gridTemplateColumns: '1fr 4fr',
+                    }
+                }
+            },
             // 获取文章列表数据
             get_article_data:function () {
                 let url = '/bg/article/article-list/'
@@ -189,6 +212,17 @@
     规定页面各元素的大小、位置、颜色等样式
     #name 样式挂载的指定页面 
 */
+    .image {
+        width: 180px;
+        border-radius: 10px;
+        box-shadow: darkslategrey 0 0 12px;
+    }
+    .image-container {
+        width: 200px;
+    }
+    .grid {
+        padding-bottom: 10px;
+    }
     #articles {
         padding: 10px;
     }

@@ -1,5 +1,7 @@
 <!-- 
     创建文章 页面
+        TODO:在该页面等待权限过期，过期后 设置自动跳转
+        将权限单独抽离为一个线程或模块
 -->
 
 <!-- html -->
@@ -12,6 +14,7 @@
             <form id="image_form">
                 <div class="form-elem">
                     <span>标题图像：</span>
+                    <!-- 选定文件 触发ofc方法 -->
                     <input v-on:change="onFileChange" type="file" id="file">
                 </div>
             </form>
@@ -106,9 +109,17 @@
             onFileChange(e) {
                 // 二进制文件数据添加入上传数据中
                 // 图像二进制流不应该表示为字符串数据 应使用FormData表单对象
+                // var urlname = that.$route.path.split("/").pop() // 页面径最后一个元素(用户名称)
                 const file = e.target.files[0]
                 let formData = new FormData()
                 formData.append("content", file)
+                formData.append("title", '标题图')
+                formData.append("describe", '标题图')
+                // TODO：图像上传早于标题输入等
+                //      判断标题输入后才可上传图像，然后标题和描述可用之前输入信息 与文章关联
+                // /bg/photo/需要post 标题 描述 文件 否则 Bad Request
+                // TODO:如何一次性post formData+headers 和 标题/描述
+                // 通过formData的append方法 文档https://developer.mozilla.org/zh-CN/docs/Web/API/FormData
 
                 // TODO:增加错误排查 权限审查
                 
