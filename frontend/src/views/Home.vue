@@ -23,7 +23,7 @@
 
     export default {
         name: 'Home',
-        components: { BlogHeader, BlogFooter, ArticleList }
+        components: { BlogHeader, BlogFooter, ArticleList },
     }
 </script>
 

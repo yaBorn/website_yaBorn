@@ -78,6 +78,7 @@
     import axios from 'axios';
     import BlogHeader from '@/components/BlogHeader.vue'
     import BlogFooter from '@/components/BlogFooter.vue'
+    import set_ from '@/setting.vue'
 
     export default {
         name: 'Login',
@@ -182,7 +183,8 @@
                             // TODO:修改JWT验证时间
                             // Token 在后端 setting-SIMPLE_JWT被设置为1分钟 此处加上60000毫秒
                             // 此外 Header-mounted-axios 刷新token相同设置
-                            const expiredTime = Date.parse(response.headers.date) + 60000
+                            console.log('JWT time:', set_.JWT_time)
+                            const expiredTime = Date.parse(response.headers.date) + set_.JWT_time
                             // 设置 localStorage
                             // header mounted中被使用 同步修改该名称
                             storage.setItem('access.myblog', response.data.access)

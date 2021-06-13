@@ -4,6 +4,7 @@
  */
 
 import axios from 'axios'
+import set_ from '@/setting.vue'
 
 /* 异步关键字 async 表示 func内含异步
     axios请求是异步的 需要将异步同步
@@ -25,6 +26,7 @@ async function auhorization () {
     const refreshToken = storage.getItem('refresh.myblog') // 刷新
     let hasLogin = false // 登录标记
 
+    console.log(' ')
     console.log('--auhorization.js')
     console.log('账户：', username)
     console.log('当前时间:', current)
@@ -43,19 +45,19 @@ async function auhorization () {
             // async不返回return 后数据 而是一个 Promise对象 其可能为 rejected 因此用 try包围
             let response = await axios.post('bg/token/refresh/', {refresh: refreshToken})
             // 重置 loscalStorage
-            const newExpiredTime = Date.parse(response.headers.date)
+            const newExpiredTime = Date.parse(response.headers.date) + set_.JWT_time
             storage.setItem('access.myblog', response.data.access)
             storage.setItem('expiredTime.myblog', newExpiredTime)
             storage.removeItem('refresh.myblog')
             hasLogin = true
-            console.log('令牌过期，重新申请')
+            console.log('刷新令牌')
             console.log('token:', response.data.access)
         }
         catch (error) {
             // .clear() 清空当前域名下所有的值
             storage.clear()
             hasLogin = false
-            console.log('令牌过期，重新申请，error')
+            console.log('刷新令牌，error:', error.message)
         }
     }
     // token过期 失效

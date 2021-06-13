@@ -3,7 +3,7 @@
 -->
 
 <style>
-    /*  <div class="components"></div>  */
+    /* <div class="components"></div> 
 	.components {
 		width: 75rem;
 		height: 40rem;
@@ -17,5 +17,5 @@
 		grid-column-gap: 5rem;
 		grid-row-gap: 2.5rem;
 		align-items: center;
-	}
+	} */
 </style>
