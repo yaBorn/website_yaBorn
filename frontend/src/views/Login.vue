@@ -5,7 +5,7 @@
 <!-- html -->
 <template>
     <div id="login">
-        <BlogHeader/>
+        <BlogHeader ref="header"/>
         <div id="grid">
             <!-- 用户注册 -->
             <div id="signup">
@@ -197,6 +197,8 @@
                                     // 存入缓存
                                     storage.setItem('isSuperuser.myblog', response.data.is_superuser)
                                     console.log('super权限：', response.data.is_superuser)
+                                    // 刷新header组件 (TODO原因见 UserCenter.vue和 Header.vue.refresh)
+                                    console.log(that.$refs.header.ss)
                                 })
 
                             // 路由跳转 登录成功后回到博客首页

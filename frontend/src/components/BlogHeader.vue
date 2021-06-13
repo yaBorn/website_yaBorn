@@ -81,6 +81,7 @@
                 hasLogin: false,
                 // 是否为管理员 直接从缓冲中解析json
                 isSuperuser: JSON.parse(localStorage.getItem('isSuperuser.myblog')),
+                ss: 'ssssssss'
             }
         },
         components:{
@@ -99,9 +100,32 @@
                 return (this.welcomeName !== undefined) ? this.welcomeName : this.username
             }
         },
+        methods: {
+            // 刷新界面 根据缓存刷新数值
+            refresh () {
+                // 见UserCenter.vue前面的TODO
+                // 解决 
+                // 1. 用户中心修改username header未刷新 (TODO 未使用此方法)
+                // 2. 管理员登录 下拉框发表文章未出现 需要刷新才行
+                // 父组件 html 组件header加上 ref="header"
+                // 父组件 js 使用 that.$refs.header.refresh()进行刷新
+                const that = this
+                that.isSuperuser = JSON.parse(localStorage.getItem('isSuperuser.myblog'))
+            },
+            // 用户登出按钮回调
+            logout () {
+                console.log('-----Header.vue.logout')
+                const storage = localStorage
+                storage.clear()
+                this.hasLogin = false
+                console.log('用户登出，清空token')
+                // 刷新页面 不刷新也可 router-link有跳转
+                // window.location.reload() 
+            }
+        },
         // 模板渲染 html后调用 二次操作 html的 dom结点
         mounted() {
-            // 整合验证代码
+            // 用户验证验证代码
             authorization()
                 .then(
                     (data) => [this.hasLogin, this.username] = data
@@ -154,18 +178,6 @@
                 }
             */
         },
-        methods: {
-        // 用户登出按钮回调
-            logout () {
-                console.log('-----Header.vue.logout')
-                const storage = localStorage
-                storage.clear()
-                this.hasLogin = false
-                console.log('用户登出，清空token')
-                // 刷新页面 不刷新也可 router-link有跳转
-                // window.location.reload() 
-            }
-        }
     }
 </script>
 
