@@ -48,14 +48,12 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             'id',
             'username',
             'password',
-            'is_superuser'
+            'is_superuser',
         ]
         extra_kwargs = {
-            'password': {
-                'write_only': True,
-                # 判断当前用户是否为管理员
-                'is_superuser': {'read_only': True}
-            }
+            'password': {'write_only': True},
+            # 判断当前用户是否为管理员
+            'is_superuser': {'read_only': True},
         }
 
     # 创建用户时
