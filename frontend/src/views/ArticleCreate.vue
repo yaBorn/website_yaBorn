@@ -107,6 +107,7 @@
                 // 验证用户
                 authorization().then(function (response) {
                     if (response[0]) {
+                        console.log('-----ArticleCreate.submit')
                         // 需要传给后端的数据字典
                         let data = {
                             title: that.title,
@@ -122,13 +123,23 @@
                             .map(x => x.trim()) // 剔除标签首尾空格
                             .filter(x => x.charAt(0) !== '') // 剔除长度为零的无效标签
 
+                        console.log('submitData:', data)
+                        // console.log('title:', data.title)
+                        // console.log('body:', data.body)
+                        // console.log('category:', data.category_id)
+                        // console.log('tags:', data.title)                       
+
                         // 将发表文章请求发送至接口
                         // 成功后前往详情页面
                         const token = localStorage.getItem('access.myblog');
                         axios
-                            .post('/bg/article/article-list',
+                            .post('/bg/article/article-list/',
                                 data,
                                 {headers: {Authorization: 'Bearer ' + token}}
+                                // TODO 报错psot 500
+                                // 如果postman测试正常 则前端传给后端的数据内容有误
+                                // ...末尾没有/
+                                // TODO 提交成功 但是body部分提交失败
                             )
                             .then(function (response) {
                                 that.$router.push({name: 'ArticleDetail', params: {id: response.data.id}});
