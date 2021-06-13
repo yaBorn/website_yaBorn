@@ -16,6 +16,8 @@ class CategoryListView(generics.ListCreateAPIView):
     # 模糊搜索 搜索后端Django的SearchFilter
     filter_backends = [filters.SearchFilter]
     search_fields = ['title']
+    # 一次性返回所有信息 不受翻页影响
+    pagination_class = None
 
 
 # 分类详情
@@ -35,6 +37,8 @@ class TagListView(generics.ListCreateAPIView):
     # 模糊搜索 搜索后端Django的SearchFilter
     filter_backends = [filters.SearchFilter]
     search_fields = ['title']
+    # 一次性返回所有信息 不受翻页影响
+    pagination_class = None
 
 
 # 标签详情
