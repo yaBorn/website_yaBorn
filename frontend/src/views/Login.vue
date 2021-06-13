@@ -200,7 +200,7 @@
                                     // TODO 报错TypeError 获取不到该组件
                                     // 刷新header组件 (TODO原因见 UserCenter.vue和 Header.vue.refresh)
                                     // TODO 管理员登录后要刷新一次才更新header 原因同用户中心更新name
-                                    // 但用组件间通信 和 $refs的方法都失败了
+                                    // 但用组件间通信 和 $refs的方法都失败了 现在是要刷新一次的版本
                                 })
 
                             // 路由跳转 登录成功后回到博客首页
