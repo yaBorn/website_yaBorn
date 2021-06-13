@@ -197,9 +197,10 @@
                                     // 存入缓存
                                     storage.setItem('isSuperuser.myblog', response.data.is_superuser)
                                     console.log('super权限：', response.data.is_superuser)
-                                    // TODO 报错TypeError 获取不到该组件
+                                    console.log('axios-isSuper:', localStorage.getItem('isSuperuser.myblog'))
+                                    // TODO 报错TypeError 获取不到该组件 console.log(that.$refs.header) 显示null
                                     // 刷新header组件 (TODO原因见 UserCenter.vue和 Header.vue.refresh)
-                                    console.log(that.$refs.header.ss)
+                                    console.log('axios-$refs',that.$refs.header) // 此处为NULL
                                 })
 
                             // 路由跳转 登录成功后回到博客首页
@@ -223,6 +224,14 @@
                                 return
                         }
                     });
+                // 见上方判定管理 此处可以定位到 header
+                // $refs 不是响应式 因此不应该用它在模板中做数据绑定
+                // ref为渲染结果被创建 初始渲染时不能访问 在页面加载好之后才能去使用refs
+                console.log('refs:', that.$refs.header)
+                console.log('$refs-isSuper:', localStorage.getItem('isSuperuser.myblog'))
+                that.$refs.header.refresh() // 刷新header组件
+                // 问题在于axios异步加载 此处localStorage还未存入缓存
+                // 而axios内部又获取不到 $refs
             }
         }
     }

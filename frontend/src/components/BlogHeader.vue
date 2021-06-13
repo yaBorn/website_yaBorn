@@ -81,7 +81,6 @@
                 hasLogin: false,
                 // 是否为管理员 直接从缓冲中解析json
                 isSuperuser: JSON.parse(localStorage.getItem('isSuperuser.myblog')),
-                ss: 'ssssssss'
             }
         },
         components:{
@@ -109,6 +108,7 @@
                 // 2. 管理员登录 下拉框发表文章未出现 需要刷新才行
                 // 父组件 html 组件header加上 ref="header"
                 // 父组件 js 使用 that.$refs.header.refresh()进行刷新
+                console.log('刷新headerRe isSuper：', localStorage.getItem('isSuperuser.myblog'))
                 const that = this
                 that.isSuperuser = JSON.parse(localStorage.getItem('isSuperuser.myblog'))
             },
