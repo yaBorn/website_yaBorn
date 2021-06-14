@@ -9,12 +9,19 @@ import Login from "@/views/Login.vue"
 import UserCenter from "@/views/UserCenter.vue"
 import ArticleCreate from "@/views/ArticleCreate.vue";
 import ArticleEdit from "@/views/ArticleEdit.vue";
+import gloCss from "@/globalCss.vue";
 
 /* routes列表
     定义所有挂载到路由中的路径
     成员：路径url 路径名 路径对应vue对象 (注意import该对象)
 */
 const routes = [
+    // css 测试页面 部署时删去
+    {
+        path: "/testCss",
+        name: "gloCss",
+        component: gloCss,
+    },
     // 主页面
     {
         path: "/",
