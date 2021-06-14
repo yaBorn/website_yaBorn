@@ -200,6 +200,7 @@
         /* background: whitesmoke; */
         /* 固定顶端位置 并固定宽度100% */
         position: fixed;
+        z-index: 10; /* 设置层级 */
         left: 0;
         top: 0;
         width: 100%;
