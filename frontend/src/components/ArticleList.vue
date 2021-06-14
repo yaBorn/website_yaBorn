@@ -15,45 +15,52 @@
     <div id="articlelist">
         <!-- 文章列表 -->
         <div v-for="article in info.results" v-bind:key="article.url" id="articles">
-            <!-- 为标题图位置布局 设置的网格层 -->
-            <div class="grid" :style="gridStyle(article)">
-                <!-- 标题图 -->
-                <div class="image-container">
-                    <img :src="imageIfExists(article)" alt="" class="image">
-                </div>
+            <br> <!-- 每个区块 间隔一行 -->
+            <div class='global_block'>
+                <div class='global_block_content'>
+                    <br>
+                    <div>
+                        <!-- 分类 -->
+                        <span v-if="article.category !== null" class="category">
+                            {{article.category.title}}
+                        </span>
+                    
+                        <!-- 标签 -->
+                        <span v-for="tag in article.tags" v-bind:key="tag" class="tag">
+                            {{ tag }}
+                        </span>
+                    </div>
 
-                <div>
-                    <!-- 分类 -->
-                    <span v-if="article.category !== null" class="category">
-                        {{article.category.title}}
-                    </span>
-                
-                    <!-- 标签 -->
-                    <span v-for="tag in article.tags" v-bind:key="tag" class="tag">
-                        {{ tag }}
-                    </span>
-                </div>
+                    <!-- 为标题图位置布局 设置的网格层 -->
+                    <div class="grid" :style="gridStyle(article)">
+                        <!-- 标题图 -->
+                        <div class="image-container">
+                            <img :src="imageIfExists(article)" alt="" class="image">
+                        </div>
 
-                <!-- 文章标题 -->
-                <!-- <div class="article-title"> -->
-                    <!-- {{ article.title }} -->
-                <!-- </div> -->
-                <router-link
-                    :to="{ name: 'ArticleDetail', params: { id: article.id }}"
-                    class="article-title"
-                >
-                    {{ article.title }}
-                </router-link>
-                <!-- 调用vue-router
-                    :to指定跳转位置，动态参数id为后端对应序列化器 aid接口 
-                    vue中，属性前的 :表啊是属性绑定，为v-bind:缩写
-                    TODO: 跳转失败 id为undefined 后端序列化器接口id字段没有暴露
-                -->
+                        <!-- 文章标题 -->
+                        <!-- <div class="article-title"> -->
+                            <!-- {{ article.title }} -->
+                        <!-- </div> -->
+                        <router-link
+                            :to="{ name: 'ArticleDetail', params: { id: article.id }}"
+                            class="article-title"
+                        >
+                            {{ article.title }}
+                        </router-link>
+                        <!-- 调用vue-router
+                            :to指定跳转位置，动态参数id为后端对应序列化器 aid接口 
+                            vue中，属性前的 :表啊是属性绑定，为v-bind:缩写
+                            TODO: 跳转失败 id为undefined 后端序列化器接口id字段没有暴露
+                        -->
 
-                <!-- 创建时间 -->
-                <div>
-                    {{ formatted_time(article.created) }}
+                        <!-- 创建时间 -->
+                        <div>
+                            {{ formatted_time(article.created) }}
+                        </div>
+                    </div>
                 </div>
+                <br>
             </div>
         </div>
         
@@ -211,7 +218,7 @@
 
 <!-- css -->
 <!-- "scoped" 使样式仅在当前组件生效 -->
-<style scoped>
+<style scoped>    
     /* 翻页 */
     .pageinator {
         display: grid;
@@ -246,6 +253,60 @@
         border: 1px solid black
     } */
 
+    /* 信息块 */
+    /* 分类 */
+    .category {
+        border-radius: 4rem;
+        /* 内外边框 */
+        padding: 8px 12px 8px 12px;
+        margin: 0px 15px 0px -20px;
+        /* 颜色 字体 */
+        font-family: Georgia, Arial, sans-serif;
+        font-size: small;
+        background-color: var(--color);
+        color: var(--tex);
+        /* 阴影 动画速率 */
+        transition: 0.2s ease;
+        box-shadow: 
+            inset 0.2rem 0.2rem 1rem var(--hightLight),
+            inset -0.2rem -0.2rem 1rem var(--dark), 
+            0.3rem 0.3rem 0.6rem var(--belowShadow), 
+            -0.2rem -0.2rem 0.5rem var(--topShadow);
+    }
+    .category:hover {
+        /* 移动动画 变换阴影 */
+        color: var(--texch);
+        box-shadow: 
+            inset 0.2rem 0.2rem 1rem var(--dark), 
+            inset -0.2rem -0.2rem 1rem var(--hightLight),
+            0.3rem 0.3rem 0.6rem var(--topShadow), 
+            -0.2rem -0.2rem 0.5rem var(--belowShadow);
+    }
+    /* 标签 */
+    .tag {
+        border-radius: 5px;
+        /* 内外边框 */
+        padding: 2px 5px 2px 5px;
+        margin: 5px 5px 5px 0;
+        /* 颜色 字体 */
+        font-family: Georgia, Arial, sans-serif;
+        font-size: small;
+        background-color: var(--gray);
+        color: var(--tex);
+        /* 阴影 动画速率 */
+        transition: 0.2s ease;
+        box-shadow: 
+            0.3rem 0.3rem 0.6rem var(--belowShadow), 
+            -0.2rem -0.2rem 0.5rem var(--topShadow);
+    }
+    .tag:hover {
+        /* 移动动画 变换阴影 */
+        color: var(--black);
+        background-color: var(--gray2);
+        box-shadow: 
+            0.3rem 0.3rem 0.6rem var(--topShadow), 
+            -0.2rem -0.2rem 0.5rem var(--belowShadow);
+    }
 
     /* list内容 */
     .image {
@@ -269,24 +330,7 @@
         text-decoration: none;
         padding: 5px 0 5px 0;
     }
-    .category {
-        padding: 5px 10px 5px 10px;
-        margin: 5px 5px 5px 0;
-        font-family: Georgia, Arial, sans-serif;
-        font-size: small;
-        background-color: rgb(43, 90, 151);
-        color: whitesmoke;
-        border-radius: 15px;
-    }
-    .tag {
-        padding: 2px 5px 2px 5px;
-        margin: 5px 5px 5px 0;
-        font-family: Georgia, Arial, sans-serif;
-        font-size: small;
-        background-color: #4e4e4e;
-        color: whitesmoke;
-        border-radius: 5px;
-    }
+
     a {
         color: black;
     }

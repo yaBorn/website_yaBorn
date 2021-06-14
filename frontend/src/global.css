@@ -2,31 +2,40 @@
     全局样式css
         在main.js中引入
         文件在 html指定 class名即可
-            命名格式： .global_组件类型 空格 组件类型_二级类型
+            命名格式： .global_组件类型 空格 组件类型__二级类型
             eg: clss='global_btn btn_primary'
 */
 :root {
-    /* 配色表 */
-    --backcolor:rgb(228,235,245);
     --white:rgb(255,255,255);
+    --gray: rgb(78,78,78);
+    --gray2: rgb(156, 156, 156);
+    --black: rgb(0, 0, 0);
+
+    /* 配色表 */
+    --backcolor:rgb(215, 227, 243);
+    --color: rgb(109,93,252); 		      /* 按钮颜色 主色调 */
+    --color2: rgb(250, 250, 250); 		  /* 按钮2颜色 */
+
+    /* 字体颜色 */
+    --tex: var(--white);			        /* 浅色字体颜色 */
+    --texch: rgb(89, 194, 255);           /* 选中后变色 */
+    --tex2: rgb(92, 175, 230);		      /* 深色字体颜色 */
+    --texch2: var(--color);                 /* 选中后变色 */
 
     /* 页首 页尾巴 */
-        --hfcolor: rgba(228,235,245, 0.897); /*  */
+    --hfcolor: rgba(228, 235, 245, 0.8);
+
     /* button */
         /* 大小 */
         --width: 6rem;
-        --width2: 3rem; /* width/2 用于翻页 Alist-prew */
+        --width2: 3rem;                       /* width/2 用于翻页 Alist-prew */
         --height: 3rem;
         --texSize: 1rem;
         --border-radius: 1rem;                /* 倒角 */
         /* 颜色 */
-        --color: rgb(109,93,252); 		    /* 按钮颜色 */
-        --color2: rgb(250, 250, 250); 		/* 按钮颜色 */
-        --tex: var(--backcolor);			/* 深按钮 字体颜色 */
-        --tex2: rgb(92, 175, 230);			/* 浅按钮 字体颜色 */
         --hightLight: rgb(138,189,255); 	/* 按钮 高光 */
-        --dark: rgb(91,14,235);			/* 按钮 暗部 */
-        --topShadow: var(--white);	/* 上边框 阴影 */
+        --dark: rgb(91,14,235);			    /* 按钮 暗部 */
+        --topShadow: var(--white);	          /* 上边框 阴影 */
         --belowShadow: rgb(155,170,207); 	/* 下边框 阴影 */
 }
 
@@ -38,19 +47,40 @@ a {
     text-decoration: none;
 }
 
+/* 显示框块 */
+/* <div class='global_block'>
+        <div class='global_block_content'> */
+    .global_block {
+        transition: 0.2s ease;
+        border-radius: 2rem;
+        box-shadow: 
+            0.8rem 0.8rem 1.4rem var(--belowShadow), 
+            -0.2rem -0.2rem 1.8rem var(--topShadow);
+    }
+    .global_block:hover {
+        /* 鼠标移动到此处时动画 变换阴影 凹陷感 */
+        box-shadow: 
+            0.3rem 0.3rem 0.6rem var(--topShadow), 
+            -0.2rem -0.2rem 0.5rem var(--belowShadow);
+    }
+    .global_block_content {
+        position: relative;
+        left: 50px;
+    }
+
 /* button */
 /* <div> */
-        /* 常用重设
-        .global_btn {
-            position: relative;
-            left: 90%;
-            border-radius: 1.6rem;
-            width: 6rem;
-            height: 3rem;
-        }
-        .btn p {
-            font-size: 1rem;
-        }  */
+    /* 常用重设
+    .global_btn {
+        position: relative;
+        left: 90%;
+        border-radius: 1.6rem;
+        width: 6rem;
+        height: 3rem;
+    }
+    .btn p {
+        font-size: 1rem;
+    }  */
     .global_btn {
         width: var(--width);
         height: var(--height);
@@ -81,26 +111,34 @@ a {
         color: var(--tex);
     }
     .btn__primary:hover {
-        color: var(--topShadow);
+        color: var(--texch);
     }
+    /* 按钮点击动作 */
     .btn__primary:active {
         box-shadow: 
             inset 0.2rem 0.2rem 1rem var(--dark), 
-            inset -0.2rem -0.2rem 1rem var(--hightLight);
+            inset -0.2rem -0.2rem 1rem var(--hightLight),
+            0.3rem 0.3rem 0.6rem var(--topShadow), 
+            -0.2rem -0.2rem 0.5rem var(--belowShadow);
     }
+    /* 第二按钮 */
     .btn__secondary {
         background: var(--color2);
         grid-column: 1/2;
         grid-row: 5/6;
         color: var(--tex2);
+        transition: 0.2s ease;
     }
     .btn__secondary:hover {
         color: var(--color);
     }
+    /* 按钮点击动作  交换阴影 会有凹陷感*/
     .btn__secondary:active {
         box-shadow: 
             inset 0.2rem 0.2rem 0.5rem var(--belowShadow), 
-            inset -0.2rem -0.2rem 0.5rem var(--topShadow);
+            inset -0.2rem -0.2rem 0.5rem var(--topShadow),
+            0.3rem 0.3rem 0.6rem var(--topShadow), 
+            -0.2rem -0.2rem 0.5rem var(--belowShadow);
     }
 
 
@@ -130,7 +168,7 @@ a {
     }
     /* 鼠标移上去后修改下拉菜单链接颜色 */
     .global_dropdown-content a:hover {
-        /* 变换速率 */
+        /* 变换速率 交换阴影位置*/
         transition: 0.3s ease; 
         background-color: #f1f1f1;
         color: black;
