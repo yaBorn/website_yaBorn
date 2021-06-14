@@ -8,7 +8,8 @@
         <BlogHeader ref="header"/>
         <div id="grid">
             <!-- 用户注册 -->
-            <div id="signup">
+            <div class='global_block'>
+            <div class='global_block_content'>
                 <h3>
                     注册账号
                 </h3>
@@ -29,8 +30,9 @@
                     </div>
                     <!-- 错误提示框 -->
                     <div id="putgrid">
+                        <div></div>
                         <div class="form-elem">
-                            <button v-on:click.prevent="signup">
+                            <button class="global_btn btn__primary" v-on:click.prevent="signup">
                                 注册
                             </button>
                         </div>
@@ -40,9 +42,12 @@
                     </div>
                 </form>
             </div>
+            </div>
+            <div></div>
 
             <!-- 用户登录 -->
-            <div id="signin">
+            <div class='global_block'>
+            <div class='global_block_content'>
                 <h3>
                     登录账号
                 </h3>
@@ -57,8 +62,9 @@
                     </div>
                     <!-- 错误提示框 -->
                     <div id="putgrid">
+                        <div></div>
                         <div class="form-elem">
-                            <button v-on:click.prevent="signin">
+                            <button class="global_btn btn__primary" v-on:click.prevent="signin">
                                 登录
                             </button>
                         </div>
@@ -67,6 +73,7 @@
                         </div>
                     </div>
                 </form>
+            </div>
             </div>
         </div>
         <BlogFooter/>
@@ -233,39 +240,44 @@
 
 <!-- css -->
 <style scoped>
+    .global_block {
+        /* 内外边框 */
+        text-align: center;
+        padding: 0px 0px 0px 0px;
+        margin: 20px 15px 200px -20px;
+    }
+    .global_block_content {
+        position: relative;
+        left: 0px;
+    }
+
     #grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-    #signin {
-        text-align: center;
-    }
-    #signup {
-        text-align: center;
+        grid-template-columns: 10fr 1fr 10fr;
     }
     .form-elem {
         padding: 10px;
     }
     #putgrid {
+        text-align: center;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
     .message {
         text-align: left;
         font-size: 10px;
-        color: rgba(251, 14, 14, 0.931);
+        color: var(--error);
     }
     input {
         height: 25px;
         padding-left: 10px;
     }
     button {
+        margin: 0 auto;
         height: 35px;
         cursor: pointer;
         border: none;
         outline: none;
-        background: gray;
-        color: whitesmoke;
         border-radius: 5px;
         width: 60px;
     }

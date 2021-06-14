@@ -24,6 +24,7 @@
     /* 评论中的用户 */
     --user:orangered;
     --user2:darkorange;
+    --error: rgba(251, 14, 14, 0.931);
 
     /* 字体颜色 */
     --tex: var(--white);			        /* 浅色字体颜色 */
