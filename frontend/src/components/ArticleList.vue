@@ -51,7 +51,7 @@
                             <router-link
                                 :to="{ name: 'ArticleDetail', params: { id: article.id }}"
                                 class="article-body">
-                                {{ article.body }}
+                                {{ article.body.slice(0,300) + ' ...' }}
                             </router-link>
                         </div>
                         <!-- 调用vue-router
@@ -335,7 +335,7 @@
     .text {
         /* 上右下左 内边距 外边距*/
         padding:0px 0px 10px 10px;
-        margin: 0px 50px 0px 0px;
+        margin: 0px 100px 0px 0px;
         border: 2px solid var(--dark);
     }
     .article-title {
