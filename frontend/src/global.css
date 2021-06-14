@@ -6,6 +6,8 @@
             eg: clss='global_btn btn_primary'
 */
 :root {
+    /* 页首 页尾巴 */
+        --hfcolor: rgba(255, 255, 255, 0.897);
     /* button */
         /* 大小 */
         --width: 6rem;
@@ -14,7 +16,7 @@
         --texSize: 1rem;
         --border-radius: 1rem;                /* 倒角 */
         /* 颜色 */
-        --color: rgb(43, 90, 151); 		    /* 按钮颜色 */
+        --color: rgb(106, 131, 165); 		    /* 按钮颜色 */
         --color2: rgb(250, 250, 250); 		    /* 按钮颜色 */
         --tex: rgb(232, 239, 248);			/* 深按钮 字体颜色 */
         --tex2: rgb(92, 149, 230);			/* 浅按钮 字体颜色 */
@@ -32,7 +34,17 @@ a {
     text-decoration: none;
 }
 
+/* 页面内容下移 */
+/*  <div calss="global_content"></div> */
+    .global_content {
+        line-height: 500px;
+        border:1px solid #F00;
+        width:300px; 
+        height:200px;
+    }
+
 /* button */
+/* <div> */
         /* 常用重设
         .global_btn {
             position: relative;

@@ -6,64 +6,68 @@
 
 <!-- html -->
 <template>
-    <!-- 页眉 -->
-    <div id="header">
-        <div class='content'>
-            <!-- 布局 -->
-            <div class="grid">
-                <!-- 搜索框 -->
-                <SearchBox/>
+    <div>
+        <!-- 页眉 -->
+        <div id="header">
+            <div class='content'>
+                <!-- 布局 -->
+                <div class="grid">
+                    <!-- 搜索框 -->
+                    <SearchBox/>
 
-                <!-- 标题 -->
-                <router-link :to="{name:'Home'}"> <!-- 点击跳转回 home -->
-                    <div class="headertex">
-                        <h1>yaBorn Blog</h1>
-                    </div>
-                </router-link>
-                <!-- grid布局 搜多-标题-空 -->
-                <PointRun/>
-            </div>
-
-            <!-- 用户注册 -->
-            <div class="login">
-                <!-- 已登录下拉框 详见css -->
-                <div v-if="hasLogin">
-                    <div class="global_dropdown">
-                        <!-- <p v-text="hasLogin"></p> -->
-                        <div class="global_btn btn__secondary">
-                            <p> 欢迎，{{com_name}} </p>
+                    <!-- 标题 -->
+                    <router-link :to="{name:'Home'}"> <!-- 点击跳转回 home -->
+                        <div class="headertex">
+                            <h1>yaBorn Blog</h1>
                         </div>
-                        <!-- 下拉框内容 -->
-                        <div class="global_dropdown-content">
-                            <!-- 用户中心 -->
-                            <router-link :to="{name:'UserCenter',params:{username:username}}">
-                                用户中心
-                            </router-link>
-                            <!-- 对管理员用户显示文章发表 -->
-                            <router-link :to="{name: 'ArticleCreate'}" v-if="com_super">
-                                发表文章
-                            </router-link>
-                            <!-- 退出 -->
-                            <router-link v-on:click.prevent="logout()" :to="{name:'Home'}">
-                                退出
-                            </router-link>
-                            <!-- <router-link @click='logout()'>
-                                退出
-                            </router-link> -->
-                        </div>
-                    </div>  
-                </div>
-                <div v-else>
-                    <!-- 登录注册链接 -->
-                    <!-- <router-link to="/login" class="login-link"> -->
-                    <router-link :to="{name:'Login'}" class="global_btn btn__primary">
-                        <p> 登录/注册 </p>
                     </router-link>
+                    <!-- grid布局 搜多-标题-空 -->
+                    <PointRun/>
+                </div>
+
+                <!-- 用户注册 -->
+                <div class="login">
+                    <!-- 已登录下拉框 详见css -->
+                    <div v-if="hasLogin">
+                        <div class="global_dropdown">
+                            <!-- <p v-text="hasLogin"></p> -->
+                            <div class="global_btn btn__secondary">
+                                <p> 欢迎，{{com_name}} </p>
+                            </div>
+                            <!-- 下拉框内容 -->
+                            <div class="global_dropdown-content">
+                                <!-- 用户中心 -->
+                                <router-link :to="{name:'UserCenter',params:{username:username}}">
+                                    用户中心
+                                </router-link>
+                                <!-- 对管理员用户显示文章发表 -->
+                                <router-link :to="{name: 'ArticleCreate'}" v-if="com_super">
+                                    发表文章
+                                </router-link>
+                                <!-- 退出 -->
+                                <router-link v-on:click.prevent="logout()" :to="{name:'Home'}">
+                                    退出
+                                </router-link>
+                                <!-- <router-link @click='logout()'>
+                                    退出
+                                </router-link> -->
+                            </div>
+                        </div>  
+                    </div>
+                    <div v-else>
+                        <!-- 登录注册链接 -->
+                        <!-- <router-link to="/login" class="login-link"> -->
+                        <router-link :to="{name:'Login'}" class="global_btn btn__primary">
+                            <p> 登录/注册 </p>
+                        </router-link>
+                    </div>
                 </div>
             </div>
+            <!-- 底部下划线 -->
+            <hr>
         </div>
-        <!-- 底部下划线 -->
-        <hr>
+        <!-- 网页头固定后 后面页面内容后移 -->
+        <br><br><br><br><br><br><br><br>
     </div>
 </template>
 
@@ -195,11 +199,12 @@
         text-align: center;
         margin-top: 0px;
         /* background: whitesmoke; */
-        /* 固定顶端位置 并固定宽度100%
+        /* 固定顶端位置 并固定宽度100% */
         position: fixed;
         left: 0;
         top: 0;
-        width: 100%; */
+        width: 100%;
+        background: var(--hfcolor);
     }
     .content {
         margin-top: 20px;

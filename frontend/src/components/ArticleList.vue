@@ -82,7 +82,7 @@
                 </router-link> 
             </div>  
             <div class='d'></div>
-        </div>
+        </div>      
     </div>
 </template>
 
@@ -212,10 +212,6 @@
 <!-- css -->
 <!-- "scoped" 使样式仅在当前组件生效 -->
 <style scoped>
-/*  
-    规定页面各元素的大小、位置、颜色等样式
-    #name 样式挂载的指定页面 
-*/
     /* 翻页 */
     .pageinator {
         display: grid;
