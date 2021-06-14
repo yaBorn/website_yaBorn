@@ -31,7 +31,7 @@
                     <div class="dropdown">
                         <!-- <p v-text="hasLogin"></p> -->
                         <button class="dropbtn">
-                            欢迎，{{name}}
+                            欢迎，{{com_name}}
                         </button>
                         <!-- 下拉框内容 -->
                         <div class="dropdown-content">
@@ -40,7 +40,7 @@
                                 用户中心
                             </router-link>
                             <!-- 对管理员用户显示文章发表 -->
-                            <router-link :to="{name: 'ArticleCreate'}" v-if="isSuperuser">
+                            <router-link :to="{name: 'ArticleCreate'}" v-if="com_super">
                                 发表文章
                             </router-link>
                             <!-- 退出 -->
@@ -87,20 +87,27 @@
             SearchBox,
             PointRun,
         },
-        props:['welcomeName'], // 更新页面传递过来的prop参数
+        props:['welcomeName','isSuper'], // 更新页面传递过来的prop参数
         // 计算属性
         // 基于响应式依赖进行缓存，当相关响应式依赖发生改变时才会重新求值
         // 即只要参数未改变 重复访问时直接返回之前的结果
         // computed默认不接受参数 且不可改变Vue管理数据 否则报错
         computed:{
-            name() {
+            com_name() {
                 // 判断用户中心页面是否传递来 name更新参数
                 // 根据判断 来显示Vue的 {{name}}内容
+                                console.log('-----header.computed：',this.isSuper)
+
                 return (this.welcomeName !== undefined) ? this.welcomeName : this.username
+            },
+            com_super() {
+                console.log('-----header.computed：',this.isSuper)
+                return (this.isSuper !== undefined) ? this.isSuper : this.isSuperuser
             }
         },
         methods: {
-            // // 刷新界面 根据缓存刷新数值
+            // 刷新界面 根据缓存刷新数值
+            // 失败 失败分支迁出 2020.6.13.16：22
             // refresh () {
             //     // 见UserCenter.vue前面的TODO
             //     // 解决 
@@ -124,6 +131,7 @@
         },
         // 模板渲染 html后调用 二次操作 html的 dom结点
         mounted() {
+            // 登录管理员用户 login组件通信
             // 用户验证验证代码
             authorization()
                 .then(

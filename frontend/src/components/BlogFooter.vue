@@ -24,22 +24,34 @@
 
     export default {
         name: 'BlogFooter',
-        components: {Doge}
+        components: {Doge},
+
+        // TODO:测试 css使用 VUE管理变量
+        data () {
+            return {
+                hei: '50px',
+                color:{
+                    bla: 'black',
+                },
+            }
+        },
     }
 </script>
 
 <!-- css -->
 <!-- "scoped" 使样式仅在当前组件生效 -->
 <style scoped>
+/*  <style vars="{ }"> 方法已弃用 改进https://github.com/vuejs/rfcs/pull/231 */
+/* 直接使用v-bind双向数据绑定即可 */
     #footer {
         position: fixed;
         left: 0;
         bottom: 0;
-        height: 50px;
+        height: v-bind(hei);
         width: 100%;
         background: whitesmoke;
         text-align: center;
         font-weight: bold;
-        color: black;
+        color: v-bind('color.bla');
     }
 </style>
