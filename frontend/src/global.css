@@ -2,15 +2,15 @@
     全局样式css
         在main.js中引入
         文件在 html指定 class名即可
-            命名格式： .组件类型 空格 组件类型_二级类型
-            eg: clss='btn btn_primary'
+            命名格式： .global_组件类型 空格 组件类型_二级类型
+            eg: clss='global_btn btn_primary'
 */
 :root {
     /* button */
         /* 大小 */
-        --width: 10rem;
-        --height: 4rem;
-        --texSize: 1.6rem;
+        --width: 6rem;
+        --height: 3rem;
+        --texSize: 1rem;
         --border-radius: 1rem;                /* 倒角 */
         /* 颜色 */
         --color: rgb(43, 90, 151); 		    /* 按钮颜色 */
@@ -24,65 +24,109 @@
 }
 
 /* button */
-    /* 常用重设
-    .btn {
-        position: relative;
-        left: 90%;
-        border-radius: 1.6rem;
-        width: 6rem;
-        height: 3rem;
+        /* 常用重设
+        .global_btn {
+            position: relative;
+            left: 90%;
+            border-radius: 1.6rem;
+            width: 6rem;
+            height: 3rem;
+        }
+        .btn p {
+            font-size: 1rem;
+        }  */
+    .global_btn {
+        width: var(--width);
+        height: var(--height);
+        border-radius: var(--border-radius);
+        box-shadow: 
+            0.3rem 0.3rem 0.6rem var(--belowShadow), 
+            -0.2rem -0.2rem 0.5rem var(--topShadow);
+        justify-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s ease;
     }
-    .btn p {
-        font-size: 1rem;
-    }  */
-.btn {
-    width: var(--width);
-    height: var(--height);
-    border-radius: var(--border-radius);
-    box-shadow: 
-        0.3rem 0.3rem 0.6rem var(--belowShadow), 
-        -0.2rem -0.2rem 0.5rem var(--topShadow);
-    justify-self: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-/* 内部文字 用<p> </p>包围 */
-.btn p {
-    font-size: var(--texSize);
-}
-.btn__primary {
-    grid-column: 1/2;
-    grid-row: 4/5;
-    background: var(--color);
-    box-shadow: 
-        inset 0.2rem 0.2rem 1rem var(--hightLight),
-        inset -0.2rem -0.2rem 1rem var(--dark), 
-        0.3rem 0.3rem 0.6rem var(--belowShadow), 
-        -0.2rem -0.2rem 0.5rem var(--topShadow);
-    color: var(--tex);
-}
-.btn__primary:hover {
-    color: var(--topShadow);
-}
-.btn__primary:active {
-    box-shadow: 
-        inset 0.2rem 0.2rem 1rem var(--dark), 
-        inset -0.2rem -0.2rem 1rem var(--hightLight);
-}
-.btn__secondary {
-    background: var(--color2);
-    grid-column: 1/2;
-    grid-row: 5/6;
-    color: var(--tex2);
-}
-.btn__secondary:hover {
-    color: var(--color);
-}
-.btn__secondary:active {
-    box-shadow: 
-        inset 0.2rem 0.2rem 0.5rem var(--belowShadow), 
-        inset -0.2rem -0.2rem 0.5rem var(--topShadow);
-}
+    /* 内部文字 用<p> </p>包围 */
+    .global_btn p {
+        font-size: var(--texSize);
+    }
+    .btn__primary {
+        grid-column: 1/2;
+        grid-row: 4/5;
+        background: var(--color);
+        box-shadow: 
+            inset 0.2rem 0.2rem 1rem var(--hightLight),
+            inset -0.2rem -0.2rem 1rem var(--dark), 
+            0.3rem 0.3rem 0.6rem var(--belowShadow), 
+            -0.2rem -0.2rem 0.5rem var(--topShadow);
+        color: var(--tex);
+    }
+    .btn__primary:hover {
+        color: var(--topShadow);
+    }
+    .btn__primary:active {
+        box-shadow: 
+            inset 0.2rem 0.2rem 1rem var(--dark), 
+            inset -0.2rem -0.2rem 1rem var(--hightLight);
+    }
+    .btn__secondary {
+        background: var(--color2);
+        grid-column: 1/2;
+        grid-row: 5/6;
+        color: var(--tex2);
+    }
+    .btn__secondary:hover {
+        color: var(--color);
+    }
+    .btn__secondary:active {
+        box-shadow: 
+            inset 0.2rem 0.2rem 0.5rem var(--belowShadow), 
+            inset -0.2rem -0.2rem 0.5rem var(--topShadow);
+    }
+
+
+/* 下拉框 */
+    /* 容器 <div> - 需要定位下拉内容 */
+    .global_dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    /* 下拉内容 (默认隐藏) */
+    .global_dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 120px;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+    /* 下拉菜单的链接 */
+    .global_dropdown-content a {
+        color: var(--tex2);
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        /* display 不受transsition影响 */
+        /* TODO：css动画 display动画 */
+    }
+    /* 鼠标移上去后修改下拉菜单链接颜色 */
+    .global_dropdown-content a:hover {
+        /* 变换速率 */
+        transition: 0.3s ease; 
+        background-color: #f1f1f1;
+        color: black;
+        box-shadow: 
+            inset 0.2rem 0.2rem 0.5rem var(--belowShadow), 
+            inset -0.2rem -0.2rem 0.5rem var(--topShadow);
+    }
+    /* 在鼠标移上去后显示下拉菜单 */
+    .global_dropdown:hover .global_dropdown-content {
+        display: block;
+    }
+    /* 当下拉内容显示后修改下拉按钮的背景颜色 */
+    .global_dropdown:hover .dropbtn {
+        background-color: rgb(190, 190, 190);
+    }

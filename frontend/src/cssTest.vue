@@ -13,9 +13,9 @@
 		<hr>
 
 		<!-- button -->
-		<div class="btn btn__primary"> <p>Button</p> </div>
+		<div class="global_btn btn__primary"> <p>Button</p> </div>
 		<hr>
-		<div class="btn btn__secondary"> <p>Button</p> </div>
+		<div class="global_btn btn__secondary"> <p>Button</p> </div>
 
     </div>
 </template>

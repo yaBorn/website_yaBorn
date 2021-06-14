@@ -28,13 +28,13 @@
             <div class="login">
                 <!-- 已登录下拉框 详见css -->
                 <div v-if="hasLogin">
-                    <div class="dropdown">
+                    <div class="global_dropdown">
                         <!-- <p v-text="hasLogin"></p> -->
-                        <div class="btn btn__secondary">
+                        <div class="global_btn btn__secondary">
                             <p> 欢迎，{{com_name}} </p>
                         </div>
                         <!-- 下拉框内容 -->
-                        <div class="dropdown-content">
+                        <div class="global_dropdown-content">
                             <!-- 用户中心 -->
                             <router-link :to="{name:'UserCenter',params:{username:username}}">
                                 用户中心
@@ -56,7 +56,7 @@
                 <div v-else>
                     <!-- 登录注册链接 -->
                     <!-- <router-link to="/login" class="login-link"> -->
-                    <router-link :to="{name:'Login'}" class="btn btn__primary">
+                    <router-link :to="{name:'Login'}" class="global_btn btn__primary">
                         <p> 登录/注册 </p>
                     </router-link>
                 </div>
@@ -222,19 +222,29 @@
         padding-right: 5px;
     }
     /* 重设按钮样式 */
-    .btn {
+    .global_btn {
         position: relative;
         left: 90%;
         border-radius: 1rem;
         width: 6rem;
         height: 3rem;
     }
-    .btn p {
+    .global_btn p {
         font-size: 1rem;
     } 
     .btn__secondary {
+        border: 2px solid var(--dark);
+        transition: 0.4s ease; 
         position: relative;
         left: 0%;
+    }
+    .btn__secondary:hover {
+        /* 鼠标放上去后改变 颜色与阴影 */
+        border: 2px solid var(--color2);
+        color: black;
+        box-shadow: 
+            inset 0.2rem 0.2rem 0.5rem var(--belowShadow), 
+            inset -0.2rem -0.2rem 0.5rem var(--topShadow);
     }
     /* 取消下划线 */
     a {
@@ -247,47 +257,4 @@
 
 <!-- 拉按钮样式 -->
 <style scoped>
-    .dropbtn {
-        background-color: rgb(136, 136, 136);
-        color: white;
-        padding: 8px 8px 30px 8px ;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-        height: 16px;
-        border-radius: 5px;
-    }
-    /* 容器 <div> - 需要定位下拉内容 */
-    .dropdown {
-        position: relative;
-        display: inline-block;
-    }
-    /* 下拉内容 (默认隐藏) */
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 120px;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        text-align: center;
-    }
-    /* 下拉菜单的链接 */
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
-    /* 鼠标移上去后修改下拉菜单链接颜色 */
-    .dropdown-content a:hover {
-        background-color: #f1f1f1
-    }
-    /* 在鼠标移上去后显示下拉菜单 */
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-    /* 当下拉内容显示后修改下拉按钮的背景颜色 */
-    .dropdown:hover .dropbtn {
-        background-color: rgb(190, 190, 190);
-    }
 </style>
