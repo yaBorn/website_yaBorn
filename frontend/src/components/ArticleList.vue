@@ -38,16 +38,22 @@
                             <img :src="imageIfExists(article)" alt="" class="image">
                         </div>
 
-                        <!-- 文章标题 -->
-                        <!-- <div class="article-title"> -->
-                            <!-- {{ article.title }} -->
-                        <!-- </div> -->
-                        <router-link
-                            :to="{ name: 'ArticleDetail', params: { id: article.id }}"
-                            class="article-title"
-                        >
-                            {{ article.title }}
-                        </router-link>
+                        <div class="text">
+                            <!-- 文章标题 -->
+                            <router-link
+                                :to="{ name: 'ArticleDetail', params: { id: article.id }}"
+                                class="article-title">
+                                {{ article.title }}
+                            </router-link>
+
+                            <!-- 内容摘要 -->
+                            <br><br>
+                            <router-link
+                                :to="{ name: 'ArticleDetail', params: { id: article.id }}"
+                                class="article-body">
+                                {{ article.body }}
+                            </router-link>
+                        </div>
                         <!-- 调用vue-router
                             :to指定跳转位置，动态参数id为后端对应序列化器 aid接口 
                             vue中，属性前的 :表啊是属性绑定，为v-bind:缩写
@@ -56,7 +62,7 @@
 
                         <!-- 创建时间 -->
                         <div>
-                            {{ formatted_time(article.created) }}
+                            <br> {{ formatted_time(article.created) }}
                         </div>
                     </div>
                 </div>
@@ -218,7 +224,10 @@
 
 <!-- css -->
 <!-- "scoped" 使样式仅在当前组件生效 -->
-<style scoped>    
+<style scoped>  
+    #articles {
+        padding: 10px;
+    }  
     /* 翻页 */
     .pageinator {
         display: grid;
@@ -308,24 +317,37 @@
             -0.2rem -0.2rem 0.5rem var(--belowShadow);
     }
 
-    /* list内容 */
+    /* 文章 */
+    .grid {
+        /* 边距 */
+        padding-top: 30px;
+        padding-bottom: 10px;
+    }
+    /* 标题图 */
+    .image-container {
+        width: 200px;
+    }
     .image {
         width: 180px;
         border-radius: 10px;
         box-shadow: darkslategrey 0 0 12px;
     }
-    .image-container {
-        width: 200px;
-    }
-    .grid {
-        padding-bottom: 10px;
-    }
-    #articles {
-        padding: 10px;
+    .text {
+        /* 上右下左 内边距 外边距*/
+        padding:0px 0px 10px 10px;
+        margin: 0px 50px 0px 0px;
+        border: 2px solid var(--dark);
     }
     .article-title {
-        font-size: large;
+        /* 字体 */
+        font-size: x-large;
         font-weight: bolder;
+        color: black;
+        text-decoration: none;
+        padding: 5px 0 5px 0;
+    }
+    .article-body {
+        font-size: medium;
         color: black;
         text-decoration: none;
         padding: 5px 0 5px 0;
