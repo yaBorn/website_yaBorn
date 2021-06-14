@@ -49,7 +49,6 @@
     body{
         margin: 0;
         padding: 0;
-        background: #e74c3c;
     }
     /* 盒子 */
     .search{
@@ -59,8 +58,8 @@
         left: 50%;
         transform: translate(-50%,-50%);
         /* 背景 边框 圆角 */
-        background: #f6f6f6;
-        border: 3px solid #505c6d;
+        background: var(--white);
+        border: 3px solid var(--color);
         border-radius: 40px;
         padding: 20px;
         /* 搜索盒中元素居中 */
@@ -72,7 +71,11 @@
         /* 宽度速率变化 贝塞尔曲线 */
         transition:width  cubic-bezier(0.75, -0.25, 0.25, 1.5)  0.75s;
         /* 阴影 偏移 半径rgba*/
-        box-shadow: 10px 8px 15px rgba(0, 0, 0, 0.5);
+        box-shadow: 
+            inset 0.2rem 0.2rem 1rem var(--hightLight),
+            inset -0.2rem -0.2rem 1rem var(--dark), 
+            0.3rem 0.3rem 0.6rem var(--belowShadow), 
+            -0.2rem -0.2rem 0.5rem var(--topShadow);
     }
     /* 按钮 */
     .search-btn{
@@ -94,7 +97,7 @@
         height: 40px;
         /* 圆形边缘 */
         border-radius: 50%;
-        background: #505c6d;
+        background: var(--color);
         border-bottom: none;
     }
     /* icon */
@@ -116,9 +119,9 @@
         outline: none;
         border: none;
         /* 下划线 */
-        border-bottom: #505c6d 2px solid;
+        border-bottom: var(--dark) 2px solid;
         /* 字体*/
-        color: rgb(63, 63, 63);
+        color: var(--gray);
         font-size: 16px;
         /* 过度动画 和search一致*/
         transition:width  cubic-bezier(0.7, -0.25, 0.27, 1.55)  .8s;
@@ -132,11 +135,13 @@
         width: 250px;
     }
     /* 设置search-text的宽度 */
-    .search:hover > .search-text{
+    .search:hover > .search-text {
         width: 200px; 
     }
     /* search-btn背景颜色变化 */
-    .search:hover > .search-btn{
-        background: #a0a0a0;
+    .search:hover > .search-btn {
+        background: var(--dark);
+        /* 开启动画 */
+        animation: global_ani1 1s infinite;
     }
 </style>

@@ -200,7 +200,8 @@
         /* background: whitesmoke; */
         /* 固定顶端位置 并固定宽度100% */
         position: fixed;
-        z-index: 10; /* 设置层级 */
+        /* 设置层级 */
+        z-index: 10;
         left: 0;
         top: 0;
         width: 100%;
@@ -220,7 +221,7 @@
         text-decoration: none;
         text-align: center;
         margin-top: 20px;
-        color: black;
+        color: var(--color);
     }
     .login {
         text-align: right;
@@ -231,6 +232,7 @@
         /* border: 2px solid rgba(0, 0, 0, 0); */
         /* position: relative;
         left:90%; */
+        margin-top: -20px;
         border-radius: 1rem;
         width: 6rem;
         height: 3rem;
