@@ -227,7 +227,7 @@
     }
     /* 重设按钮样式 */
     .global_btn {
-        border: 2px solid var(--color);
+        border: 2px solid rgba(0, 0, 0, 0);
         /* position: relative;
         left:90%; */
         border-radius: 1rem;

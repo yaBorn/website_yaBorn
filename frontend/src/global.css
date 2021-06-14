@@ -6,8 +6,12 @@
             eg: clss='global_btn btn_primary'
 */
 :root {
+    /* 配色表 */
+    --backcolor:rgb(228,235,245);
+    --white:rgb(255,255,255);
+
     /* 页首 页尾巴 */
-        --hfcolor: rgba(255, 255, 255, 0.897);
+        --hfcolor: rgba(228,235,245, 0.897); /*  */
     /* button */
         /* 大小 */
         --width: 6rem;
@@ -16,14 +20,14 @@
         --texSize: 1rem;
         --border-radius: 1rem;                /* 倒角 */
         /* 颜色 */
-        --color: rgb(59, 107, 161); 		    /* 按钮颜色 */
-        --color2: rgb(250, 250, 250); 		    /* 按钮颜色 */
-        --tex: rgb(232, 239, 248);			/* 深按钮 字体颜色 */
+        --color: rgb(109,93,252); 		    /* 按钮颜色 */
+        --color2: rgb(250, 250, 250); 		/* 按钮颜色 */
+        --tex: var(--backcolor);			/* 深按钮 字体颜色 */
         --tex2: rgb(92, 175, 230);			/* 浅按钮 字体颜色 */
-        --hightLight: rgb(121, 190, 230); 	/* 按钮 高光 */
-        --dark: rgb(31, 84, 109);			/* 按钮 暗部 */
-        --topShadow: rgb(255, 255, 255);	/* 上边框 阴影 */
-        --belowShadow: rgb(208, 214, 231); 	/* 下边框 阴影 */
+        --hightLight: rgb(138,189,255); 	/* 按钮 高光 */
+        --dark: rgb(91,14,235);			/* 按钮 暗部 */
+        --topShadow: var(--white);	/* 上边框 阴影 */
+        --belowShadow: rgb(155,170,207); 	/* 下边框 阴影 */
 }
 
 /* 取消下划线 */

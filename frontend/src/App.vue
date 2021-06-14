@@ -29,4 +29,8 @@
         margin-left: 40px;
         margin-right: 40px;
     }
+    /* html设置 */
+    html {
+        background: var(--backcolor);
+    }
 </style>
