@@ -56,8 +56,8 @@
                 <div v-else>
                     <!-- 登录注册链接 -->
                     <!-- <router-link to="/login" class="login-link"> -->
-                    <router-link :to="{name:'Login'}" class="login-link">
-                        登录/注册
+                    <router-link :to="{name:'Login'}" class="btn btn__primary">
+                        <p> 登录/注册 </p>
                     </router-link>
                 </div>
             </div>
@@ -221,9 +221,18 @@
         text-align: right;
         padding-right: 5px;
     }
-    .login-link {
-        color:black;
+    /* 重设按钮样式 */
+    .btn {
+        position: relative;
+        left: 90%;
+        border-radius: 1rem;
+        width: 6rem;
+        height: 3rem;
     }
+    .btn p {
+        font-size: 1rem;
+        
+    } 
 </style>
 
 <!-- 拉按钮样式 -->

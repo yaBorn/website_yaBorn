@@ -1,0 +1,86 @@
+/* 
+    全局样式css
+        在main.js中引入
+        文件在 html指定 class名即可
+            命名格式： .组件类型 空格 组件类型_二级类型
+            eg: clss='btn btn_primary'
+*/
+:root {
+    /* button */
+        /* 大小 */
+        --width: 10rem;
+        --height: 4rem;
+        --texSize: 1.6rem;
+        --border-radius: 1rem;                /* 倒角 */
+        /* 颜色 */
+        --color: rgb(43, 90, 151); 		    /* 按钮颜色 */
+        --tex: rgb(232, 239, 248);			/* 深按钮 字体颜色 */
+        --tex2: rgb(92, 149, 230);			/* 浅按钮 字体颜色 */
+        --hightLight: rgb(121, 166, 230); 	/* 按钮 高光 */
+        --dark: rgb(31, 64, 109);			/* 按钮 暗部 */
+        --topShadow: rgb(255, 255, 255);	/* 上边框 阴影 */
+        --belowShadow: rgb(208, 214, 231); 	/* 下边框 阴影 */
+}
+
+/* button */
+    /* 常用重设
+    .btn {
+        position: relative;
+        left: 90%;
+        border-radius: 1.6rem;
+        width: 6rem;
+        height: 3rem;
+    }
+    .btn p {
+        font-size: 1rem;
+    }  */
+.btn {
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--border-radius);
+    box-shadow: 
+        0.3rem 0.3rem 0.6rem var(--belowShadow), 
+        -0.2rem -0.2rem 0.5rem var(--topShadow);
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+/* 内部文字 用<p> </p>包围 */
+.btn p {
+    font-size: var(--texSize);
+}
+.btn__primary {
+    grid-column: 1/2;
+    grid-row: 4/5;
+    background: var(--color);
+    box-shadow: 
+        inset 0.2rem 0.2rem 1rem var(--hightLight),
+        inset -0.2rem -0.2rem 1rem var(--dark), 
+        0.3rem 0.3rem 0.6rem var(--belowShadow), 
+        -0.2rem -0.2rem 0.5rem var(--topShadow);
+    color: var(--tex);
+}
+.btn__primary:hover {
+    color: var(--topShadow);
+}
+.btn__primary:active {
+    box-shadow: 
+        inset 0.2rem 0.2rem 1rem var(--dark), 
+        inset -0.2rem -0.2rem 1rem var(--hightLight);
+}
+.btn__secondary {
+    grid-column: 1/2;
+    grid-row: 5/6;
+    color: var(--tex2);
+}
+.btn__secondary:hover {
+    color: var(--color);
+}
+.btn__secondary:active {
+    box-shadow: 
+        inset 0.2rem 0.2rem 0.5rem var(--belowShadow), 
+        inset -0.2rem -0.2rem 0.5rem var(--topShadow);
+}
