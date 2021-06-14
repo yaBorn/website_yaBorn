@@ -16,9 +16,10 @@
 
         <!-- 发布按钮 -->
         <div>
-            <button @click="submit" class="submitBtn">发布</button>
+            <button @click="submit" class="global_btn btn__primary submitBtn">发布</button>
         </div>
 
+        <!-- 统计 -->
         <br>
         <p>已有 {{ comments.length }} 条评论</p>
         <hr>
@@ -44,7 +45,7 @@
                 </div>
 
                 <div>
-                    <button class="commentBtn" @click="replyTo(comment)">回复</button>
+                    <button class="global_btn btn__secondary commentBtn" @click="replyTo(comment)">回复</button>
                 </div>
             </div>
             <!-- 横线 -->
@@ -132,25 +133,23 @@
         cursor: pointer;
         border: none;
         outline: none;
-        color: whitesmoke;
         border-radius: 5px;
     }
     .submitBtn {
         height: 35px;
-        background: steelblue;
         width: 60px;
     }
     .commentBtn {
         height: 25px;
-        background: lightslategray;
         width: 40px;
     }
+
     .comments {
         padding-top: 10px;
     }
     .username {
         font-weight: bold;
-        color: darkorange;
+        color: var(--user);
     }
     .created {
         font-weight: bold;
@@ -158,7 +157,7 @@
     }
     .parent {
         font-weight: bold;
-        color: orangered;
+        color: var(--user2);
     }
     .content {
         font-size: large;

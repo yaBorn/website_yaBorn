@@ -21,6 +21,10 @@
     --topShadow: var(--white);	          /* 上边框 阴影 */
     --belowShadow: rgb(155,170,207); 	/* 下边框 阴影 */
 
+    /* 评论中的用户 */
+    --user:orangered;
+    --user2:darkorange;
+
     /* 字体颜色 */
     --tex: var(--white);			        /* 浅色字体颜色 */
     --texch: rgb(89, 194, 255);           /* 选中后变色 */
