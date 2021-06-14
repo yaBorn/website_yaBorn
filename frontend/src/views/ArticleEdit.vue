@@ -7,6 +7,8 @@
     <div id='edit'>
         <BlogHeader/>
         <div id="article-create">
+        <div class='global_block'>
+        <div class='global_block_content'>
             <h3>更新文章</h3>
             <form>
                 <div class="form-elem">
@@ -43,12 +45,14 @@
 
 
                 <div class="form-elem">
-                    <button class='post-btn' v-on:click.prevent="submit">提交</button>
+                    <button class='global_btn btn__secondary post-btn' v-on:click.prevent="submit">提交</button>
                 </div>
                 <div class="form-elem">
-                    <button class='post-btn' v-on:click.prevent="deleteArticle" style="background-color: darkred">删除</button>
+                    <button class='global_btn btn__secondary post-btn del' v-on:click.prevent="deleteArticle" style="background-color: darkred">删除</button>
                 </div>
             </form>
+        </div>
+        </div>
         </div>
         <BlogFooter/>
     </div>
@@ -103,7 +107,7 @@
             // 根据分类是否被选中，按钮的颜色发生变化
             categoryStyle(category) {
                 if (this.selectedCategory !== null && category.id === this.selectedCategory.id) {
-                    return {backgroundColor: 'black',}
+                    return {backgroundColor: 'var(--hightLight)',}
                 }
                 return {
                     backgroundColor: 'lightgrey',
@@ -179,6 +183,12 @@
 </script>
 
 <style scoped>
+    .global_block {
+        /* 内外边框 */
+        text-align: center;
+        padding: 0px 0px 0px 0px;
+        margin: 20px 0px 0px 0px;
+    }
     .category-btn {
         margin-right: 10px;
     }
@@ -201,16 +211,18 @@
     }
     button {
         height: 35px;
-        cursor: pointer;
         border: none;
         outline: none;
-        background: steelblue;
-        color: whitesmoke;
-        border-radius: 5px;
-        width: 60px;
+        width: 80px;
     }
     .post-btn {
         position: relative;
-        left: 600px;
+        left: 70%;
+    }
+    .del {
+        color: var(--tex);
+    }
+    .del:hover {
+        color: var(--texch);
     }
 </style>
