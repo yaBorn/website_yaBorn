@@ -17,7 +17,17 @@ module.exports = {
                 pathRewrite: {
                     '^/bg': ''
                 }
-            }
+            },
+            // '/admin': {
+            //     target: `http://127.0.0.1:8000/admin`,
+            //     changeOrigin: true,
+            //     pathRewrite: {
+            //         '^/admin': ''
+            //     }
+            // }
+            // TODO：这样 能从前端 /admin登录到后端管理
+            // 但是没有django API view渲染结果
+            // 只有基础组件
         }
     }
 };
