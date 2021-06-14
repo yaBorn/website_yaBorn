@@ -62,10 +62,14 @@
         <div id='pageinator'>
             <!-- 前页 -->
             <span v-if="is_page_exists('previous')">
-                <!-- <router-link :to="{ name:'Home', query:{page:get_page_param('previous')} }"> -->
-                <router-link :to="get_path('previous')">
-                    Prew
-                </router-link>
+            <!-- <router-link :to="{ name:'Home', query:{page:get_page_param('previous')} }"> -->
+                <div class="global_btn btn__secondary prew"> 
+                    <p>
+                        <router-link :to="get_path('previous')">
+                            Prew
+                        </router-link>
+                    </p> 
+                </div> 
             </span>
             <!-- 当前页 -->
             <span class="current-page">
@@ -74,9 +78,13 @@
             <!-- 后页 -->
             <span v-if="is_page_exists('next')">
                 <!-- <router-link :to="{ name:'Home', query:{page:get_page_param('next')} }"> -->
-                <router-link :to="get_path('next')">
-                    Next
-                </router-link>    
+                <div class="global_btn btn__secondary next"> 
+                    <p>
+                        <router-link :to="get_path('next')">
+                            Next
+                        </router-link> 
+                    </p> 
+                </div>   
             </span>           
         </div>
     </div>
@@ -212,6 +220,28 @@
     规定页面各元素的大小、位置、颜色等样式
     #name 样式挂载的指定页面 
 */
+    /* 翻页 */
+    .global_btn {
+        border-radius: 1.6rem;
+        width: 6rem;
+        height: 3rem;
+    }
+    .current-page {
+        font-size: x-large;
+        font-weight: bold;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .next {
+        position: relative;
+        left: 50%;
+    }
+    .prew {
+        position: relative;
+        left: 30%;
+    }
+
+    /* list内容 */
     .image {
         width: 180px;
         border-radius: 10px;
@@ -257,11 +287,5 @@
     }
     a {
         color: black;
-    }
-    .current-page {
-        font-size: x-large;
-        font-weight: bold;
-        padding-left: 10px;
-        padding-right: 10px;
     }
 </style>

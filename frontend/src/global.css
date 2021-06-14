@@ -23,6 +23,14 @@
         --belowShadow: rgb(208, 214, 231); 	/* 下边框 阴影 */
 }
 
+/* 取消下划线 */
+a {
+    text-decoration: none;
+}
+.router-link-active {
+    text-decoration: none;
+}
+
 /* button */
         /* 常用重设
         .global_btn {

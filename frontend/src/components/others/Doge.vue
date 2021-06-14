@@ -128,6 +128,13 @@
 
 <!-- css -->
 <style scoped>
+    /* 狗狗点击冲突 */
+    /* 会挡住下层物体的点击 */
+    /* 设置点击事件无效 */
+    #Doge {
+        pointer-events: none
+    }
+
     div:before, div:after {
     content: "";
     display: block;
