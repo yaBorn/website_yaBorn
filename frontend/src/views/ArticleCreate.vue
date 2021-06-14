@@ -9,6 +9,8 @@
     <div id='articlecreat'>
         <BlogHeader/>
         <div id="article-create">
+        <div class='global_block'>
+        <div class='global_block_content'>
             <h3>发表文章</h3>
             <!-- 标题图像 -->
             <form id="image_form">
@@ -61,9 +63,11 @@
             </div>
 
             <div class="form-elem">
-                <button class='post-btn' v-on:click.prevent="submit">提交</button>
+                <button class="global_btn btn__primary post-btn" v-on:click.prevent="submit">提交</button>
             </div>
             </form>
+        </div>
+        </div>
         </div>
         <BlogFooter/>
     </div>
@@ -104,7 +108,7 @@
             // css 也是可以被 vue 绑定
             categoryStyle(category) {
                 if (this.selectedCategory!==null && category.id===this.selectedCategory.id) {
-                    return { backgroundColor: 'black', }
+                    return { backgroundColor: 'var(--hightLight)', }
                 }
                 return {
                     backgroundColor: 'lightgrey',
@@ -210,6 +214,12 @@
 
 <!-- css -->
 <style scoped>
+    .global_block {
+        /* 内外边框 */
+        text-align: center;
+        padding: 0px 0px 0px 0px;
+        margin: 20px 0px 0px 0px;
+    }
     .category-btn {
         margin-right: 10px;
     }
@@ -232,16 +242,12 @@
     }
     button {
         height: 35px;
-        cursor: pointer;
         border: none;
         outline: none;
-        background: steelblue;
-        color: whitesmoke;
-        border-radius: 5px;
         width: 80px;
     }
     .post-btn {
         position: relative;
-        left: 600px;
+        left: 70%;
     }
 </style>
