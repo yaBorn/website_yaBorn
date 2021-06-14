@@ -14,6 +14,7 @@
         --border-radius: 1rem;                /* 倒角 */
         /* 颜色 */
         --color: rgb(43, 90, 151); 		    /* 按钮颜色 */
+        --color2: rgb(250, 250, 250); 		    /* 按钮颜色 */
         --tex: rgb(232, 239, 248);			/* 深按钮 字体颜色 */
         --tex2: rgb(92, 149, 230);			/* 浅按钮 字体颜色 */
         --hightLight: rgb(121, 166, 230); 	/* 按钮 高光 */
@@ -72,6 +73,7 @@
         inset -0.2rem -0.2rem 1rem var(--hightLight);
 }
 .btn__secondary {
+    background: var(--color2);
     grid-column: 1/2;
     grid-row: 5/6;
     color: var(--tex2);

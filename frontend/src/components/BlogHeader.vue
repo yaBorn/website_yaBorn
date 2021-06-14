@@ -30,9 +30,9 @@
                 <div v-if="hasLogin">
                     <div class="dropdown">
                         <!-- <p v-text="hasLogin"></p> -->
-                        <button class="dropbtn">
-                            欢迎，{{com_name}}
-                        </button>
+                        <div class="btn btn__secondary">
+                            <p> 欢迎，{{com_name}} </p>
+                        </div>
                         <!-- 下拉框内容 -->
                         <div class="dropdown-content">
                             <!-- 用户中心 -->
@@ -231,13 +231,22 @@
     }
     .btn p {
         font-size: 1rem;
-        
     } 
+    .btn__secondary {
+        position: relative;
+        left: 0%;
+    }
+    /* 取消下划线 */
+    a {
+        text-decoration: none;
+    }
+    .router-link-active {
+        text-decoration: none;
+    }
 </style>
 
 <!-- 拉按钮样式 -->
 <style scoped>
-    /* 来源: https://www.runoob.com/css/css-dropdowns.html */
     .dropbtn {
         background-color: rgb(136, 136, 136);
         color: white;
