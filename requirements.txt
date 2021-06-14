@@ -1,0 +1,26 @@
+asgiref @ file:///tmp/build/80754af9/asgiref_1617740417847/work
+certifi==2020.12.5
+chardet==4.0.0
+colorama==0.4.4
+Django @ file:///tmp/build/80754af9/django_1620309509374/work
+django-filter==2.4.0
+djangorestframework==3.12.4
+djangorestframework-simplejwt==4.6.0
+httpie==2.4.0
+idna==2.10
+importlib-metadata @ file:///C:/ci/importlib-metadata_1617877484576/work
+Markdown @ file:///C:/ci/markdown_1614364121613/work
+olefile==0.46
+path @ file:///C:/ci/path_1614022440181/work
+Pillow @ file:///C:/ci/pillow_1617386341487/work
+psycopg2 @ file:///C:/ci/psycopg2_1612298803839/work
+Pygments==2.9.0
+PyJWT==2.1.0
+PySocks==1.7.1
+pytz @ file:///tmp/build/80754af9/pytz_1612215392582/work
+requests==2.25.1
+requests-toolbelt==0.9.1
+sqlparse @ file:///tmp/build/80754af9/sqlparse_1602184451250/work
+urllib3==1.26.4
+wincertstore==0.2
+zipp @ file:///tmp/build/80754af9/zipp_1615904174917/work
