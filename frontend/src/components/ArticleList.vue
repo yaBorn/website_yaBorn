@@ -75,9 +75,9 @@
         <div class='pageinator'>
             <div class='d'></div>
             <!-- 前页 -->
-            <div v-if="is_page_exists('previous')">
+            <div class='d' v-if="is_page_exists('previous')">
                 <!-- <router-link :to="{ name:'Home', query:{page:get_page_param('previous')} }"> -->
-                <router-link :to="get_path('previous')" class="global_btn btn__secondary prew">
+                <router-link :to="get_path('previous')" class="global_btn btn__secondary">
                     <p>Prew</p> 
                 </router-link>
             </div>
@@ -88,9 +88,9 @@
             </div>
 
             <!-- 后页 -->
-            <div v-if="is_page_exists('next')">
+            <div class='d' v-if="is_page_exists('next')">
                 <!-- <router-link :to="{ name:'Home', query:{page:get_page_param('next')} }"> -->   
-                <router-link :to="get_path('next')" class="global_btn btn__secondary next">
+                <router-link :to="get_path('next')" class="global_btn btn__secondary">
                     <p>Next</p> 
                 </router-link> 
             </div>  
@@ -236,11 +236,6 @@
         text-align: center;
         padding-top: 50px;
     }
-    .prew {
-        /* 右移动一半 */
-        position: relative;
-        left: var(--width2);
-    }
     .current-page {
         font-size: x-large;
         font-weight: bold;
@@ -252,15 +247,19 @@
         border-radius: 1.6rem;
         width: 6rem;
         height: 3rem;
+        /* d按键居中 */
+        margin: 0 auto;
 
         font-size: x-large;
         font-weight: bold;
         padding-left: 10px;
         padding-right: 10px;
     }
-    /* .d{
-        border: 1px solid black
-    } */
+    .d{
+        /* 标签内容物居中 */
+        text-align: center;
+        /* border: 1px solid black; */
+    }
 
     /* 信息块 */
     /* 分类 */
