@@ -9,7 +9,7 @@
     <!-- 页脚 -->
     <router-link :to="{name:'Home'}"> <!-- 点击跳转回home -->
         <div id="footer">
-            <p>yaborn.com</p>
+            <p class='headertex'>yaborn.com</p>
         </div>
     </router-link>
     <div id="doge">
@@ -54,4 +54,8 @@
         font-weight: bold;
         color: v-bind('color.bla');
     }
+    .headertex {
+        margin-top: 15px;
+    }
+
 </style>

@@ -217,12 +217,6 @@
     .search {
         padding-top: 22px;
     }
-    .headertex {
-        text-decoration: none;
-        text-align: center;
-        margin-top: 20px;
-        color: var(--color);
-    }
     .login {
         text-align: right;
         padding-right: 5px;

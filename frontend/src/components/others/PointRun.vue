@@ -19,10 +19,13 @@
 
 <!-- css -->
 <style scoped>
+    #PointRun {
+        margin: 10px 30px 0px 30px;
+    }
     .dotsBars {
         width: 40px;
         height: 20px;
-        --c:radial-gradient(farthest-side,currentColor 93%,#0000);
+        --c:radial-gradient(farthest-side,currentColor 50%, var(--darker));
         background:
             var(--c) 0    0,
             var(--c) 50%  0,
