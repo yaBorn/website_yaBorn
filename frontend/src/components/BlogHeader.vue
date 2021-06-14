@@ -28,7 +28,7 @@
                 <!-- 用户注册 -->
                 <div class="login">
                     <!-- 已登录下拉框 详见css -->
-                    <div v-if="hasLogin">
+                    <div class="cif" v-if="hasLogin">
                         <div class="global_dropdown">
                             <!-- <p v-text="hasLogin"></p> -->
                             <div class="global_btn btn__secondary">
@@ -54,7 +54,7 @@
                             </div>
                         </div>  
                     </div>
-                    <div v-else>
+                    <div class="cif" v-else>
                         <!-- 登录注册链接 -->
                         <!-- <router-link to="/login" class="login-link"> -->
                         <router-link :to="{name:'Login'}" class="global_btn btn__primary">
@@ -100,8 +100,7 @@
             com_name() {
                 // 判断用户中心页面是否传递来 name更新参数
                 // 根据判断 来显示Vue的 {{name}}内容
-                                console.log('-----header.computed：',this.isSuper)
-
+                console.log('-----header.computed：',this.isSuper)
                 return (this.welcomeName !== undefined) ? this.welcomeName : this.username
             },
             com_super() {
@@ -228,20 +227,26 @@
     }
     /* 重设按钮样式 */
     .global_btn {
-        position: relative;
-        left: 90%;
+        border: 2px solid var(--color);
+        /* position: relative;
+        left:90%; */
         border-radius: 1rem;
         width: 6rem;
         height: 3rem;
+        display: inline-block; /* 不换行 */
+        text-align: center;
     }
     .global_btn p {
         font-size: 1rem;
+        position: relative;
+        top: -3px;
     } 
     .btn__secondary {
+        height: 3rem;
         border: 2px solid var(--dark);
         transition: 0.4s ease; 
-        position: relative;
-        left: 0%;
+        /* position: relative;
+        left: 0%; */
     }
     .btn__secondary:hover {
         /* 鼠标放上去后改变 颜色与阴影 */
@@ -251,15 +256,4 @@
             inset 0.2rem 0.2rem 0.5rem var(--belowShadow), 
             inset -0.2rem -0.2rem 0.5rem var(--topShadow);
     }
-    /* 取消下划线 */
-    a {
-        text-decoration: none;
-    }
-    .router-link-active {
-        text-decoration: none;
-    }
-</style>
-
-<!-- 拉按钮样式 -->
-<style scoped>
 </style>
