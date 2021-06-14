@@ -9,6 +9,7 @@
     /* button */
         /* 大小 */
         --width: 6rem;
+        --width2: 3rem; /* width/2 用于翻页 Alist-prew */
         --height: 3rem;
         --texSize: 1rem;
         --border-radius: 1rem;                /* 倒角 */

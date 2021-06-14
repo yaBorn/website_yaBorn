@@ -59,33 +59,29 @@
         
         <!-- 翻页 -->
         <!-- 每页项目数量 由后端传输json内容决定  setting-->
-        <div id='pageinator'>
+        <div class='pageinator'>
+            <div class='d'></div>
             <!-- 前页 -->
-            <span v-if="is_page_exists('previous')">
-            <!-- <router-link :to="{ name:'Home', query:{page:get_page_param('previous')} }"> -->
-                <div class="global_btn btn__secondary prew"> 
-                    <p>
-                        <router-link :to="get_path('previous')">
-                            Prew
-                        </router-link>
-                    </p> 
-                </div> 
-            </span>
+            <div v-if="is_page_exists('previous')">
+                <!-- <router-link :to="{ name:'Home', query:{page:get_page_param('previous')} }"> -->
+                <router-link :to="get_path('previous')" class="global_btn btn__secondary prew">
+                    <p>Prew</p> 
+                </router-link>
+            </div>
+            
             <!-- 当前页 -->
-            <span class="current-page">
+            <div class="current-page">
                 {{ get_page_param('current') }}
-            </span>
+            </div>
+
             <!-- 后页 -->
-            <span v-if="is_page_exists('next')">
-                <!-- <router-link :to="{ name:'Home', query:{page:get_page_param('next')} }"> -->
-                <div class="global_btn btn__secondary next"> 
-                    <p>
-                        <router-link :to="get_path('next')">
-                            Next
-                        </router-link> 
-                    </p> 
-                </div>   
-            </span>           
+            <div v-if="is_page_exists('next')">
+                <!-- <router-link :to="{ name:'Home', query:{page:get_page_param('next')} }"> -->   
+                <router-link :to="get_path('next')" class="global_btn btn__secondary next">
+                    <p>Next</p> 
+                </router-link> 
+            </div>  
+            <div class='d'></div>
         </div>
     </div>
 </template>
@@ -221,10 +217,17 @@
     #name 样式挂载的指定页面 
 */
     /* 翻页 */
-    .global_btn {
-        border-radius: 1.6rem;
-        width: 6rem;
-        height: 3rem;
+    .pageinator {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        /* border: 2px solid var(--dark); */
+        text-align: center;
+        padding-top: 50px;
+    }
+    .prew {
+        /* 右移动一半 */
+        position: relative;
+        left: var(--width2);
     }
     .current-page {
         font-size: x-large;
@@ -232,14 +235,21 @@
         padding-left: 10px;
         padding-right: 10px;
     }
-    .next {
-        position: relative;
-        left: 50%;
+    .global_btn {
+        /* top: 30px; */
+        border-radius: 1.6rem;
+        width: 6rem;
+        height: 3rem;
+
+        font-size: x-large;
+        font-weight: bold;
+        padding-left: 10px;
+        padding-right: 10px;
     }
-    .prew {
-        position: relative;
-        left: 30%;
-    }
+    /* .d{
+        border: 1px solid black
+    } */
+
 
     /* list内容 */
     .image {
@@ -280,10 +290,6 @@
         background-color: #4e4e4e;
         color: whitesmoke;
         border-radius: 5px;
-    }
-    #pageinator {
-        text-align: center;
-        padding-top: 50px;
     }
     a {
         color: black;
