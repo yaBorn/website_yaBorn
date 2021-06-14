@@ -16,6 +16,8 @@
         <BlogHeader ref="header"/>
         js使用 that.$refs.header.refresh()调用子组件函数 -->
         <div id="user-center">
+        <div class='global_block'>
+        <div class='global_block_content'>
             <!-- 用户中心 表单 -->
             <h3>更新信息</h3>
             <form> 
@@ -38,7 +40,8 @@
                 <div id="grid">
                     <div></div>
                     <div class="form-elem">
-                        <button v-on:click.prevent="changeinfo">
+                        <button v-on:click.prevent="changeinfo"
+                            class="global_btn btn__primary">
                             更新
                         </button>
                     </div>
@@ -48,22 +51,24 @@
                 </div>
 
                 <!-- 删除用户 -->
-                <div></div>
-                    <button 
-                        v-on:click.prevent="showDeleteAlert = true" 
-                        class="delete-btn"
-                    >删除用户
+                <button 
+                    v-on:click.prevent="showDeleteAlert = true" 
+                    class="global_btn btn__secondary delete-btn">
+                    删除用户
+                </button>
+                <!-- 二次确认 -->
+                <div :class="{ shake: showDeleteAlert }">
+                    <button v-if="showDeleteAlert"
+                        class="global_btn btn__secondary confirm-btn"
+                        @click.prevent="deleteUser"
+                    >确定要删除嘛？
                     </button>
-                    <!-- 二次确认 -->
-                    <div :class="{ shake: showDeleteAlert }">
-                        <button v-if="showDeleteAlert"
-                            class="confirm-btn"
-                            @click.prevent="deleteUser"
-                        >确定要删除嘛？
-                        </button>
-                        <!-- @为v-on缩写 -->
-                    </div>
+                    <!-- @为v-on缩写 -->
+                </div>
+                <br>
             </form>
+        </div>
+        </div>
         </div>
         <BlogFooter/>
     </div>
@@ -283,6 +288,16 @@
 
 <!-- css -->
 <style scoped>
+    .global_block {
+        /* 内外边框 */
+        text-align: center;
+        padding: 0px 0px 0px 0px;
+        margin: 20px 0px 0px 0px;
+    }
+    .global_block_content {
+        position: relative;
+        left: 0px;
+    }
     #user-center {
         text-align: center;
     }
@@ -296,7 +311,7 @@
     .message {
         text-align: left;
         font-size: 10px;
-        color: rgba(251, 14, 14, 0.931);
+        color: var(--error);
     }
     input {
         height: 25px;
@@ -307,19 +322,21 @@
         cursor: pointer;
         border: none;
         outline: none;
-        background: gray;
-        color: whitesmoke;
         border-radius: 5px;
         width: 80px;
     }
     /* 删除用户 */
+    .btn__secondary {
+        color: var(--white);
+        margin: 20px 0px 0px 50%;
+    }
     .confirm-btn {
         width: 80px;
-        background-color: rgba(187, 0, 0, 0.815);
+        background-color: var(--user2);
         width: 120px;
     }
     .delete-btn {
-        background-color: rgb(255, 0, 0);
+        background-color: var(--error);
         margin-bottom: 10px;
         width: 80px;
     }

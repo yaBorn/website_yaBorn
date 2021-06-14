@@ -244,7 +244,7 @@
         /* 内外边框 */
         text-align: center;
         padding: 0px 0px 0px 0px;
-        margin: 20px 15px 200px -20px;
+        margin: 20px 0px 0px 0px;
     }
     .global_block_content {
         position: relative;
