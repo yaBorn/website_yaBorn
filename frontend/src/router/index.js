@@ -9,7 +9,7 @@ import Login from "@/views/Login.vue"
 import UserCenter from "@/views/UserCenter.vue"
 import ArticleCreate from "@/views/ArticleCreate.vue";
 import ArticleEdit from "@/views/ArticleEdit.vue";
-import gloCss from "@/cssTest.vue";
+import gloCss from "@/css/cssTest.vue";
 
 /* routes列表
     定义所有挂载到路由中的路径
