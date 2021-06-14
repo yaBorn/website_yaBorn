@@ -49,7 +49,7 @@
         bottom: 0;
         height: v-bind(hei);
         width: 100%;
-        background: whitesmoke;
+        background: var(--hfcolor);
         text-align: center;
         font-weight: bold;
         color: v-bind('color.bla');

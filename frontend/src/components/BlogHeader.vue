@@ -228,7 +228,7 @@
     }
     /* 重设按钮样式 */
     .global_btn {
-        border: 2px solid rgba(0, 0, 0, 0);
+        /* border: 2px solid rgba(0, 0, 0, 0); */
         /* position: relative;
         left:90%; */
         border-radius: 1rem;
@@ -244,17 +244,20 @@
     } 
     .btn__secondary {
         height: 3rem;
-        border: 2px solid var(--dark);
+        /* border: 2px solid var(--dark); */
         transition: 0.4s ease; 
         /* position: relative;
         left: 0%; */
     }
     .btn__secondary:hover {
         /* 鼠标放上去后改变 颜色与阴影 */
-        border: 2px solid var(--color2);
+        /* border: 2px solid var(--color2); */
+        transition: 0.2s ease;
         color: black;
         box-shadow: 
             inset 0.2rem 0.2rem 0.5rem var(--belowShadow), 
-            inset -0.2rem -0.2rem 0.5rem var(--topShadow);
+            inset -0.2rem -0.2rem 0.5rem var(--topShadow),
+            0.3rem 0.3rem 0.6rem var(--topShadow), 
+            -0.2rem -0.2rem 0.5rem var(--belowShadow);
     }
 </style>
