@@ -25,8 +25,20 @@ SECRET_KEY = 'django-insecure-$tioc%1hfy(mm!wh7&*x4h2jmdmpk7lf$x^!rczflk)9*05=d-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# TODO: 感觉admin会进不去 先不关
+# 关闭调试模式 django不再处理静态资源
 
-ALLOWED_HOSTS = []
+# 允许所有的IP访问网络服务
+ALLOWED_HOSTS = ['*']
+
+# 指定需要收集的静态文件的位置
+# 即前端打包文件所在位置
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "frontend/dist/"),
+]
+
+# 静态文件收集目录
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
 # Application definition
 
