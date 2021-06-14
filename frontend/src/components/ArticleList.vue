@@ -336,6 +336,7 @@
         /* 上右下左 内边距 外边距*/
         padding:0px 0px 10px 10px;
         margin: 0px 100px 0px 0px;
+        /* TODO：bug 窗口过窄时 字符信息超出区块 且和标题形式有关 */
         border: 2px solid var(--dark);
     }
     .article-title {
