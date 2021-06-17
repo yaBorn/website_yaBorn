@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$tioc%1hfy(mm!wh7&*x4h2jmdmpk7lf$x^!rczflk)9*05=d-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # TODO: 感觉admin会进不去 先不关
 # 关闭调试模式 django不再处理静态资源
 
